@@ -412,14 +412,16 @@ footer p{font-size:12px;opacity:.7}
 }
 
 .mcq-next{
-  display:inline-block;
-  border:0;
-  background:var(--primary-dark);
-  color:white;
-  padding:.7rem 1.2rem;
-  border-radius:8px;
-  font-weight:700;
-  cursor:pointer;
+    display:inline-block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    border:0;
+    background:var(--primary-dark);
+    color:white;
+    padding:.7rem 1.2rem;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
 }
 
 .mcq-result{
@@ -598,10 +600,11 @@ footer p{font-size:12px;opacity:.7}
 
       <div class="mcq-explanation" id="mcqExplanation"></div>
 
-      <div class="mcq-actions">
-        <button class="mcq-next" id="mcqNext">
-          Next Question →
-        </button>
+       <div class="mcq-actions">
+    <button class="mcq-next" id="mcqNext">
+        Next Question →
+    </button>
+</div>
       </div>
 
     </div>
