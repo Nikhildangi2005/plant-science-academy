@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plant Science Academy</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#f7faf7;color:#17321f}
+header{background:#17321f;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.logo{font-size:22px;font-weight:700}.nav a{color:white;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{padding:70px 6%;background:linear-gradient(135deg,#e8f5e9,#f7faf7);text-align:center}
+.hero h1{font-size:42px;margin:0 0 12px}.hero p{font-size:18px;max-width:650px;margin:0 auto 25px;line-height:1.6}
+.btn{display:inline-block;background:#2e7d32;color:white;padding:13px 22px;border-radius:9px;text-decoration:none;font-weight:700}
+section{padding:48px 6%;max-width:1100px;margin:auto} h2{text-align:center;font-size:30px;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:white;padding:22px;border-radius:14px;box-shadow:0 3px 15px #00000012;border:1px solid #e5eee6}
+.card h3{margin-top:0}.card p{line-height:1.55;color:#49604e}
+.badge{display:inline-block;background:#e8f5e9;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold;margin-bottom:10px}
+.mcq{margin:12px 0;padding:15px;background:#f0f7f1;border-radius:10px}
+footer{background:#17321f;color:white;text-align:center;padding:28px 6%;margin-top:30px}
+@media(max-width:700px){.nav{display:none}.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🌱 Plant Science Academy</div>
+  <nav class="nav">
+    <a href="#notes">Notes</a><a href="#pyq">PYQs</a><a href="#mcq">MCQs</a><a href="#about">About</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Plant Science Made Simple</h1>
+  <p>Easy notes, PYQs and MCQs for Plant Science students. Learn concepts clearly and revise faster.</p>
+  <a class="btn" href="#notes">Start Studying</a>
+</div>
+
+<section id="notes">
+<h2>📚 Study Notes</h2>
+<div class="grid">
+  <div class="card"><span class="badge">Genetics</span><h3>Genetic Variance</h3><p>Simple explanations of genetic, environmental and phenotypic variance with important formulas.</p></div>
+  <div class="card"><span class="badge">Cytogenetics</span><h3>Chromosome Basics</h3><p>Centromeres, chromosome types, ploidy, structural changes and exam-focused points.</p></div>
+  <div class="card"><span class="badge">Plant Breeding</span><h3>Self-Incompatibility</h3><p>Clear notes on SI systems, distyly, tristyly and related concepts.</p></div>
+  <div class="card"><span class="badge">Microbiology</span><h3>Nitrogen Fixation</h3><p>Nif genes, nitrogenase, nod genes and important microorganisms in simple language.</p></div>
+</div>
+</section>
+
+<section id="pyq">
+<h2>📝 PYQ Practice</h2>
+<div class="grid">
+  <div class="card"><h3>Topic-wise PYQs</h3><p>Practice previous-year and PYQ-type questions chapter by chapter.</p><a class="btn" href="#mcq">Practice Now</a></div>
+  <div class="card"><h3>Quick Revision</h3><p>Use one-line facts and formula-based questions for last-minute revision.</p></div>
+</div>
+</section>
+
+<section id="mcq">
+<h2>❓ Free MCQs</h2>
+<div class="card">
+  <div class="mcq"><b>1. Phenotypic variance is equal to:</b><br><br>A) Vg − Ve &nbsp; B) Vg + Ve &nbsp; C) Vg/Vp &nbsp; D) Ve − Vg</div>
+  <div class="mcq"><b>2. F₂ variance generally contains:</b><br><br>A) Only genetic variation &nbsp; B) Only environmental variation &nbsp; C) Genetic + environmental variation &nbsp; D) No variation</div>
+  <p><b>Answers:</b> 1-B, 2-C</p>
+</div>
+</section>
+
+<section id="about">
+<h2>🌱 About</h2>
+<div class="card">
+<p>Plant Science Academy is designed as a simple study hub for students preparing for Plant Science entrance and competitive examinations.</p>
+<p><b>Next additions:</b> downloadable PDF notes, 100+ MCQs per topic, mock tests, search, and a contact page.</p>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Plant Science Academy • Study smart, revise simple.</p>
+</footer>
+</body>
+</html>
