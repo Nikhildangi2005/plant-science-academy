@@ -756,7 +756,6 @@ function showMCQ() {
 
   });
 }
-
 function answerMCQ(index, clickedButton) {
 
   if (mcqAnswered) return;
@@ -765,8 +764,7 @@ function answerMCQ(index, clickedButton) {
 
   const question = mcqQuestions[mcqCurrent];
 
-  const buttons =
-    document.querySelectorAll(".mcq-option");
+  const buttons = document.querySelectorAll(".mcq-option");
 
   buttons.forEach(function(button, i) {
 
@@ -779,18 +777,9 @@ function answerMCQ(index, clickedButton) {
   });
 
   if (index === question.answer) {
-
     mcqScore++;
-
   } else {
-    document.getElementById("mcqExplanation").style.display = "block";
-
-document.getElementById("mcqNext").style.display = "inline-block";
-document.getElementById("mcqNext").style.visibility = "visible";
-document.getElementById("mcqNext").style.opacity = "1";
-
     clickedButton.classList.add("wrong");
-
   }
 
   document.getElementById("mcqScore").textContent =
@@ -804,8 +793,14 @@ document.getElementById("mcqNext").style.opacity = "1";
 
   explanation.style.display = "block";
 
- const nextButton = document.getElementById("mcqNext");
-nextButton.style.setProperty("display", "inline-block", "important");
+  const nextButton =
+    document.getElementById("mcqNext");
+
+  nextButton.style.setProperty("display", "inline-block", "important");
+nextButton.style.setProperty("visibility", "visible", "important");
+nextButton.style.setProperty("opacity", "1", "important");
+nextButton.disabled = false;
+
 }
 
 document.getElementById("mcqNext").onclick = function() {
