@@ -172,6 +172,20 @@ body{transition:background .25s,color .25s}
 @media(max-width:800px){.learning-panel{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.quick-actions{grid-template-columns:1fr}.section-toolbar{display:block}.filters{margin-top:10px}}
 
+
+
+/* ===== NOTES LIBRARY ===== */
+.notes-card{min-height:0}
+.notes-card .card-bottom{margin-top:16px}
+.notes-open{border:1px solid var(--line);background:var(--card,#fff);color:var(--green);border-radius:9px;padding:9px 12px;font-weight:900}
+.notes-open:hover{background:var(--soft)}
+.note-reader{line-height:1.8;font-size:15px;color:var(--ink)}
+.note-reader h3{margin:20px 0 8px;color:var(--green)}
+.note-reader h4{margin:15px 0 6px}
+.note-reader p{margin:8px 0}
+.note-reader ul,.note-reader ol{margin:8px 0 8px 22px}
+.note-reader .note-box{padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--soft);margin:14px 0}
+.note-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
 </style>
 </head>
 <body>
@@ -215,9 +229,10 @@ body{transition:background .25s,color .25s}
 </section>
 
 <section class="section" id="notes">
-<div class="head"><div><div class="kicker">Study Material</div><h2>Notes & Learning Areas</h2></div></div>
-<div class="simple">Choose a subject above and open its sections. Each section is ready to connect to your detailed notes.</div>
-</section>
+ <div class="head"><div><div class="kicker">Study Material</div><h2>Notes & Learning Areas</h2></div><p>Open a topic to read your notes.</p></div>
+ <input class="search" id="notesSearch" placeholder="🔍 Search notes, subjects or topics...">
+ <div class="grid" id="notesGrid"></div>
+ </section>
 
 <section class="section" id="pyqs">
 <div class="head"><div><div class="kicker">Practice</div><h2>Previous-Year Style Questions</h2></div></div>
@@ -309,6 +324,19 @@ body{transition:background .25s,color .25s}
 
 <div class="modal" id="modal"><div class="modal-box"><button class="close" id="close">✕</button><div class="kicker" id="modalKicker"></div><h2 id="modalTitle"></h2><p id="modalDesc" style="color:var(--muted);margin-top:7px"></p><div class="topics" id="topics"></div></div></div>
 
+<div class="modal" id="noteReaderModal">
+ <div class="modal-box modal-wide">
+  <button class="close" id="noteReaderClose">✕</button>
+  <div class="kicker">NOTES</div>
+  <h2 id="readerTitle"></h2>
+  <p id="readerMeta" style="color:var(--muted);margin-top:7px"></p>
+  <div id="readerContent" class="note-reader" style="margin-top:20px"></div>
+  <div class="note-actions">
+   <button class="btn primary" id="printNote">🖨️ Print / Save PDF</button>
+   <button class="btn" id="readerBack">← Back to Notes</button>
+  </div>
+ </div>
+</div>
 <script>
 const subjects=[
 {name:"Genetics",icon:"🧬",desc:"Inheritance, chromosomes, genes and genetic variation.",sections:["History","Cytogenetics","Molecular Genetics","Classical Genetics","Population Genetics"]},
@@ -489,6 +517,54 @@ saveScore = function(value){
 
 updateAdvancedDashboard();
 loadNotes();
+
+
+/* ===== WEBSITE NOTES =====
+   Add your own notes by copying an object in this array.
+   Put HTML in "content" for headings, paragraphs, lists and tables.
+*/
+const studyNotes=[
+ {subject:"Genetics",icon:"🧬",topic:"Genetic Variance",type:"Notes",
+  content:`<h3>Genetic Variance</h3><p>Genetic variance is the portion of phenotypic variation due to genetic differences among individuals.</p><div class="note-box"><b>Replace this sample:</b> Paste your complete Genetics notes here.</div><h3>Important points</h3><ul><li>Genetic variance is important in plant breeding and selection.</li><li>It includes additive and non-additive components.</li></ul>`},
+ {subject:"Plant Breeding",icon:"🌾",topic:"Breeding Methods",type:"Notes",
+  content:`<h3>Breeding Methods</h3><p>Paste your complete Plant Breeding notes here.</p><div class="note-box"><b>Tip:</b> Make separate cards for Selection, Hybridization, Backcrossing and other methods.</div>`},
+ {subject:"Seed Science",icon:"🌱",topic:"Seed Science Notes",type:"Notes",
+  content:`<h3>Seed Science</h3><p>Paste your Seed Science notes here. You can make separate entries for seed development, dormancy, germination, certification, testing and storage.</p>`},
+ {subject:"Cytogenetics",icon:"🔬",topic:"Chromosome Structure",type:"Notes",
+  content:`<h3>Chromosome Structure</h3><p>Paste your Cytogenetics notes here. Create separate topic cards for chromosome morphology, karyotype, euploidy, aneuploidy and structural changes.</p>`}
+];
+
+function renderStudyNotes(term=""){
+ const box=document.getElementById("notesGrid"); if(!box)return;
+ const q=term.toLowerCase().trim();
+ const list=studyNotes.filter(n=>(n.subject+" "+n.topic+" "+n.type+" "+n.content.replace(/<[^>]*>/g," ")).toLowerCase().includes(q));
+ box.innerHTML="";
+ if(!list.length){box.innerHTML='<div class="simple" style="grid-column:1/-1">No notes found.</div>';return}
+ list.forEach((n,i)=>{
+  const c=document.createElement("article"); c.className="card notes-card";
+  c.innerHTML='<div class="card-top"><div class="subject-icon">'+escapeHTML(n.icon)+'</div><div><h3>'+escapeHTML(n.topic)+'</h3><p>'+escapeHTML(n.subject)+' • '+escapeHTML(n.type)+'</p></div></div><div class="card-bottom"><span class="count">📖 Read Notes</span><button class="notes-open" data-note="'+i+'">Open →</button></div>';
+  box.appendChild(c);
+ });
+ box.querySelectorAll(".notes-open").forEach(btn=>btn.addEventListener("click",()=>openStudyNote(Number(btn.dataset.note),list)));
+}
+function openStudyNote(index,list){
+ const n=list[index]; if(!n)return;
+ document.getElementById("readerTitle").textContent=n.topic;
+ document.getElementById("readerMeta").textContent=n.subject+" • "+n.type;
+ document.getElementById("readerContent").innerHTML=n.content;
+ document.getElementById("noteReaderModal").classList.add("open");
+}
+function closeStudyNote(){document.getElementById("noteReaderModal").classList.remove("open")}
+document.getElementById("notesSearch")?.addEventListener("input",e=>renderStudyNotes(e.target.value));
+document.getElementById("noteReaderClose")?.addEventListener("click",closeStudyNote);
+document.getElementById("readerBack")?.addEventListener("click",closeStudyNote);
+document.getElementById("noteReaderModal")?.addEventListener("click",e=>{if(e.target.id==="noteReaderModal")closeStudyNote()});
+document.getElementById("printNote")?.addEventListener("click",()=>{
+ const w=window.open("","_blank"); if(!w)return;
+ w.document.write('<html><head><title>'+escapeHTML(document.getElementById("readerTitle").textContent)+'</title><style>body{font-family:Arial;max-width:850px;margin:40px auto;padding:0 20px;line-height:1.7}h1,h3{color:#087b3d}.note-box{padding:12px;background:#eaf6e9;border-radius:10px}</style></head><body><h1>'+escapeHTML(document.getElementById("readerTitle").textContent)+'</h1>'+document.getElementById("readerContent").innerHTML+'</body></html>');
+ w.document.close();w.focus();w.print();
+});
+renderStudyNotes();
 
 
 const navLinks=[...document.querySelectorAll("nav a")];
