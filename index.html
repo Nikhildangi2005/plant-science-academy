@@ -8,20 +8,82 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <style>
+    <style> 
         :root {
-            --bg-page: #f1f6f0;
-            --nav-bg: #0b1a10;
-            --primary-green: #14381e;
-            --accent-green: #2d7a42;
-            --accent-glow: #e2f0e0;
-            --text-dark: #122116;
-            --text-muted: #526356;
-            --card-border: rgba(20, 56, 30, 0.08);
-            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 15px 35px rgba(20, 56, 30, 0.12);
-        }
+  --bg-page: #f4f8f3;
+  --nav-bg: #071a10;
+  --primary-green: #154d2b;
+  --accent-green: #2d6a4f;
+  --accent-glow: #e2ede0;
+  --text-dark: #111827;
+  --text-muted: #4b5563;
+  --card-border: rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 10px 25px rgba(21, 77, 43, 0.12);
+  
+  /* Subject Card Pastel Colors */
+  --bg-genetics: #eef6ed;
+  --bg-pathology: #f1f8f1;
+  --bg-breeding: #fcf8ec;
+  --bg-microbiology: #f5f0f8;
+}
+h1, h2, h3, .brand-title {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+        /* 4-Column Responsive Grid */
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
 
+/* Base Card Layout */
+.subject-card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.subject-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Individual Pastel Card Backgrounds */
+.card-genetics { background-color: var(--bg-genetics); }
+.card-pathology { background-color: var(--bg-pathology); }
+.card-breeding { background-color: var(--bg-breeding); }
+.card-microbiology { background-color: var(--bg-microbiology); }
+
+/* Outline Button Styling */
+.btn-view-notes {
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid var(--primary-green);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--primary-green);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-view-notes:hover {
+  background-color: var(--primary-green);
+  color: #ffffff;
+}
         * {
             margin: 0;
             padding: 0;
