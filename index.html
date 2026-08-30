@@ -783,6 +783,11 @@ function answerMCQ(index, clickedButton) {
     mcqScore++;
 
   } else {
+    document.getElementById("mcqExplanation").style.display = "block";
+
+document.getElementById("mcqNext").style.display = "inline-block";
+document.getElementById("mcqNext").style.visibility = "visible";
+document.getElementById("mcqNext").style.opacity = "1";
 
     clickedButton.classList.add("wrong");
 
