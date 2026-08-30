@@ -314,6 +314,126 @@ footer p{font-size:12px;opacity:.7}
   .footer{display:block}
   .footer p{margin-top:8px}
 }
+  /* MCQ SECTION */
+.mcq-box{
+  max-width:850px;
+  margin:0 auto 4rem;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:16px;
+  padding:1.5rem;
+  box-shadow:var(--shadow-sm);
+}
+
+.mcq-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:1rem;
+  color:var(--text-muted);
+  font-size:.85rem;
+  font-weight:700;
+}
+
+.mcq-progress{
+  height:7px;
+  background:#e8f1ea;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:1.4rem;
+}
+
+.mcq-progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:var(--primary-green);
+  transition:.3s;
+}
+
+.mcq-question{
+  font-size:1.25rem;
+  font-weight:800;
+  color:var(--primary-dark);
+  margin-bottom:1rem;
+}
+
+.mcq-options{
+  display:grid;
+  gap:10px;
+}
+
+.mcq-option{
+  width:100%;
+  text-align:left;
+  padding:.85rem 1rem;
+  border:1px solid #dce8df;
+  border-radius:10px;
+  background:#fff;
+  color:var(--text-main);
+  cursor:pointer;
+  font-weight:600;
+}
+
+.mcq-option:hover{
+  border-color:var(--accent-green);
+  background:#f3faf5;
+}
+
+.mcq-option.correct{
+  background:#e6f6eb;
+  border-color:#42a866;
+  color:#176b3a;
+}
+
+.mcq-option.wrong{
+  background:#fff0f0;
+  border-color:#d66;
+  color:#a22;
+}
+
+.mcq-option:disabled{
+  cursor:default;
+}
+
+.mcq-explanation{
+  display:none;
+  margin-top:1rem;
+  padding:.8rem 1rem;
+  background:#f1f7f3;
+  border-left:4px solid var(--accent-green);
+  border-radius:7px;
+  font-size:.9rem;
+}
+
+.mcq-actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:1rem;
+}
+
+.mcq-next{
+  display:none;
+  border:0;
+  background:var(--primary-dark);
+  color:white;
+  padding:.7rem 1.2rem;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.mcq-result{
+  display:none;
+  text-align:center;
+  padding:1rem;
+}
+
+.mcq-result strong{
+  display:block;
+  font-size:2.5rem;
+  color:var(--primary-green);
+  margin-bottom:.4rem;
+}
 </style>
 </head>
 
@@ -452,7 +572,53 @@ footer p{font-size:12px;opacity:.7}
   </div>
   <a href="#" class="btn">Practice PYQs →</a>
 </section>
+<section id="mcqs">
 
+  <div class="section-header">
+    <h2 class="section-title">🧠 MCQs</h2>
+    <p class="section-subtitle">Test your Plant Science knowledge</p>
+  </div>
+
+  <div class="mcq-box">
+
+    <div id="mcqQuiz">
+
+      <div class="mcq-top">
+        <span id="mcqCount">Question 1</span>
+        <span id="mcqScore">Score: 0</span>
+      </div>
+
+      <div class="mcq-progress">
+        <span id="mcqProgress"></span>
+      </div>
+
+      <div class="mcq-question" id="mcqQuestion"></div>
+
+      <div class="mcq-options" id="mcqOptions"></div>
+
+      <div class="mcq-explanation" id="mcqExplanation"></div>
+
+      <div class="mcq-actions">
+        <button class="mcq-next" id="mcqNext">
+          Next Question →
+        </button>
+      </div>
+
+    </div>
+
+    <div class="mcq-result" id="mcqResult">
+      <strong id="mcqFinalScore">0/0</strong>
+      <h3>Quiz Complete 🎉</h3>
+      <p id="mcqFinalText"></p>
+
+      <button class="btn-primary" onclick="startMCQ()">
+        Try Again
+      </button>
+    </div>
+
+  </div>
+
+</section>
 </main>
 
 <footer id="contact">
@@ -464,6 +630,215 @@ footer p{font-size:12px;opacity:.7}
     <p>© 2026 Plant Science Academy</p>
   </div>
 </footer>
+  
+<script>
 
+const mcqQuestions = [
+  {
+    q: "The basic unit of heredity is:",
+    options: ["Gene", "Cell", "Tissue", "Organ"],
+    answer: 0,
+    explanation: "A gene is the basic unit of heredity."
+  },
+
+  {
+    q: "The study of plant diseases is called:",
+    options: [
+      "Plant Pathology",
+      "Plant Breeding",
+      "Agronomy",
+      "Taxonomy"
+    ],
+    answer: 0,
+    explanation: "Plant pathology deals with plant diseases, their causes and management."
+  },
+
+  {
+    q: "The main objective of plant breeding is:",
+    options: [
+      "Crop improvement",
+      "Stopping reproduction",
+      "Removing variation",
+      "Removing genes"
+    ],
+    answer: 0,
+    explanation: "Plant breeding aims to improve useful crop characteristics."
+  },
+
+  {
+    q: "Bacteria are generally:",
+    options: [
+      "Prokaryotic",
+      "Eukaryotic",
+      "Multicellular plants",
+      "Viruses"
+    ],
+    answer: 0,
+    explanation: "Bacteria are prokaryotic organisms."
+  },
+
+  {
+    q: "Seed testing is mainly used to assess:",
+    options: [
+      "Seed quality",
+      "Leaf colour",
+      "Flower colour",
+      "Soil texture"
+    ],
+    answer: 0,
+    explanation: "Seed testing helps assess qualities such as purity and germination."
+  }
+];
+
+let mcqCurrent = 0;
+let mcqScore = 0;
+let mcqAnswered = false;
+
+function startMCQ() {
+
+  mcqCurrent = 0;
+  mcqScore = 0;
+  mcqAnswered = false;
+
+  document.getElementById("mcqQuiz").style.display = "block";
+  document.getElementById("mcqResult").style.display = "none";
+
+  showMCQ();
+}
+
+function showMCQ() {
+
+  mcqAnswered = false;
+
+  const question = mcqQuestions[mcqCurrent];
+
+  document.getElementById("mcqCount").textContent =
+    "Question " + (mcqCurrent + 1) +
+    " of " + mcqQuestions.length;
+
+  document.getElementById("mcqScore").textContent =
+    "Score: " + mcqScore;
+
+  document.getElementById("mcqProgress").style.width =
+    ((mcqCurrent + 1) / mcqQuestions.length * 100) + "%";
+
+  document.getElementById("mcqQuestion").textContent =
+    question.q;
+
+  const optionsBox =
+    document.getElementById("mcqOptions");
+
+  optionsBox.innerHTML = "";
+
+  document.getElementById("mcqExplanation").style.display =
+    "none";
+
+  document.getElementById("mcqNext").style.display =
+    "none";
+
+  question.options.forEach(function(option, index) {
+
+    const button = document.createElement("button");
+
+    button.className = "mcq-option";
+
+    button.textContent =
+      String.fromCharCode(65 + index) + ". " + option;
+
+    button.onclick = function() {
+      answerMCQ(index, button);
+    };
+
+    optionsBox.appendChild(button);
+
+  });
+}
+
+function answerMCQ(index, clickedButton) {
+
+  if (mcqAnswered) return;
+
+  mcqAnswered = true;
+
+  const question = mcqQuestions[mcqCurrent];
+
+  const buttons =
+    document.querySelectorAll(".mcq-option");
+
+  buttons.forEach(function(button, i) {
+
+    button.disabled = true;
+
+    if (i === question.answer) {
+      button.classList.add("correct");
+    }
+
+  });
+
+  if (index === question.answer) {
+
+    mcqScore++;
+
+  } else {
+
+    clickedButton.classList.add("wrong");
+
+  }
+
+  document.getElementById("mcqScore").textContent =
+    "Score: " + mcqScore;
+
+  const explanation =
+    document.getElementById("mcqExplanation");
+
+  explanation.textContent =
+    "Explanation: " + question.explanation;
+
+  explanation.style.display = "block";
+
+  document.getElementById("mcqNext").style.display =
+    "inline-block";
+}
+
+document.getElementById("mcqNext").onclick = function() {
+
+  mcqCurrent++;
+
+  if (mcqCurrent < mcqQuestions.length) {
+
+    showMCQ();
+
+  } else {
+
+    finishMCQ();
+
+  }
+};
+
+function finishMCQ() {
+
+  document.getElementById("mcqQuiz").style.display =
+    "none";
+
+  document.getElementById("mcqResult").style.display =
+    "block";
+
+  document.getElementById("mcqFinalScore").textContent =
+    mcqScore + "/" + mcqQuestions.length;
+
+  const percentage =
+    Math.round(
+      mcqScore / mcqQuestions.length * 100
+    );
+
+  document.getElementById("mcqFinalText").textContent =
+    "You scored " + percentage +
+    "%. Keep practicing!";
+}
+
+startMCQ();
+  
+</script>
+  
 </body>
 </html>
