@@ -1,497 +1,463 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Science Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #f4f8f3;
+            --nav-bg: #0c1a12;
+            --primary-green: #1c4428;
+            --accent-green: #377d4b;
+            --text-dark: #1b261e;
+            --text-muted: #4e6052;
+            --card-border: rgba(28, 68, 40, 0.12);
+        }
 
-<title>🌱Plant Science Academy</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-* {
-  box-sizing: border-box;
-}
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f8f3;
-  color: #17321f;
-}
+        /* --- NAVIGATION HEADER --- */
+        header {
+            background-color: var(--nav-bg);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* Header */
-header {
-  background: #17321f;
-  color: white;
-  padding: 18px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #ffffff;
+            text-decoration: none;
+        }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-}
+        .logo svg {
+            width: 28px;
+            height: 28px;
+            fill: #55b66d;
+        }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 18px;
-  font-size: 14px;
-}
+        .logo-text h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+        }
 
-/* Hero */
-.hero {
-  padding: 75px 6%;
-  background: linear-gradient(135deg, #e8f5e9, #f7faf7);
-  text-align: center;
-}
+        .logo-text span {
+            font-size: 0.7rem;
+            color: #8da493;
+            letter-spacing: 0.5px;
+        }
 
-.hero h1 {
-  font-size: 42px;
-  margin: 0 0 12px;
-}
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
 
-.hero p {
-  font-size: 18px;
-  max-width: 650px;
-  margin: 0 auto 25px;
-  line-height: 1.6;
-}
+        nav a {
+            color: #d1ded5;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
 
-.btn {
-  display: inline-block;
-  background: #2e7d32;
-  color: white;
-  padding: 13px 22px;
-  border-radius: 9px;
-  text-decoration: none;
-  font-weight: bold;
-}
+        nav a:hover, nav a.active {
+            color: #ffffff;
+            border-bottom: 2px solid #55b66d;
+            padding-bottom: 2px;
+        }
 
-/* Sections */
-section {
-  padding: 48px 6%;
-  max-width: 1150px;
-  margin: auto;
-}
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #ffffff;
+        }
 
-section h2 {
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 30px;
-}
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            padding: 4rem 1.5rem 3rem;
+            text-align: center;
+            background: radial-gradient(circle at center, #e8f3e8 0%, var(--bg-main) 70%);
+            overflow: hidden;
+        }
 
-/* Subject cards */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 22px;
-}
+        .hero-icon {
+            margin-bottom: 1rem;
+        }
 
-.card {
-    background: white;
-    padding: 26px;
-    border-radius: 18px;
-    border: 1px solid #e5eee6;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    transition: 0.25s;
-}
+        .hero-icon svg {
+            width: 42px;
+            height: 42px;
+            fill: var(--accent-green);
+        }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
+        .hero h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.75rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
 
-.icon {
-    font-size: 42px;
-    margin-bottom: 14px;
-    display: inline-block;
-}
+        .hero h1 span {
+            color: var(--accent-green);
+        }
 
-.badge {
-    display: inline-block;
-    background: #e8f5e9;
-    color: #2e7d32;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1rem;
+        }
 
-.card h3 {
-    margin: 5px 0 10px;
-    font-size: 22px;
-    color: #17321f;
-}
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--primary-green);
+            color: #ffffff;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(28, 68, 40, 0.2);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
 
-.card p {
-  line-height: 1.55;
-  color: #49604e;
-}
+        .btn-primary:hover {
+            background-color: #122d1b;
+            transform: translateY(-1px);
+        }
 
-/* Practice boxes */
-.practice {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 16px;
-  margin-top: 20px;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.06);
-}
+        /* --- FEATURE HIGHLIGHTS GRID --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
 
-/* Footer */
-footer {
-  background: #17321f;
-  color: white;
-  text-align: center;
-  padding: 28px 6%;
-  margin-top: 30px;
-}
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 4rem;
+        }
 
-/* Mobile */
-@media (max-width: 800px) {
-  nav {
-    display: none;
-  }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
 
-  .hero h1 {
-    font-size: 32px;
-  }
+        .feature-icon {
+            background: #e4f0e6;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--primary-green);
+        }
 
-  .grid {
-    grid-template-columns: 1fr;
-  } 
-  }
+        .feature-text h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
 
-/* NEW CSS STARTS HERE */
+        .feature-text p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
 
-body {
-    background: linear-gradient(135deg, #eef7f0, #f8fbf8);
-    color: #17321f;
-}
+        /* --- STUDY NOTES SECTION --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
 
-header {
-    background: linear-gradient(135deg, #17321f, #285c3b);
-    padding: 18px 6%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-}
+        .section-header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
 
-.logo {
-    font-size: 24px;
-    font-weight: 700;
-}
+        .section-header-title h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.75rem;
+            color: var(--text-dark);
+        }
 
-nav a {
-    transition: 0.25s;
-}
+        .section-header p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
 
-nav a:hover {
-    color: #b7e4c7;
-}
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
 
-.hero {
-    background: linear-gradient(135deg, #dff3e5, #f7fbf8);
-    border-radius: 0 0 35px 35px;
-    padding: 75px 6%;
-}
+        .note-card {
+            border-radius: 16px;
+            padding: 1.75rem 1.25rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
 
-.hero h1 {
-    font-size: 46px;
-    color: #17321f;
-}
+        .note-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+        }
 
-.hero p {
-    color: #49604e;
-}
+        /* Distinct Background Tints per Card */
+        .card-genetics { background-color: #f2f7f3; }
+        .card-pathology { background-color: #f4f8f4; }
+        .card-breeding { background-color: #fcf9f2; }
+        .card-microbiology { background-color: #f7f5fa; }
 
-.btn {
-    background: linear-gradient(135deg, #2e7d32, #43a047);
-    border-radius: 25px;
-    padding: 14px 25px;
-    box-shadow: 0 5px 15px rgba(46,125,50,0.25);
-    transition: 0.25s;
-}
+        .card-icon-wrapper {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
 
-.btn:hover {
-    transform: translateY(-3px);
-}
+        .pill-badge {
+            position: absolute;
+            top: 2px;
+            right: -45px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+        }
 
-.grid {
-    gap: 25px;
-}
+        .pill-genetics { background: #dceada; color: #2d5537; }
+        .pill-pathology { background: #dceada; color: #2d5537; }
+        .pill-breeding { background: #efe8d5; color: #5a4b27; }
+        .pill-microbiology { background: #eae4f2; color: #4c375c; }
 
-.card {
-    background: rgba(255,255,255,0.95);
-    border: 1px solid #dce9df;
-    border-radius: 22px;
-    padding: 28px;
-    box-shadow: 0 8px 25px rgba(23,50,31,0.08);
-    transition: 0.3s ease;
-}
+        .note-card h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
 
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(23,50,31,0.15);
-}
+        .note-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
 
-.icon {
-    font-size: 45px;
-}
+        .btn-secondary {
+            width: 100%;
+            padding: 0.6rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            transition: background 0.2s ease;
+        }
 
-.badge {
-    background: #e1f3e6;
-    color: #2e7d32;
-    border-radius: 20px;
-    padding: 7px 13px;
-}
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
 
-.card h3 {
-    color: #17321f;
-    font-size: 22px;
-}
-
-.card p {
-    color: #596b5d;
-}
-
-.practice {
-    border-radius: 22px;
-    box-shadow: 0 8px 25px rgba(23,50,31,0.08);
-}
-
-/* NEW CSS ENDS HERE */
- 
-</style>
+        /* Responsive Tweaks */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 1rem; }
+            .hero h1 { font-size: 2rem; }
+            nav { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-  <div class="logo">🌱 Plant Science Academy</div>
+    <header>
+        <a href="#" class="logo">
+            <svg viewBox="0 0 24 24"><path d="M17,8C8,10 59,16 3,21C3,21 7,15 6,12C5,9 3,9 3,9C3,9 8,8 11,5C14,2 17,8 17,8Z"/></svg>
+            <div class="logo-text">
+                <h1>Plant Science Academy</h1>
+                <span>Learn • Understand • Excel</span>
+            </div>
+        </a>
+        <nav>
+            <a href="#" class="active">Notes</a>
+            <a href="#">PYQs</a>
+            <a href="#">MCQs</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <button class="theme-toggle" aria-label="Toggle Theme">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-5.4-5.4c0-1.81 .89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/></svg>
+            </button>
+        </nav>
+    </header>
 
-  <nav>
-    <a href="#notes">Notes</a>
-    <a href="#pyq">PYQs</a>
-    <a href="#mcq">MCQs</a>
-    <a href="#about">About</a>
-  </nav>
-</header>
+    <section class="hero">
+        <div class="hero-icon">
+            <svg viewBox="0 0 24 24"><path d="M12,3C6.5,3 2,6.5 2,12C2,14 3,16 4,17.5C3,19 2.5,20.5 2.5,20.5C2.5,20.5 4.5,20.5 6.5,19.5C8,20.5 10,21 12,21C17.5,21 22,16.5 22,11C22,5.5 17.5,3 12,3Z"/></svg>
+        </div>
+        <h1>Plant Science <span>Made Simple</span></h1>
+        <p>Easy notes, PYQs and MCQs for Plant Science students. Learn concepts clearly and revise faster.</p>
+        <a href="#notes" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Start Studying
+        </a>
+    </section>
 
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Exam Focused</h3>
+                    <p>Important topics and high yield notes.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Well Organized</h3>
+                    <p>Structured content for quick understanding.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Trusted Content</h3>
+                    <p>Accurate, simple and student friendly.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Save Time</h3>
+                    <p>Short notes to help you revise faster.</p>
+                </div>
+            </div>
+        </div>
 
-<!-- Hero Section -->
+        <section id="notes">
+            <div class="section-header">
+                <div class="section-header-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#377d4b"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+                    <h2>Study Notes</h2>
+                </div>
+                <p>Explore important Plant Science subjects</p>
+            </div>
 
-<div class="hero">
+            <div class="notes-grid">
+                <div class="note-card card-genetics">
+                    <div class="card-icon-wrapper">
+                        <span class="pill-badge pill-genetics">Genetics</span>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e05252" stroke-width="2"><path d="M2 15c6.667-6 13.333 0 20-6"></path><path d="M2 9c6.667 6 13.333 0 20 6"></path></svg>
+                    </div>
+                    <h3>Genetics</h3>
+                    <p>Simple and exam-focused notes on Genetics.</p>
+                    <a href="#" class="btn-secondary">View Notes &rarr;</a>
+                </div>
 
-  <h1>Plant Science Made Simple</h1>
+                <div class="note-card card-pathology">
+                    <div class="card-icon-wrapper">
+                        <span class="pill-badge pill-pathology">Plant Pathology</span>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#43a047" stroke-width="2"><circle cx="12" cy="12" r="6"></circle><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+                    </div>
+                    <h3>Plant Pathology</h3>
+                    <p>Easy notes on plant diseases, pathogens and management.</p>
+                    <a href="#" class="btn-secondary">View Notes &rarr;</a>
+                </div>
 
-  <p>
-    Easy notes, PYQs and MCQs for Plant Science students.
-    Learn concepts clearly and revise faster.
-  </p>
+                <div class="note-card card-breeding">
+                    <div class="card-icon-wrapper">
+                        <span class="pill-badge pill-breeding">Plant Breeding</span>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fb8c00" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                    <h3>Plant Breeding</h3>
+                    <p>Notes on breeding methods, selection and improvement.</p>
+                    <a href="#" class="btn-secondary">View Notes &rarr;</a>
+                </div>
 
-  <a class="btn" href="#notes">Start Studying</a>
-
-</div>
-
-
-<!-- Study Notes -->
-
-<section id="notes">
-
-  <h2>📚 Study Notes</h2>
-
-  <div class="grid">
-
-    <!-- Genetics -->
-
-    <a href="genetics.html" class="card">
-
-      <div class="icon">🧬</div>
-
-      <span class="badge">Genetics</span>
-
-      <h3>Genetics</h3>
-
-      <p>
-        Simple and exam-focused notes on genetics,
-        inheritance, variation, genes and important concepts.
-      </p>
-
-    </a>
-
-
-    <!-- Plant Pathology -->
-
-    <div class="card">
-
-      <div class="icon">🦠</div>
-
-      <span class="badge">Plant Pathology</span>
-
-      <h3>Plant Pathology</h3>
-
-      <p>
-        Easy notes on plant diseases, pathogens,
-        symptoms, disease cycles and disease management.
-      </p>
-
+                <div class="note-card card-microbiology">
+                    <div class="card-icon-wrapper">
+                        <span class="pill-badge pill-microbiology">Microbiology</span>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#5e35b1" stroke-width="2"><path d="M6 18h12M12 2v14M9 9h6"></path></svg>
+                    </div>
+                    <h3>Microbiology</h3>
+                    <p>Simple notes on microorganisms and their importance.</p>
+                    <a href="#" class="btn-secondary">View Notes &rarr;</a>
+                </div>
+            </div>
+        </section>
     </div>
-
-
-    <!-- Plant Breeding -->
-
-    <div class="card">
-
-      <div class="icon">🌾</div>
-
-      <span class="badge">Plant Breeding</span>
-
-      <h3>Plant Breeding</h3>
-
-      <p>
-        Notes on breeding methods, selection,
-        hybridization, self-incompatibility and related topics.
-      </p>
-
-    </div>
-
-
-    <!-- Microbiology -->
-
-    <div class="card">
-
-      <div class="icon">🔬</div>
-
-      <span class="badge">Microbiology</span>
-
-      <h3>Microbiology</h3>
-
-      <p>
-        Simple notes on microorganisms, bacteria,
-        nitrogen fixation and important microbiology topics.
-      </p>
-
-    </div>
-
-
-    <!-- Seed Science -->
-
-    <div class="card">
-
-      <div class="icon">🌰</div>
-
-      <span class="badge">Seed Science</span>
-
-      <h3>Seed Science</h3>
-
-      <p>
-        Notes on seed development, dormancy,
-        germination, seed testing, storage and seed technology.
-      </p>
-
-    </div>
-
-
-    <!-- General Agriculture -->
-
-    <div class="card">
-
-      <div class="icon">🚜</div>
-
-      <span class="badge">General Agriculture</span>
-
-      <h3>General Agriculture</h3>
-
-      <p>
-        Important notes covering agronomy, horticulture,
-        soil science, crops and general agriculture.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PYQ Section -->
-
-<section id="pyq">
-
-  <h2>📝 PYQ Practice</h2>
-
-  <div class="practice">
-
-    <h3>Previous Year Questions</h3>
-
-    <p>
-      Practice previous-year and PYQ-type questions
-      chapter by chapter for entrance examinations.
-    </p>
-
-    <a class="btn" href="#mcq">Practice Now</a>
-
-  </div>
-
-</section>
-
-
-<!-- MCQ Section -->
-
-<section id="mcq">
-
-  <h2>❓ Free MCQs</h2>
-
-  <div class="practice">
-
-    <h3>Quick Revision</h3>
-
-    <p>
-      Practice one-line facts, important concepts
-      and formula-based questions for last-minute revision.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- About -->
-
-<section id="about">
-
-  <h2>🌱 About</h2>
-
-  <div class="practice">
-
-    <p>
-      Plant Science Academy is designed as a simple
-      study hub for students preparing for Plant Science
-      entrance examinations.
-    </p>
-
-    <p>
-      <b>Upcoming:</b> Downloadable PDF notes,
-      100+ MCQs per topic, mock tests, search
-      and more study resources.
-    </p>
-
-  </div>
-
-</section>
-
-
-<footer>
-
-  <p>
-    © 2026 Plant Science Academy • Study smart, revise simple.
-  </p>
-
-</footer>
 
 </body>
-</html>
+</html>  
