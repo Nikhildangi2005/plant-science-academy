@@ -3,82 +3,396 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Plant Science Academy</title>
+
 <style>
-*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#f7faf7;color:#17321f}
-header{background:#17321f;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
-.logo{font-size:22px;font-weight:700}.nav a{color:white;text-decoration:none;margin-left:18px;font-size:14px}
-.hero{padding:70px 6%;background:linear-gradient(135deg,#e8f5e9,#f7faf7);text-align:center}
-.hero h1{font-size:42px;margin:0 0 12px}.hero p{font-size:18px;max-width:650px;margin:0 auto 25px;line-height:1.6}
-.btn{display:inline-block;background:#2e7d32;color:white;padding:13px 22px;border-radius:9px;text-decoration:none;font-weight:700}
-section{padding:48px 6%;max-width:1100px;margin:auto} h2{text-align:center;font-size:30px;margin-bottom:28px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card{background:white;padding:22px;border-radius:14px;box-shadow:0 3px 15px #00000012;border:1px solid #e5eee6}
-.card h3{margin-top:0}.card p{line-height:1.55;color:#49604e}
-.badge{display:inline-block;background:#e8f5e9;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold;margin-bottom:10px}
-.mcq{margin:12px 0;padding:15px;background:#f0f7f1;border-radius:10px}
-footer{background:#17321f;color:white;text-align:center;padding:28px 6%;margin-top:30px}
-@media(max-width:700px){.nav{display:none}.hero h1{font-size:32px}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f8f3;
+  color: #17321f;
+}
+
+/* Header */
+header {
+  background: #17321f;
+  color: white;
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 18px;
+  font-size: 14px;
+}
+
+/* Hero */
+.hero {
+  padding: 75px 6%;
+  background: linear-gradient(135deg, #e8f5e9, #f7faf7);
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin: 0 0 12px;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 650px;
+  margin: 0 auto 25px;
+  line-height: 1.6;
+}
+
+.btn {
+  display: inline-block;
+  background: #2e7d32;
+  color: white;
+  padding: 13px 22px;
+  border-radius: 9px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Sections */
+section {
+  padding: 48px 6%;
+  max-width: 1150px;
+  margin: auto;
+}
+
+section h2 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+/* Subject cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    padding: 26px;
+    border-radius: 18px;
+    border: 1px solid #e5eee6;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 14px;
+    display: inline-block;
+}
+
+.badge {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin: 5px 0 10px;
+    font-size: 22px;
+    color: #17321f;
+}
+
+.card p {
+  line-height: 1.55;
+  color: #49604e;
+}
+
+/* Practice boxes */
+.practice {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  margin-top: 20px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+}
+
+/* Footer */
+footer {
+  background: #17321f;
+  color: white;
+  text-align: center;
+  padding: 28px 6%;
+  margin-top: 30px;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  nav {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header>
   <div class="logo">🌱 Plant Science Academy</div>
-  <nav class="nav">
-    <a href="#notes">Notes</a><a href="#pyq">PYQs</a><a href="#mcq">MCQs</a><a href="#about">About</a>
+
+  <nav>
+    <a href="#notes">Notes</a>
+    <a href="#pyq">PYQs</a>
+    <a href="#mcq">MCQs</a>
+    <a href="#about">About</a>
   </nav>
 </header>
 
+
+<!-- Hero Section -->
+
 <div class="hero">
+
   <h1>Plant Science Made Simple</h1>
-  <p>Easy notes, PYQs and MCQs for Plant Science students. Learn concepts clearly and revise faster.</p>
+
+  <p>
+    Easy notes, PYQs and MCQs for Plant Science students.
+    Learn concepts clearly and revise faster.
+  </p>
+
   <a class="btn" href="#notes">Start Studying</a>
+
 </div>
+
+
+<!-- Study Notes -->
 
 <section id="notes">
-<h2>📚 Study Notes</h2>
-<div class="grid">
-  <div class="card"><span class="badge">Genetics</span><h3>Genetics</h3><p>Simple and exam-focused notes on genetics, inheritance, variation, genes and important concepts.</p></div>
 
-<div class="card"><span class="badge">Plant Pathology</span><h3>Plant Pathology</h3><p>Easy notes on plant diseases, pathogens, symptoms, disease cycles and disease management.</p></div>
+  <h2>📚 Study Notes</h2>
 
-<div class="card"><span class="badge">Plant Breeding</span><h3>Plant Breeding</h3><p>Notes on breeding methods, selection, hybridization, self-incompatibility and related topics.</p></div>
+  <div class="grid">
 
-<div class="card"><span class="badge">Microbiology</span><h3>Microbiology</h3><p>Simple notes on microorganisms, bacteria, nitrogen fixation and important microbiology topics.</p></div>
+    <!-- Genetics -->
 
-<div class="card"><span class="badge">Seed Science</span><h3>Seed Science</h3><p>Notes on seed development, dormancy, germination, seed testing, storage and seed technology.</p></div>
+    <div class="card">
 
-<div class="card"><span class="badge">General Agriculture</span><h3>General Agriculture</h3><p>Important notes covering agronomy, horticulture, soil science, crops and general agriculture.</p></div>></div>
-</div>
+      <div class="icon">🧬</div>
+
+      <span class="badge">Genetics</span>
+
+      <h3>Genetics</h3>
+
+      <p>
+        Simple and exam-focused notes on genetics,
+        inheritance, variation, genes and important concepts.
+      </p>
+
+    </div>
+
+
+    <!-- Plant Pathology -->
+
+    <div class="card">
+
+      <div class="icon">🦠</div>
+
+      <span class="badge">Plant Pathology</span>
+
+      <h3>Plant Pathology</h3>
+
+      <p>
+        Easy notes on plant diseases, pathogens,
+        symptoms, disease cycles and disease management.
+      </p>
+
+    </div>
+
+
+    <!-- Plant Breeding -->
+
+    <div class="card">
+
+      <div class="icon">🌾</div>
+
+      <span class="badge">Plant Breeding</span>
+
+      <h3>Plant Breeding</h3>
+
+      <p>
+        Notes on breeding methods, selection,
+        hybridization, self-incompatibility and related topics.
+      </p>
+
+    </div>
+
+
+    <!-- Microbiology -->
+
+    <div class="card">
+
+      <div class="icon">🔬</div>
+
+      <span class="badge">Microbiology</span>
+
+      <h3>Microbiology</h3>
+
+      <p>
+        Simple notes on microorganisms, bacteria,
+        nitrogen fixation and important microbiology topics.
+      </p>
+
+    </div>
+
+
+    <!-- Seed Science -->
+
+    <div class="card">
+
+      <div class="icon">🌰</div>
+
+      <span class="badge">Seed Science</span>
+
+      <h3>Seed Science</h3>
+
+      <p>
+        Notes on seed development, dormancy,
+        germination, seed testing, storage and seed technology.
+      </p>
+
+    </div>
+
+
+    <!-- General Agriculture -->
+
+    <div class="card">
+
+      <div class="icon">🚜</div>
+
+      <span class="badge">General Agriculture</span>
+
+      <h3>General Agriculture</h3>
+
+      <p>
+        Important notes covering agronomy, horticulture,
+        soil science, crops and general agriculture.
+      </p>
+
+    </div>
+
+  </div>
+
 </section>
+
+
+<!-- PYQ Section -->
 
 <section id="pyq">
-<h2>📝 PYQ Practice</h2>
-<div class="grid">
-  <div class="card"><h3>Topic-wise PYQs</h3><p>Practice previous-year and PYQ-type questions chapter by chapter.</p><a class="btn" href="#mcq">Practice Now</a></div>
-  <div class="card"><h3>Quick Revision</h3><p>Use one-line facts and formula-based questions for last-minute revision.</p></div>
-</div>
+
+  <h2>📝 PYQ Practice</h2>
+
+  <div class="practice">
+
+    <h3>Previous Year Questions</h3>
+
+    <p>
+      Practice previous-year and PYQ-type questions
+      chapter by chapter for entrance examinations.
+    </p>
+
+    <a class="btn" href="#mcq">Practice Now</a>
+
+  </div>
+
 </section>
+
+
+<!-- MCQ Section -->
 
 <section id="mcq">
-<h2>❓ Free MCQs</h2>
-<div class="card">
-  <div class="mcq"><b>1. Phenotypic variance is equal to:</b><br><br>A) Vg − Ve &nbsp; B) Vg + Ve &nbsp; C) Vg/Vp &nbsp; D) Ve − Vg</div>
-  <div class="mcq"><b>2. F₂ variance generally contains:</b><br><br>A) Only genetic variation &nbsp; B) Only environmental variation &nbsp; C) Genetic + environmental variation &nbsp; D) No variation</div>
-  <p><b>Answers:</b> 1-B, 2-C</p>
-</div>
+
+  <h2>❓ Free MCQs</h2>
+
+  <div class="practice">
+
+    <h3>Quick Revision</h3>
+
+    <p>
+      Practice one-line facts, important concepts
+      and formula-based questions for last-minute revision.
+    </p>
+
+  </div>
+
 </section>
+
+
+<!-- About -->
 
 <section id="about">
-<h2>🌱 About</h2>
-<div class="card">
-<p>Plant Science Academy is designed as a simple study hub for students preparing for Plant Science entrance and competitive examinations.</p>
-<p><b>Next additions:</b> downloadable PDF notes, 100+ MCQs per topic, mock tests, search, and a contact page.</p>
-</div>
+
+  <h2>🌱 About</h2>
+
+  <div class="practice">
+
+    <p>
+      Plant Science Academy is designed as a simple
+      study hub for students preparing for Plant Science
+      entrance examinations.
+    </p>
+
+    <p>
+      <b>Upcoming:</b> Downloadable PDF notes,
+      100+ MCQs per topic, mock tests, search
+      and more study resources.
+    </p>
+
+  </div>
+
 </section>
 
+
 <footer>
-<p>© 2026 Plant Science Academy • Study smart, revise simple.</p>
+
+  <p>
+    © 2026 Plant Science Academy • Study smart, revise simple.
+  </p>
+
 </footer>
+
 </body>
 </html>
