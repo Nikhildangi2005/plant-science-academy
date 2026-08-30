@@ -412,7 +412,7 @@ footer p{font-size:12px;opacity:.7}
 }
 
 .mcq-next{
-  display:block;
+  display:inline-block;
   border:0;
   background:var(--primary-dark);
   color:white;
@@ -796,8 +796,8 @@ function answerMCQ(index, clickedButton) {
 
   explanation.style.display = "block";
 
-  document.getElementById("mcqNext").style.display =
-    "block";
+ const nextButton = document.getElementById("mcqNext");
+nextButton.style.setProperty("display", "inline-block", "important");
 }
 
 document.getElementById("mcqNext").onclick = function() {
