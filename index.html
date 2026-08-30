@@ -3,845 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Plant Science Academy — notes, PYQs, MCQs and revision tools for agriculture and plant science students.">
 <title>Plant Science Academy</title>
-
 <style>
 :root{
-  --green:#176b3a;
-  --green2:#2e8b57;
-  --mint:#e9f7ee;
-  --cream:#fbfdf9;
-  --dark:#123020;
-  --text:#304238;
-  --muted:#6b7c71;
-  --white:#fff;
-  --shadow:0 14px 40px rgba(23,107,58,.10);
+  --green:#176b3a;--green2:#2e8b57;--mint:#e9f7ee;--cream:#f7faf7;
+  --dark:#10291b;--text:#304238;--muted:#6b7c71;--white:#fff;
+  --border:#e1ebe4;--shadow:0 14px 40px rgba(23,107,58,.10);
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  font-family:Inter,Segoe UI,Arial,sans-serif;
-  background:var(--cream);
-  color:var(--text);
-  line-height:1.5;
-}
-
-/* NAVBAR */
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid #e8efe9;
-}
-.nav{
-  max-width:1180px;
-  margin:auto;
-  padding:15px 22px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.logo{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  text-decoration:none;
-  color:var(--dark);
-}
-.logo-icon{
-  width:43px;height:43px;
-  display:grid;place-items:center;
-  border-radius:14px;
-  background:var(--green);
-  color:white;
-  font-size:23px;
-  box-shadow:0 7px 18px rgba(23,107,58,.2);
-}
-.logo strong{display:block;font-size:16px}
-.logo small{display:block;color:var(--green2);font-size:11px;font-weight:600}
-nav{display:flex;gap:26px;align-items:center}
-nav a{
-  text-decoration:none;
-  color:#52635a;
-  font-size:14px;
-  font-weight:600;
-}
-nav a:hover{color:var(--green)}
-.menu{display:none;border:0;background:var(--mint);font-size:22px;border-radius:10px;padding:7px}
-
-/* HERO */
-.hero{
-  max-width:1180px;
-  margin:auto;
-  padding:76px 22px 64px;
-  display:grid;
-  grid-template-columns:1.08fr .92fr;
-  gap:55px;
-  align-items:center;
-}
-.eyebrow{
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
-  padding:8px 13px;
-  background:var(--mint);
-  color:var(--green);
-  border-radius:30px;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:18px;
-}
-.hero h1{
-  font-size:clamp(42px,5vw,68px);
-  line-height:1.03;
-  letter-spacing:-2.5px;
-  color:var(--dark);
-  margin-bottom:20px;
-}
-.hero h1 span{color:var(--green2)}
-.hero p{
-  max-width:590px;
-  color:var(--muted);
-  font-size:17px;
-  margin-bottom:29px;
-}
-.buttons{display:flex;gap:12px;flex-wrap:wrap}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
-  padding:13px 21px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:800;
-  font-size:14px;
-  transition:.25s;
-}
-.btn-primary{background:var(--green);color:white;box-shadow:0 9px 20px rgba(23,107,58,.18)}
-.btn-primary:hover{transform:translateY(-3px);background:#115b31}
-.btn-light{background:white;color:var(--green);border:1px solid #dbe9df}
-.btn-light:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-
-.hero-art{
-  min-height:380px;
-  border-radius:35px;
-  background:linear-gradient(145deg,#e8f7ed,#d5efdf);
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:var(--shadow);
-}
-.circle{
-  width:280px;height:280px;
-  border-radius:50%;
-  background:rgba(255,255,255,.6);
-  position:absolute;
-}
-.plant{
-  position:relative;
-  z-index:2;
-  font-size:155px;
-  filter:drop-shadow(0 18px 12px rgba(23,107,58,.13));
-  animation:float 4s ease-in-out infinite;
-}
-@keyframes float{50%{transform:translateY(-9px)}}
-.badge{
-  position:absolute;
-  z-index:3;
-  background:white;
-  padding:13px 16px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(20,70,40,.12);
-  font-size:12px;
-  font-weight:800;
-  color:var(--dark);
-}
-.badge.one{top:35px;left:30px}
-.badge.two{bottom:35px;right:30px}
-
-/* FEATURES */
-.features{
-  max-width:1180px;
-  margin:0 auto 70px;
-  padding:0 22px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-.feature{
-  background:white;
-  border:1px solid #e9f0eb;
-  padding:20px;
-  border-radius:18px;
-  box-shadow:0 8px 25px rgba(30,70,45,.05);
-}
-.feature-icon{font-size:25px;margin-bottom:8px}
-.feature h3{font-size:15px;color:var(--dark);margin-bottom:4px}
-.feature p{font-size:12px;color:var(--muted)}
-
-/* SECTION */
-.section{
-  max-width:1180px;
-  margin:auto;
-  padding:20px 22px 80px;
-}
-.section-head{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  margin-bottom:28px;
-}
-.kicker{
-  color:var(--green2);
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-}
-.section h2{
-  color:var(--dark);
-  font-size:35px;
-  line-height:1.15;
-  margin-top:5px;
-}
-.section-head p{color:var(--muted);font-size:14px}
-
-/* SUBJECT CARDS */
-.subjects{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-.subject{
-  position:relative;
-  overflow:hidden;
-  background:white;
-  border:1px solid #e6eee8;
-  border-radius:23px;
-  padding:25px;
-  min-height:250px;
-  box-shadow:0 8px 28px rgba(25,70,42,.055);
-  transition:.3s;
-}
-.subject:hover{
-  transform:translateY(-7px);
-  box-shadow:0 18px 42px rgba(25,90,50,.13);
-}
-.subject:after{
-  content:"";
-  position:absolute;
-  width:110px;height:110px;
-  border-radius:50%;
-  background:var(--mint);
-  right:-35px;top:-35px;
-}
-.subject-icon{
-  width:62px;height:62px;
-  display:grid;place-items:center;
-  background:var(--mint);
-  border-radius:18px;
-  font-size:32px;
-  margin-bottom:17px;
-  position:relative;
-  z-index:1;
-}
-.subject h3{font-size:20px;color:var(--dark);margin-bottom:7px}
-.subject p{font-size:13px;color:var(--muted);max-width:280px;margin-bottom:18px}
-.explore{
-  color:var(--green);
-  text-decoration:none;
-  font-size:13px;
-  font-weight:900;
-}
-.explore:hover{text-decoration:underline}
-
-/* CTA */
-.cta{
-  max-width:1136px;
-  margin:0 auto 75px;
-  padding:42px 45px;
-  border-radius:28px;
-  background:var(--green);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:25px;
-  box-shadow:0 20px 45px rgba(23,107,58,.18);
-}
-.cta h2{font-size:30px;margin-bottom:5px}
-.cta p{opacity:.82;font-size:14px}
-.cta .btn{background:white;color:var(--green);white-space:nowrap}
-
-/* FOOTER */
-footer{
-  background:#10291b;
-  color:#dbe9df;
-  padding:35px 22px;
-}
-.footer{
-  max-width:1136px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-}
-footer strong{color:white}
-footer p{font-size:12px;opacity:.7}
-
-/* MOBILE */
-@media(max-width:850px){
-  nav{display:none}
-  .menu{display:block}
-  .hero{grid-template-columns:1fr;padding-top:50px}
-  .hero-art{min-height:300px}
-  .features{grid-template-columns:repeat(2,1fr)}
-  .subjects{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:560px){
-  .hero h1{font-size:42px}
-  .features,.subjects{grid-template-columns:1fr}
-  .section-head{display:block}
-  .section-head p{margin-top:8px}
-  .cta{margin:0 18px 55px;padding:30px 25px;display:block}
-  .cta .btn{margin-top:18px}
-  .footer{display:block}
-  .footer p{margin-top:8px}
-}
-  /* MCQ SECTION */
-.mcq-box{
-  max-width:850px;
-  margin:0 auto 4rem;
-  background:rgba(255,255,255,.9);
-  border:1px solid rgba(255,255,255,.8);
-  border-radius:16px;
-  padding:1.5rem;
-  box-shadow:var(--shadow-sm);
-}
-
-.mcq-top{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:1rem;
-  color:var(--text-muted);
-  font-size:.85rem;
-  font-weight:700;
-}
-
-.mcq-progress{
-  height:7px;
-  background:#e8f1ea;
-  border-radius:20px;
-  overflow:hidden;
-  margin-bottom:1.4rem;
-}
-
-.mcq-progress span{
-  display:block;
-  height:100%;
-  width:0;
-  background:var(--primary-green);
-  transition:.3s;
-}
-
-.mcq-question{
-  font-size:1.25rem;
-  font-weight:800;
-  color:var(--primary-dark);
-  margin-bottom:1rem;
-}
-
-.mcq-options{
-  display:grid;
-  gap:10px;
-}
-
-.mcq-option{
-  width:100%;
-  text-align:left;
-  padding:.85rem 1rem;
-  border:1px solid #dce8df;
-  border-radius:10px;
-  background:#fff;
-  color:var(--text-main);
-  cursor:pointer;
-  font-weight:600;
-}
-
-.mcq-option:hover{
-  border-color:var(--accent-green);
-  background:#f3faf5;
-}
-
-.mcq-option.correct{
-  background:#e6f6eb;
-  border-color:#42a866;
-  color:#176b3a;
-}
-
-.mcq-option.wrong{
-  background:#fff0f0;
-  border-color:#d66;
-  color:#a22;
-}
-
-.mcq-option:disabled{
-  cursor:default;
-}
-
-.mcq-explanation{
-  display:none;
-  margin-top:1rem;
-  padding:.8rem 1rem;
-  background:#f1f7f3;
-  border-left:4px solid var(--accent-green);
-  border-radius:7px;
-  font-size:.9rem;
-}
-
-.mcq-actions{
-  display:flex;
-  justify-content:flex-end;
-  margin-top:1rem;
-}
-
-.mcq-next{
-    display:inline-block !important;
-    visibility:visible !important;
-    opacity:1 !important;
-    border:0;
-    background:var(--primary-dark);
-    color:white;
-    padding:.7rem 1.2rem;
-    border-radius:8px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.mcq-result{
-  display:none;
-  text-align:center;
-  padding:1rem;
-}
-
-.mcq-result strong{
-  display:block;
-  font-size:2.5rem;
-  color:var(--primary-green);
-  margin-bottom:.4rem;
-}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--cream);color:var(--text);line-height:1.5}
+body.dark{--cream:#0b1710;--white:#122219;--dark:#f1f7f2;--text:#d5e2d9;--muted:#9eb0a4;--border:#26382d;--mint:#183525;background:#0b1710}
+header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.dark header{background:rgba(12,24,16,.93)}
+.nav{max-width:1180px;margin:auto;padding:13px 22px;display:flex;align-items:center;gap:18px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--dark);margin-right:auto}
+.logo-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:var(--green);color:#fff;font-size:23px;box-shadow:0 7px 18px rgba(23,107,58,.2)}
+.logo strong{display:block;font-size:16px}.logo small{display:block;color:var(--green2);font-size:11px;font-weight:700}
+nav{display:flex;gap:21px;align-items:center}nav a{text-decoration:none;color:var(--muted);font-size:13px;font-weight:700}nav a:hover{color:var(--green)}
+.icon-btn,.menu{border:1px solid var(--border);background:var(--white);color:var(--text);font-size:18px;border-radius:10px;padding:8px;cursor:pointer}
+.menu{display:none}
+.hero{max-width:1180px;margin:auto;padding:70px 22px 55px;display:grid;grid-template-columns:1.08fr .92fr;gap:55px;align-items:center}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 13px;background:var(--mint);color:var(--green);border-radius:30px;font-size:12px;font-weight:800;margin-bottom:18px}
+.hero h1{font-size:clamp(42px,5vw,68px);line-height:1.03;letter-spacing:-2.5px;color:var(--dark);margin-bottom:20px}.hero h1 span{color:var(--green2)}
+.hero p{max-width:590px;color:var(--muted);font-size:17px;margin-bottom:29px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 21px;border-radius:12px;text-decoration:none;font-weight:800;font-size:14px;transition:.25s;cursor:pointer;border:0}
+.btn-primary{background:var(--green);color:#fff;box-shadow:0 9px 20px rgba(23,107,58,.18)}.btn-primary:hover{transform:translateY(-3px);background:#115b31}
+.btn-light{background:var(--white);color:var(--green);border:1px solid var(--border)}.btn-light:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.hero-art{min-height:380px;border-radius:35px;background:linear-gradient(145deg,#e8f7ed,#d5efdf);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.dark .hero-art{background:linear-gradient(145deg,#163b26,#10291b)}.circle{width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.6);position:absolute}.plant{position:relative;z-index:2;font-size:155px;filter:drop-shadow(0 18px 12px rgba(23,107,58,.13));animation:float 4s ease-in-out infinite}@keyframes float{50%{transform:translateY(-9px)}}
+.badge{position:absolute;z-index:3;background:var(--white);padding:13px 16px;border-radius:15px;box-shadow:0 10px 30px rgba(20,70,40,.12);font-size:12px;font-weight:800;color:var(--dark)}.badge.one{top:35px;left:30px}.badge.two{bottom:35px;right:30px}
+.features,.subjects,.tool-grid,.stats{max-width:1180px;margin:auto;padding:0 22px}.features{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:70px}.feature{background:var(--white);border:1px solid var(--border);padding:20px;border-radius:18px;box-shadow:0 8px 25px rgba(30,70,45,.05)}.feature-icon{font-size:25px;margin-bottom:8px}.feature h3{font-size:15px;color:var(--dark);margin-bottom:4px}.feature p{font-size:12px;color:var(--muted)}
+.section{max-width:1180px;margin:auto;padding:25px 22px 75px}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:28px}.kicker{color:var(--green2);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px}.section h2{color:var(--dark);font-size:35px;line-height:1.15;margin-top:5px}.section-head p{color:var(--muted);font-size:14px}
+.subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0}.subject{position:relative;overflow:hidden;background:var(--white);border:1px solid var(--border);border-radius:23px;padding:25px;min-height:250px;box-shadow:0 8px 28px rgba(25,70,42,.055);transition:.3s}.subject:hover{transform:translateY(-7px);box-shadow:0 18px 42px rgba(25,90,50,.13)}.subject:after{content:"";position:absolute;width:110px;height:110px;border-radius:50%;background:var(--mint);right:-35px;top:-35px}.subject-icon{width:62px;height:62px;display:grid;place-items:center;background:var(--mint);border-radius:18px;font-size:32px;margin-bottom:17px;position:relative;z-index:1}.subject h3{font-size:20px;color:var(--dark);margin-bottom:7px}.subject p{font-size:13px;color:var(--muted);max-width:280px;margin-bottom:18px}.explore{color:var(--green);text-decoration:none;font-size:13px;font-weight:900;cursor:pointer}
+.search-wrap{display:flex;gap:10px;margin-bottom:22px}.search-wrap input{flex:1;padding:13px 16px;border:1px solid var(--border);border-radius:12px;background:var(--white);color:var(--text);outline:none}.search-wrap input:focus{border-color:var(--green2)}
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0}.panel{background:var(--white);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:var(--shadow)}.panel h3{color:var(--dark);margin-bottom:6px}.panel p{color:var(--muted);font-size:13px;margin-bottom:15px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{background:var(--mint);border-radius:15px;padding:15px}.stat b{display:block;font-size:24px;color:var(--green)}.stat span{font-size:11px;color:var(--muted);font-weight:700}
+.cta{max-width:1136px;margin:0 auto 75px;padding:42px 45px;border-radius:28px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:25px;box-shadow:0 20px 45px rgba(23,107,58,.18)}.cta h2{font-size:30px;margin-bottom:5px}.cta p{opacity:.82;font-size:14px}.cta .btn{background:#fff;color:var(--green);white-space:nowrap}
+.mcq-box{max-width:850px;margin:0 auto 1rem;background:var(--white);border:1px solid var(--border);border-radius:18px;padding:1.5rem;box-shadow:var(--shadow)}.mcq-top{display:flex;justify-content:space-between;margin-bottom:1rem;color:var(--muted);font-size:.85rem;font-weight:700}.mcq-progress{height:7px;background:#e8f1ea;border-radius:20px;overflow:hidden;margin-bottom:1.4rem}.mcq-progress span{display:block;height:100%;width:0;background:var(--green2);transition:.3s}.mcq-question{font-size:1.25rem;font-weight:800;color:var(--dark);margin-bottom:1rem}.mcq-options{display:grid;gap:10px}.mcq-option{width:100%;text-align:left;padding:.85rem 1rem;border:1px solid var(--border);border-radius:10px;background:var(--white);color:var(--text);cursor:pointer;font-weight:600}.mcq-option:hover{border-color:var(--green2);background:var(--mint)}.mcq-option.correct{background:#e6f6eb;border-color:#42a866;color:#176b3a}.mcq-option.wrong{background:#fff0f0;border-color:#d66;color:#a22}.mcq-option:disabled{cursor:default}.mcq-explanation{display:none;margin-top:1rem;padding:.8rem 1rem;background:var(--mint);border-left:4px solid var(--green2);border-radius:7px;font-size:.9rem}.mcq-actions{display:flex;justify-content:flex-end;margin-top:1rem}.mcq-next{display:none;border:0;background:var(--green);color:#fff;padding:.7rem 1.2rem;border-radius:8px;font-weight:700;cursor:pointer}.mcq-result{display:none;text-align:center;padding:1rem}.mcq-result strong{display:block;font-size:2.5rem;color:var(--green2);margin-bottom:.4rem}
+.pyq-list{display:grid;gap:12px}.pyq{padding:17px;border:1px solid var(--border);border-radius:14px;background:var(--white)}.pyq b{color:var(--dark)}.pyq small{display:block;color:var(--muted);margin-top:5px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modal-card{width:min(760px,100%);max-height:85vh;overflow:auto;background:var(--white);border-radius:22px;padding:28px;position:relative}.close{position:absolute;right:18px;top:15px;border:0;background:var(--mint);border-radius:9px;padding:7px 10px;cursor:pointer}.topic-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}.topic{padding:14px;border:1px solid var(--border);border-radius:12px;cursor:pointer;background:var(--cream)}.topic:hover{border-color:var(--green2);background:var(--mint)}
+footer{background:#10291b;color:#dbe9df;padding:35px 22px}.footer{max-width:1136px;margin:auto;display:flex;justify-content:space-between;gap:20px}footer strong{color:#fff}footer p{font-size:12px;opacity:.7}
+@media(max-width:850px){nav{display:none}.menu{display:block}.hero{grid-template-columns:1fr;padding-top:50px}.hero-art{min-height:300px}.features{grid-template-columns:repeat(2,1fr)}.subjects{grid-template-columns:repeat(2,1fr)}.tool-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.hero h1{font-size:42px}.features,.subjects{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:8px}.cta{margin:0 18px 55px;padding:30px 25px;display:block}.cta .btn{margin-top:18px}.footer{display:block}.footer p{margin-top:8px}.topic-list{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
+<header><div class="nav">
+<a class="logo" href="#top"><div class="logo-icon">🌿</div><div><strong>Plant Science Academy</strong><small>Learn • Understand • Excel</small></div></a>
+<nav><a href="#notes">Notes</a><a href="#pyqs">PYQs</a><a href="#mcqs">MCQs</a><a href="#progress">Progress</a><a href="#about">About</a></nav>
+<button class="icon-btn" id="themeBtn" title="Toggle dark mode">🌙</button><button class="menu" id="menuBtn">☰</button>
+</div></header>
 
-<header>
-  <div class="nav">
-    <a class="logo" href="#">
-      <div class="logo-icon">🌿</div>
-      <div>
-        <strong>Plant Science Academy</strong>
-        <small>Learn • Understand • Excel</small>
-      </div>
-    </a>
-
-    <nav>
-      <a href="#notes">Notes</a>
-      <a href="#pyqs">PYQs</a>
-      <a href="#mcqs">MCQs</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <button class="menu" onclick="alert('Use the menu links above on desktop.')">☰</button>
-  </div>
-</header>
-
-<main>
-
-<section class="hero">
-  <div>
-    <div class="eyebrow">🌱 Your Plant Science Learning Hub</div>
-    <h1>Plant Science <span>Made Simple.</span></h1>
-    <p>
-      Easy notes, PYQs and MCQs designed to help Plant Science and Agriculture
-      students understand concepts clearly and revise faster.
-    </p>
-
-    <div class="buttons">
-      <a href="#notes" class="btn btn-primary">📚 Start Studying →</a>
-      <a href="#pyqs" class="btn btn-light">📝 Explore PYQs</a>
-    </div>
-  </div>
-
-  <div class="hero-art">
-    <div class="circle"></div>
-    <div class="badge one">🌿 Grow Your Knowledge</div>
-    <div class="plant">🌱</div>
-    <div class="badge two">📖 Learn • Revise • Excel</div>
-  </div>
-</section>
+<main id="top">
+<section class="hero"><div>
+<div class="eyebrow">🌱 Your Plant Science Learning Hub</div>
+<h1>Plant Science <span>Made Simple.</span></h1>
+<p>Easy notes, PYQs and MCQs designed to help Plant Science and Agriculture students understand concepts clearly and revise faster.</p>
+<div class="buttons"><a href="#notes" class="btn btn-primary">📚 Start Studying →</a><a href="#mcqs" class="btn btn-light">🧠 Practice MCQs</a></div>
+</div><div class="hero-art"><div class="circle"></div><div class="badge one">🌿 Grow Your Knowledge</div><div class="plant">🌱</div><div class="badge two">📖 Learn • Revise • Excel</div></div></section>
 
 <section class="features">
-  <div class="feature">
-    <div class="feature-icon">📖</div>
-    <h3>Exam Focused</h3>
-    <p>Important topics and high-yield study material.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">🎯</div>
-    <h3>Well Organized</h3>
-    <p>Find concepts quickly with structured subjects.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">🧠</div>
-    <h3>Easy to Understand</h3>
-    <p>Simple explanations for difficult concepts.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">⚡</div>
-    <h3>Quick Revision</h3>
-    <p>Short notes help you revise more efficiently.</p>
-  </div>
+<div class="feature"><div class="feature-icon">📖</div><h3>Exam Focused</h3><p>Important topics and high-yield study material.</p></div>
+<div class="feature"><div class="feature-icon">🎯</div><h3>Well Organized</h3><p>Find concepts quickly with structured subjects.</p></div>
+<div class="feature"><div class="feature-icon">🧠</div><h3>Easy to Understand</h3><p>Simple explanations for difficult concepts.</p></div>
+<div class="feature"><div class="feature-icon">⚡</div><h3>Quick Revision</h3><p>Short notes help you revise efficiently.</p></div>
 </section>
 
-<section class="section" id="notes">
-  <div class="section-head">
-    <div>
-      <div class="kicker">Study Library</div>
-      <h2>Explore Your Subjects</h2>
-    </div>
-    <p>Choose a subject and start learning.</p>
-  </div>
+<section class="section" id="notes"><div class="section-head"><div><div class="kicker">Study Library</div><h2>Explore Your Subjects</h2></div><p>Click any subject to open its topic library.</p></div>
+<div class="search-wrap"><input id="subjectSearch" placeholder="🔍 Search subjects or topics..."><button class="btn btn-primary" onclick="clearSearch()">Clear</button></div>
+<div class="subjects" id="subjectGrid"></div></section>
 
-  <div class="subjects">
+<section class="section" id="progress"><div class="section-head"><div><div class="kicker">Your Dashboard</div><h2>Study Progress</h2></div><p>Saved automatically in this browser.</p></div>
+<div class="tool-grid"><div class="panel"><h3>📊 Revision Overview</h3><p>Track your MCQ performance and study activity.</p><div class="stat-grid"><div class="stat"><b id="statQuizzes">0</b><span>Quizzes completed</span></div><div class="stat"><b id="statBest">0%</b><span>Best score</span></div><div class="stat"><b id="statSubjects">6</b><span>Subjects available</span></div></div></div>
+<div class="panel"><h3>🚀 Quick Actions</h3><p>Jump directly to the tools you use most.</p><div class="buttons"><a class="btn btn-primary" href="#mcqs">Start MCQ</a><a class="btn btn-light" href="#pyqs">View PYQs</a></div></div></div></section>
 
-    <article class="subject">
-      <div class="subject-icon">🧬</div>
-      <h3>Genetics</h3>
-      <p>Inheritance, genes, chromosomes, variation and important genetic principles.</p>
-      <a class="explore" href="#">Explore Genetics →</a>
-    </article>
+<section class="section" id="pyqs"><div class="section-head"><div><div class="kicker">Practice</div><h2>Previous-Year Style Questions</h2></div><p>Practice exam-oriented questions.</p></div>
+<div class="pyq-list">
+<div class="pyq"><b>1. The basic unit of heredity is:</b><small>Genetics • Answer: Gene</small></div>
+<div class="pyq"><b>2. The study of plant diseases is called:</b><small>Plant Pathology • Answer: Plant Pathology</small></div>
+<div class="pyq"><b>3. What is the main objective of plant breeding?</b><small>Plant Breeding • Answer: Crop improvement</small></div>
+<div class="pyq"><b>4. Bacteria are generally classified as:</b><small>Microbiology • Answer: Prokaryotic</small></div>
+<div class="pyq"><b>5. Seed testing is mainly used to assess:</b><small>Seed Science • Answer: Seed quality</small></div>
+</div></section>
 
-    <article class="subject">
-      <div class="subject-icon">🌱</div>
-      <h3>Plant Pathology</h3>
-      <p>Plant diseases, pathogens, disease cycles and crop protection.</p>
-      <a class="explore" href="#">Explore Pathology →</a>
-    </article>
-
-    <article class="subject">
-      <div class="subject-icon">🌾</div>
-      <h3>Plant Breeding</h3>
-      <p>Breeding methods, selection, hybridization and crop improvement.</p>
-      <a class="explore" href="#">Explore Breeding →</a>
-    </article>
-
-    <article class="subject">
-      <div class="subject-icon">🦠</div>
-      <h3>Microbiology</h3>
-      <p>Microorganisms and their importance in agriculture and plant science.</p>
-      <a class="explore" href="#">Explore Microbiology →</a>
-    </article>
-
-    <article class="subject">
-      <div class="subject-icon">🌰</div>
-      <h3>Seed Science</h3>
-      <p>Seed development, quality, testing, processing, dormancy and storage.</p>
-      <a class="explore" href="#">Explore Seed Science →</a>
-    </article>
-
-    <article class="subject">
-      <div class="subject-icon">🚜</div>
-      <h3>Agriculture</h3>
-      <p>Core agricultural concepts, crop production and essential fundamentals.</p>
-      <a class="explore" href="#">Explore Agriculture →</a>
-    </article>
-
-  </div>
+<section class="section" id="mcqs"><div class="section-head"><div><div class="kicker">Test Yourself</div><h2>🧠 MCQ Practice</h2></div><p>Instant feedback with explanations.</p></div>
+<div class="mcq-box"><div id="mcqQuiz"><div class="mcq-top"><span id="mcqCount"></span><span id="mcqScore">Score: 0</span></div><div class="mcq-progress"><span id="mcqProgress"></span></div><div class="mcq-question" id="mcqQuestion"></div><div class="mcq-options" id="mcqOptions"></div><div class="mcq-explanation" id="mcqExplanation"></div><div class="mcq-actions"><button class="mcq-next" id="mcqNext">Next Question →</button></div></div>
+<div class="mcq-result" id="mcqResult"><strong id="mcqFinalScore">0/0</strong><h3>Quiz Complete 🎉</h3><p id="mcqFinalText"></p><br><button class="btn btn-primary" onclick="startMCQ()">Try Again</button></div></div>
 </section>
 
-<section class="cta" id="pyqs">
-  <div>
-    <h2>Ready to test yourself?</h2>
-    <p>Practice previous-year questions and strengthen your preparation.</p>
-  </div>
-  <a href="#" class="btn">Practice PYQs →</a>
-</section>
-<section id="mcqs">
-
-  <div class="section-header">
-    <h2 class="section-title">🧠 MCQs</h2>
-    <p class="section-subtitle">Test your Plant Science knowledge</p>
-  </div>
-
-  <div class="mcq-box">
-
-    <div id="mcqQuiz">
-
-      <div class="mcq-top">
-        <span id="mcqCount">Question 1</span>
-        <span id="mcqScore">Score: 0</span>
-      </div>
-
-      <div class="mcq-progress">
-        <span id="mcqProgress"></span>
-      </div>
-
-      <div class="mcq-question" id="mcqQuestion"></div>
-
-      <div class="mcq-options" id="mcqOptions"></div>
-
-      <div class="mcq-explanation" id="mcqExplanation"></div>
-
-       <div class="mcq-actions">
-    <button class="mcq-next" id="mcqNext">
-        Next Question →
-    </button>
-</div>
-      </div>
-
-    </div>
-
-    <div class="mcq-result" id="mcqResult">
-      <strong id="mcqFinalScore">0/0</strong>
-      <h3>Quiz Complete 🎉</h3>
-      <p id="mcqFinalText"></p>
-
-      <button class="btn-primary" onclick="startMCQ()">
-        Try Again
-      </button>
-    </div>
-
-  </div>
-
-</section>
+<section class="section" id="about"><div class="section-head"><div><div class="kicker">About</div><h2>Built for Plant Science Students</h2></div></div><div class="panel"><p>This website brings notes, subject-wise learning, PYQs and interactive MCQs into one simple study hub. The current version works as a single HTML file, so it can be opened directly in a browser.</p></div></section>
 </main>
 
-<footer id="contact">
-  <div class="footer">
-    <div>
-      <strong>🌿 Plant Science Academy</strong>
-      <p>Learn • Understand • Excel</p>
-    </div>
-    <p>© 2026 Plant Science Academy</p>
-  </div>
-</footer>
-  
+<div class="modal" id="subjectModal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="kicker" id="modalKicker">Subject</div><h2 id="modalTitle"></h2><p id="modalDescription" style="color:var(--muted);margin-top:8px"></p><div class="topic-list" id="topicList"></div></div></div>
+<footer id="contact"><div class="footer"><div><strong>🌿 Plant Science Academy</strong><p>Learn • Understand • Excel</p></div><p>© 2026 Plant Science Academy • Made for learning</p></div></footer>
+
 <script>
-
-const mcqQuestions = [
-  {
-    q: "The basic unit of heredity is:",
-    options: ["Gene", "Cell", "Tissue", "Organ"],
-    answer: 0,
-    explanation: "A gene is the basic unit of heredity."
-  },
-
-  {
-    q: "The study of plant diseases is called:",
-    options: [
-      "Plant Pathology",
-      "Plant Breeding",
-      "Agronomy",
-      "Taxonomy"
-    ],
-    answer: 0,
-    explanation: "Plant pathology deals with plant diseases, their causes and management."
-  },
-
-  {
-    q: "The main objective of plant breeding is:",
-    options: [
-      "Crop improvement",
-      "Stopping reproduction",
-      "Removing variation",
-      "Removing genes"
-    ],
-    answer: 0,
-    explanation: "Plant breeding aims to improve useful crop characteristics."
-  },
-
-  {
-    q: "Bacteria are generally:",
-    options: [
-      "Prokaryotic",
-      "Eukaryotic",
-      "Multicellular plants",
-      "Viruses"
-    ],
-    answer: 0,
-    explanation: "Bacteria are prokaryotic organisms."
-  },
-
-  {
-    q: "Seed testing is mainly used to assess:",
-    options: [
-      "Seed quality",
-      "Leaf colour",
-      "Flower colour",
-      "Soil texture"
-    ],
-    answer: 0,
-    explanation: "Seed testing helps assess qualities such as purity and germination."
-  }
+const subjects=[
+ {name:"Genetics",icon:"🧬",desc:"A complete genetics learning section organized into four major study areas.",topics:["History","Cytogenetics","Molecular Genetics","Classical Genetics","Population Genetics"]},
+ {name:"Plant Pathology",icon:"🌱",desc:"A complete plant pathology learning section organized into six major study areas.",topics:["History","Mycology","Bacteriology","Virology","Plant Epidemiology","Diseases"]},
+ {name:"Plant Breeding",icon:"🌾",desc:"Plant breeding concepts, breeding methods, special techniques, modern approaches and crop-wise improvement.",topics:["History","Breeding Methods","Special Breeding Techniques","Modern Plant Breeding","Crop Breeding"]},
+ {name:"Microbiology",icon:"🦠",desc:"Microorganisms and their importance in agriculture and plant science.",topics:["Bacteria","Archaea","Culture Media","Microbial Growth","Nitrogen Fixation","Industrial Microbiology"]},
+ {name:"Seed Science",icon:"🌰",desc:"Seed development, quality, testing, processing, dormancy and storage.",topics:["Seed Development","Seed Quality","Germination","Dormancy","Seed Testing","Storage"]},
+ {name:"Agriculture",icon:"🚜",desc:"Core agricultural concepts, crop production and essential fundamentals.",topics:["Agronomy","Soil Science","Crop Production","Irrigation","Weed Management","Farm Basics"]}
 ];
-
-let mcqCurrent = 0;
-let mcqScore = 0;
-let mcqAnswered = false;
-
-function startMCQ() {
-
-  mcqCurrent = 0;
-  mcqScore = 0;
-  mcqAnswered = false;
-
-  document.getElementById("mcqQuiz").style.display = "block";
-  document.getElementById("mcqResult").style.display = "none";
-
-  showMCQ();
+const grid=document.getElementById("subjectGrid");
+function renderSubjects(filter=""){
+ grid.innerHTML="";
+ subjects.filter(s=>(s.name+" "+s.desc+" "+s.topics.join(" ")).toLowerCase().includes(filter.toLowerCase())).forEach((s,i)=>{
+  const el=document.createElement("article");el.className="subject";
+  el.innerHTML=`<div class="subject-icon">${s.icon}</div><h3>${s.name}</h3><p>${s.desc}</p><a class="explore">Explore ${s.name} →</a>`;
+  el.querySelector(".explore").onclick=()=>openSubject(i);grid.appendChild(el);
+ });
+ if(!grid.children.length)grid.innerHTML='<div class="panel" style="grid-column:1/-1">No subject found. Try another search.</div>';
 }
-
-function showMCQ() {
-
-  mcqAnswered = false;
-
-  const question = mcqQuestions[mcqCurrent];
-
-  document.getElementById("mcqCount").textContent =
-    "Question " + (mcqCurrent + 1) +
-    " of " + mcqQuestions.length;
-
-  document.getElementById("mcqScore").textContent =
-    "Score: " + mcqScore;
-
-  document.getElementById("mcqProgress").style.width =
-    ((mcqCurrent + 1) / mcqQuestions.length * 100) + "%";
-
-  document.getElementById("mcqQuestion").textContent =
-    question.q;
-
-  const optionsBox =
-    document.getElementById("mcqOptions");
-
-  optionsBox.innerHTML = "";
-
-  document.getElementById("mcqExplanation").style.display =
-    "none";
-
-  document.getElementById("mcqNext").style.display =
-    "none";
-
-  question.options.forEach(function(option, index) {
-
-    const button = document.createElement("button");
-
-    button.className = "mcq-option";
-
-    button.textContent =
-      String.fromCharCode(65 + index) + ". " + option;
-
-    button.onclick = function() {
-      answerMCQ(index, button);
-    };
-
-    optionsBox.appendChild(button);
-
-  });
+function clearSearch(){document.getElementById("subjectSearch").value="";renderSubjects()}
+document.getElementById("subjectSearch").addEventListener("input",e=>renderSubjects(e.target.value));
+function openSubject(i){
+ const s=subjects[i];document.getElementById("modalTitle").textContent=s.name;document.getElementById("modalKicker").textContent="Study Library";document.getElementById("modalDescription").textContent=s.desc;
+ document.getElementById("topicList").innerHTML=s.topics.map(t=>`<div class="topic" onclick="topicMessage('${t.replace(/'/g,"\\'")}','${s.name.replace(/'/g,"\\'")}')">📘 ${t}</div>`).join("");
+ document.getElementById("subjectModal").classList.add("open");
 }
-function answerMCQ(index, clickedButton) {
-
-  if (mcqAnswered) return;
-
-  mcqAnswered = true;
-
-  const question = mcqQuestions[mcqCurrent];
-
-  const buttons = document.querySelectorAll(".mcq-option");
-
-  buttons.forEach(function(button, i) {
-
-    button.disabled = true;
-
-    if (i === question.answer) {
-      button.classList.add("correct");
-    }
-
-  });
-
-  if (index === question.answer) {
-    mcqScore++;
-  } else {
-    clickedButton.classList.add("wrong");
-  }
-
-  document.getElementById("mcqScore").textContent =
-    "Score: " + mcqScore;
-
-  const explanation =
-    document.getElementById("mcqExplanation");
-
-  explanation.textContent =
-    "Explanation: " + question.explanation;
-
-  explanation.style.display = "block";
-
-  const nextButton =
-    document.getElementById("mcqNext");
-
-  nextButton.style.setProperty("display", "inline-block", "important");
-nextButton.style.setProperty("visibility", "visible", "important");
-nextButton.style.setProperty("opacity", "1", "important");
-nextButton.disabled = false;
-
-}
-
-document.getElementById("mcqNext").onclick = function() {
-
-  mcqCurrent++;
-
-  if (mcqCurrent < mcqQuestions.length) {
-
-    showMCQ();
-
-  } else {
-
-    finishMCQ();
-
-  }
+function closeModal(){document.getElementById("subjectModal").classList.remove("open")}
+const pathologyContent={
+"History":{
+title:"History of Plant Pathology",
+intro:"Study the development of plant pathology and major milestones in the study of plant diseases.",
+items:["Early observations of plant diseases","Development of plant pathology","Important pioneers and discoveries","Development of modern plant disease science","Major milestones in plant pathology"]
+},
+"Mycology":{
+title:"Mycology",
+intro:"Study fungi, their structure, reproduction, classification and importance as plant pathogens.",
+items:["Fungal structure and characteristics","Fungal reproduction","Classification of fungi","Important plant pathogenic fungi","Fungal life cycles","Disease-causing mechanisms of fungi"]
+},
+"Bacteriology":{
+title:"Bacteriology",
+intro:"Study plant pathogenic bacteria, their characteristics, identification and disease development.",
+items:["General characteristics of bacteria","Structure and classification","Plant pathogenic bacteria","Bacterial reproduction","Bacterial disease symptoms","Identification and management of bacterial diseases"]
+},
+"Virology":{
+title:"Virology",
+intro:"Study plant viruses, their structure, multiplication, transmission and management.",
+items:["General characteristics of plant viruses","Virus structure and components","Virus replication","Transmission of plant viruses","Symptoms of viral diseases","Management of viral diseases"]
+},
+"Plant Epidemiology":{
+title:"Plant Epidemiology",
+intro:"Study the occurrence, distribution and development of plant diseases in populations.",
+items:["Disease triangle","Disease cycle","Primary and secondary inoculum","Disease development","Disease forecasting","Disease management and epidemiological principles"]
+},
+"Diseases":{
+title:"Plant Diseases",
+intro:"Study important plant diseases, their causal organisms, symptoms, disease cycles and management.",
+items:["Fungal diseases","Bacterial diseases","Viral diseases","Disease symptoms and signs","Disease diagnosis","Integrated disease management"]
 };
 
-function finishMCQ() {
-
-  document.getElementById("mcqQuiz").style.display =
-    "none";
-
-  document.getElementById("mcqResult").style.display =
-    "block";
-
-  document.getElementById("mcqFinalScore").textContent =
-    mcqScore + "/" + mcqQuestions.length;
-
-  const percentage =
-    Math.round(
-      mcqScore / mcqQuestions.length * 100
-    );
-
-  document.getElementById("mcqFinalText").textContent =
-    "You scored " + percentage +
-    "%. Keep practicing!";
+const breedingContent={
+"History":{
+title:"History of Plant Breeding",
+intro:"Study the development of plant breeding from early selection to systematic and scientific crop improvement.",
+items:["Origin and early domestication","Plant selection by farmers","Development of scientific plant breeding","Important pioneers and milestones","Evolution of modern breeding"]
+},
+"Breeding Methods":{
+title:"Breeding Methods",
+intro:"Study the major methods used to create, select and combine desirable variation in crop plants.",
+items:["Selection methods","Hybridization","Pedigree method","Bulk method","Single seed descent","Backcross method"]
+},
+"Special Breeding Techniques":{
+title:"Special Breeding Techniques",
+intro:"Study specialized techniques used to generate or exploit useful variation in plant breeding.",
+items:["Mutation breeding","Polyploidy breeding","Haploid breeding","Heterosis breeding","Wide hybridization","Male sterility and its use"]
+},
+"Modern Plant Breeding":{
+title:"Modern Plant Breeding",
+intro:"Study modern approaches that combine conventional breeding with molecular and biotechnological tools.",
+items:["Marker-assisted selection","Molecular breeding","Genomic selection","QTL analysis","Genetic engineering","Genome editing"]
+},
+"Crop Breeding":{
+title:"Crop Breeding",
+intro:"Study crop-wise breeding objectives, important traits and improvement strategies.",
+items:["Cereal crop breeding","Pulse crop breeding","Oilseed crop breeding","Vegetable crop breeding","Fruit crop breeding","Breeding for resistance and quality"]
 }
 
-startMCQ();
-  
+const geneticsContent={
+"History":{
+title:"History of Genetics",
+intro:"Study the development of genetics from early ideas of heredity to modern genetics.",
+items:["Early concepts of heredity","Gregor Mendel and his experiments","Rediscovery of Mendel's work","Chromosome theory of inheritance","Development of modern genetics"]
+},
+"Cytogenetics":{
+title:"Cytogenetics",
+intro:"Study chromosomes, their structure, behavior and role in inheritance.",
+items:["Chromosome structure and organization","Chromosome number and karyotype","Mitosis and meiosis","Chromosomal abnormalities","Linkage, crossing over and recombination"]
+},
+"Molecular Genetics":{
+title:"Molecular Genetics",
+intro:"Study genes at the molecular level and how genetic information is stored and expressed.",
+items:["DNA structure","RNA and types of RNA","DNA replication","Transcription","Translation","Gene regulation and mutations"]
+},
+"Classical Genetics":{
+title:"Classical Genetics",
+intro:"Study the fundamental principles of inheritance based on Mendelian genetics and classical experiments.",
+items:["Mendel's laws","Monohybrid and dihybrid crosses","Dominance and segregation","Independent assortment","Test cross and back cross","Gene interactions"]
+}
+};
+"Population Genetics":{
+title:"Population Genetics",
+intro:"Study genetic variation and how allele and genotype frequencies change within populations.",
+items:["Gene pool and genetic variation","Allele and genotype frequencies","Hardy–Weinberg principle","Forces affecting allele frequency","Mutation, migration and genetic drift","Natural selection","Population structure and inbreeding"]
+},
+function topicMessage(topic,subject){
+ if(subject==="Plant Breeding" && breedingContent[topic]){
+  const data=breedingContent[topic];
+  document.getElementById("modalTitle").textContent=data.title;
+  document.getElementById("modalKicker").textContent="Plant Breeding • Study Area";
+  document.getElementById("modalDescription").textContent=data.intro;
+  document.getElementById("topicList").innerHTML=data.items.map((x,i)=>`<div class="topic" onclick="alert('Open detailed notes for: ${x.replace(/'/g,"\\'")}')">📘 ${i+1}. ${x}</div>`).join("");
+ }else if(subject==="Plant Pathology" && pathologyContent[topic]){
+  const data=pathologyContent[topic];
+  document.getElementById("modalTitle").textContent=data.title;
+  document.getElementById("modalKicker").textContent="Plant Pathology • Study Area";
+  document.getElementById("modalDescription").textContent=data.intro;
+  document.getElementById("topicList").innerHTML=data.items.map((x,i)=>`<div class="topic" onclick="alert('Open detailed notes for: ${x.replace(/'/g,"\\'")}')">📘 ${i+1}. ${x}</div>`).join("");
+ }else if(subject==="Genetics" && geneticsContent[topic]){
+  const data=geneticsContent[topic];
+  document.getElementById("modalTitle").textContent=data.title;
+  document.getElementById("modalKicker").textContent="Genetics • Study Area";
+  document.getElementById("modalDescription").textContent=data.intro;
+  document.getElementById("topicList").innerHTML=data.items.map((x,i)=>`<div class="topic" onclick="alert('Open detailed notes for: ${x.replace(/'/g,"\\'")}')">📘 ${i+1}. ${x}</div>`).join("");
+ }else{
+  alert("Topic selected: "+subject+" → "+topic);
+ }
+}
+document.getElementById("subjectModal").addEventListener("click",e=>{if(e.target.id==="subjectModal")closeModal()});
+renderSubjects();
+
+document.getElementById("themeBtn").onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem("psaDark",document.body.classList.contains("dark"));document.getElementById("themeBtn").textContent=document.body.classList.contains("dark")?"☀️":"🌙"};
+if(localStorage.getItem("psaDark")==="true"){document.body.classList.add("dark");document.getElementById("themeBtn").textContent="☀️"}
+document.getElementById("menuBtn").onclick=()=>{const n=document.querySelector("nav");n.style.display=n.style.display==="flex"?"none":"flex";n.style.flexDirection="column";n.style.position="absolute";n.style.top="70px";n.style.right="15px";n.style.padding="15px";n.style.background="var(--white)";n.style.border="1px solid var(--border)";n.style.borderRadius="14px"};
+
+const mcqQuestions=[
+{q:"The basic unit of heredity is:",options:["Gene","Cell","Tissue","Organ"],answer:0,explanation:"A gene is the basic unit of heredity."},
+{q:"The study of plant diseases is called:",options:["Plant Pathology","Plant Breeding","Agronomy","Taxonomy"],answer:0,explanation:"Plant pathology deals with plant diseases, their causes and management."},
+{q:"The main objective of plant breeding is:",options:["Crop improvement","Stopping reproduction","Removing variation","Removing genes"],answer:0,explanation:"Plant breeding aims to improve useful crop characteristics."},
+{q:"Bacteria are generally:",options:["Prokaryotic","Eukaryotic","Multicellular plants","Viruses"],answer:0,explanation:"Bacteria are prokaryotic organisms."},
+{q:"Seed testing is mainly used to assess:",options:["Seed quality","Leaf colour","Flower colour","Soil texture"],answer:0,explanation:"Seed testing helps assess qualities such as purity and germination."},
+{q:"Crossing over generally occurs during:",options:["Prophase I","Metaphase II","Anaphase II","Telophase I"],answer:0,explanation:"Crossing over occurs during pachytene of Prophase I of meiosis."},
+{q:"The physical location of a gene on a chromosome is called:",options:["Locus","Allele","Genome","Centromere"],answer:0,explanation:"A locus is the specific position of a gene on a chromosome."},
+{q:"Nitrogen fixation converts atmospheric nitrogen into:",options:["Usable nitrogen compounds","Oxygen","Carbon dioxide","Starch"],answer:0,explanation:"Nitrogen fixation makes atmospheric N₂ available in biologically usable forms."}
+];
+let mcqCurrent=0,mcqScore=0,mcqAnswered=false;
+function startMCQ(){mcqCurrent=0;mcqScore=0;mcqAnswered=false;document.getElementById("mcqQuiz").style.display="block";document.getElementById("mcqResult").style.display="none";showMCQ()}
+function showMCQ(){
+ mcqAnswered=false;const q=mcqQuestions[mcqCurrent];
+ document.getElementById("mcqCount").textContent=`Question ${mcqCurrent+1} of ${mcqQuestions.length}`;
+ document.getElementById("mcqScore").textContent=`Score: ${mcqScore}`;
+ document.getElementById("mcqProgress").style.width=((mcqCurrent+1)/mcqQuestions.length*100)+"%";
+ document.getElementById("mcqQuestion").textContent=q.q;document.getElementById("mcqExplanation").style.display="none";document.getElementById("mcqNext").style.display="none";
+ const box=document.getElementById("mcqOptions");box.innerHTML="";
+ q.options.forEach((o,i)=>{const b=document.createElement("button");b.className="mcq-option";b.textContent=String.fromCharCode(65+i)+". "+o;b.onclick=()=>answerMCQ(i,b);box.appendChild(b)})
+}
+function answerMCQ(index,clicked){
+ if(mcqAnswered)return;mcqAnswered=true;const q=mcqQuestions[mcqCurrent],buttons=document.querySelectorAll(".mcq-option");
+ buttons.forEach((b,i)=>{b.disabled=true;if(i===q.answer)b.classList.add("correct")});
+ if(index===q.answer)mcqScore++;else clicked.classList.add("wrong");
+ document.getElementById("mcqScore").textContent=`Score: ${mcqScore}`;
+ const ex=document.getElementById("mcqExplanation");ex.textContent="Explanation: "+q.explanation;ex.style.display="block";document.getElementById("mcqNext").style.display="inline-block";
+}
+document.getElementById("mcqNext").onclick=()=>{mcqCurrent++;if(mcqCurrent<mcqQuestions.length)showMCQ();else finishMCQ()};
+function finishMCQ(){
+ document.getElementById("mcqQuiz").style.display="none";document.getElementById("mcqResult").style.display="block";
+ const pct=Math.round(mcqScore/mcqQuestions.length*100);document.getElementById("mcqFinalScore").textContent=mcqScore+"/"+mcqQuestions.length;document.getElementById("mcqFinalText").textContent=`You scored ${pct}%. ${pct>=80?"Excellent work!":"Keep practicing and improve your score!"}`;
+ const history=JSON.parse(localStorage.getItem("psaQuizHistory")||"[]");history.push(pct);localStorage.setItem("psaQuizHistory",JSON.stringify(history));updateStats();
+}
+function updateStats(){const h=JSON.parse(localStorage.getItem("psaQuizHistory")||"[]");document.getElementById("statQuizzes").textContent=h.length;document.getElementById("statBest").textContent=(h.length?Math.max(...h):0)+"%"}
+updateStats();startMCQ();
 </script>
-  
 </body>
 </html>
