@@ -7,6 +7,7 @@
 <title>Plant Pathology | Plant Science Academy</title>
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -15,171 +16,284 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f3f7ee;
-    color: #243b2a;
+    background: #f1f8f2;
+    color: #183d2b;
 }
+
+/* HEADER - SAME AS PLANT BREEDING */
 
 header {
-    background: #dcecc4;
-    padding: 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-header h2 {
-    font-size: 22px;
-}
-
-header a {
-    text-decoration: none;
-    color: #244b31;
-    font-weight: bold;
-}
-
-.hero {
+    background: #14532d;
+    color: white;
     text-align: center;
-    padding: 55px 20px 35px;
+    padding: 45px 20px;
 }
 
-.hero h1 {
-    font-size: 34px;
+header h1 {
+    font-size: 32px;
     margin-bottom: 12px;
 }
 
-.hero p {
-    color: #647568;
+header p {
     font-size: 16px;
 }
 
-.subject-container {
+/* MAIN CONTAINER */
+
+.container {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+/* SUBJECT GRID */
+
+.subject-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 25px;
-    max-width: 1250px;
-    margin: auto;
+    gap: 17px;
 }
+
+/* SUBJECT CARDS - SAME INTERIOR */
 
 .card {
     background: white;
-    padding: 28px;
-    border-radius: 25px;
-    min-height: 210px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+    padding: 28px 22px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    border-left: 5px solid #2e8b57;
     transition: 0.3s;
+    min-height: 155px;
 }
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
-.icon {
-    font-size: 30px;
-    margin-bottom: 18px;
-}
-
-.card h3 {
+.card h2 {
+    font-size: 20px;
     margin-bottom: 12px;
 }
 
 .card p {
-    color: #68766b;
+    color: #607568;
     line-height: 1.6;
-    margin-bottom: 18px;
+    font-size: 15px;
 }
 
+/* EXPLORE LINK */
+
 .card a {
-    text-decoration: none;
-    color: #28734b;
+    display: inline-block;
+    margin-top: 18px;
+    color: #14532d;
     font-weight: bold;
+    text-decoration: none;
 }
+
+.card a:hover {
+    color: #2e8b57;
+}
+
+/* BACK BUTTON */
+
+.back {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 22px;
+    background: #14532d;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.back:hover {
+    background: #2e8b57;
+}
+
+/* FOOTER */
 
 footer {
     text-align: center;
-    padding: 30px;
-    color: #718071;
+    padding: 25px;
+    color: #607568;
+    font-size: 14px;
 }
 
-@media(max-width: 800px) {
-    .subject-container {
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .subject-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    header h1 {
+        font-size: 26px;
+    }
+
 }
 
-@media(max-width: 550px) {
-    .subject-container {
+@media (max-width: 500px) {
+
+    .subject-grid {
         grid-template-columns: 1fr;
     }
 
-    .hero h1 {
-        font-size: 27px;
+    .container {
+        padding: 15px;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-    <h2>🌿 Plant Science Academy</h2>
-    <a href="index.html">← Home</a>
+
+    <h1>🌿 Plant Pathology</h1>
+
+    <p>Plant Science Academy | Learn • Understand • Grow</p>
+
 </header>
 
-<section class="hero">
-    <h1>🌿 Plant Pathology</h1>
-    <p>Study of Plant Diseases, Pathogens and Disease Management</p>
-</section>
 
-<section class="subject-container">
+<!-- MAIN CONTENT -->
 
-    <article class="card">
-        <div class="icon">📚</div>
-        <h3>History of Plant Pathology</h3>
-        <p>Origin, development, scientists and contributions in plant pathology.</p>
-        <a href="#history">Explore →</a>
-    </article>
+<div class="container">
 
-    <article class="card">
-        <div class="icon">🍄</div>
-        <h3>Mycology</h3>
-        <p>Fungi, classification, morphology, reproduction and fungal diseases.</p>
-        <a href="#mycology">Explore →</a>
-    </article>
+    <div class="subject-grid">
 
-    <article class="card">
-        <div class="icon">🔬</div>
-        <h3>Bacteriology</h3>
-        <p>Bacterial structure, classification, reproduction and plant pathogenic bacteria.</p>
-        <a href="#bacteriology">Explore →</a>
-    </article>
+        <!-- CARD 1 -->
 
-    <article class="card">
-        <div class="icon">🦠</div>
-        <h3>Virology</h3>
-        <p>Plant viruses, structure, transmission, replication and viral diseases.</p>
-        <a href="#virology">Explore →</a>
-    </article>
+        <div class="card">
 
-    <article class="card">
-        <div class="icon">🌱</div>
-        <h3>Plant Epidemiology</h3>
-        <p>Disease development, disease cycle, forecasting and epidemic management.</p>
-        <a href="#epidemiology">Explore →</a>
-    </article>
+            <h2>01. History of Plant Pathology</h2>
 
-    <article class="card">
-        <div class="icon">🌾</div>
-        <h3>Plant Diseases & Management</h3>
-        <p>Important crop diseases, symptoms, causal organisms, diagnosis and management.</p>
-        <a href="#diseases">Explore →</a>
-    </article>
+            <p>
+                Origin, development, important scientists
+                and contributions in plant pathology.
+            </p>
 
-</section>
+            <a href="history-plant-pathology.html">
+                Explore →
+            </a>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+
+        <div class="card">
+
+            <h2>02. Mycology</h2>
+
+            <p>
+                Fungi, classification, morphology,
+                reproduction and fungal diseases.
+            </p>
+
+            <a href="mycology.html">
+                Explore →
+            </a>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+
+        <div class="card">
+
+            <h2>03. Bacteriology</h2>
+
+            <p>
+                Bacterial structure, classification,
+                reproduction and plant pathogenic bacteria.
+            </p>
+
+            <a href="bacteriology.html">
+                Explore →
+            </a>
+
+        </div>
+
+
+        <!-- CARD 4 -->
+
+        <div class="card">
+
+            <h2>04. Virology</h2>
+
+            <p>
+                Plant viruses, structure, transmission,
+                replication and viral diseases.
+            </p>
+
+            <a href="virology.html">
+                Explore →
+            </a>
+
+        </div>
+
+
+        <!-- CARD 5 -->
+
+        <div class="card">
+
+            <h2>05. Plant Epidemiology</h2>
+
+            <p>
+                Disease development, disease cycle,
+                forecasting and epidemic management.
+            </p>
+
+            <a href="plant-epidemiology.html">
+                Explore →
+            </a>
+
+        </div>
+
+
+        <!-- CARD 6 -->
+
+        <div class="card">
+
+            <h2>06. Plant Diseases & Management</h2>
+
+            <p>
+                Important crop diseases, symptoms,
+                causal organisms, diagnosis and management.
+            </p>
+
+            <a href="plant-diseases.html">
+                Explore →
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- BACK BUTTON -->
+
+    <a href="index.html" class="back">
+        ← Back to Home
+    </a>
+
+</div>
+
+
+<!-- FOOTER -->
 
 <footer>
-    © 2026 Plant Science Academy | Learn • Practice • Grow
+
+    © 2026 Plant Science Academy
+
 </footer>
 
 </body>
