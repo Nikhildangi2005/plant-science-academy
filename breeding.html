@@ -8,280 +8,218 @@
 
 <style>
 
-:root {
-    --bg: #f6f8f2;
-    --surface: #ffffff;
-    --text: #17221b;
-    --muted: #667268;
-    --green: #2f6b45;
-    --green-dark: #1e4b31;
-    --lime: #8bc34a;
-    --radius: 24px;
-}
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    font-family: Inter, Arial, sans-serif;
-    color: var(--text);
-
-    background:
-        radial-gradient(
-            circle at 8% 8%,
-            rgba(139,195,74,.13),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 92% 16%,
-            rgba(47,107,69,.09),
-            transparent 24%
-        ),
-        var(--bg);
-
-    line-height: 1.6;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(120deg, #e7f0d0, #f5f5e9, #e3edce);
+    color: #171717;
+    min-height: 100vh;
 }
 
 /* NAVBAR */
 
 .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
-    backdrop-filter: blur(18px);
-
-    background: rgba(246,248,242,.84);
-
-    border-bottom: 1px solid rgba(23,34,27,.07);
-}
-
-.nav-inner {
-    max-width: 1180px;
-    height: 76px;
-
-    margin: auto;
-    padding: 0 22px;
-
+    height: 72px;
+    padding: 0 8%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(80,100,50,0.12);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 11px;
-
+    gap: 12px;
+    font-size: 17px;
     font-weight: 800;
-    font-size: 1.02rem;
 }
 
 .logo-icon {
-    width: 40px;
-    height: 40px;
-
-    border-radius: 13px;
-
-    display: grid;
-    place-items: center;
-
-    background: linear-gradient(
-        145deg,
-        #315f41,
-        #83bd4a
-    );
-
+    width: 38px;
+    height: 38px;
+    background: #172a19;
     color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 21px;
 }
 
-.home-btn {
+.home {
     text-decoration: none;
-    color: var(--text);
-
-    font-weight: 700;
+    color: #171717;
+    font-weight: 600;
     font-size: 14px;
-
-    transition: .2s;
 }
 
-.home-btn:hover {
-    color: var(--green);
-}
-
-/* MAIN CONTENT */
+/* MAIN SECTION */
 
 .container {
-    width: min(1180px, 92%);
+    max-width: 1080px;
     margin: auto;
+    padding: 30px 20px 55px;
 }
 
-/* HERO SECTION */
+/* HEADING */
 
-.hero {
+.heading {
     text-align: center;
-    padding: 48px 0 40px;
+    margin-bottom: 40px;
 }
 
-.hero h1 {
-    font-size: clamp(28px, 4vw, 36px);
+.heading h1 {
+    font-size: 36px;
     font-weight: 800;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
 }
 
-.hero p {
-    color: var(--muted);
-    font-size: 15px;
+.heading p {
+    font-size: 14px;
+    color: #333;
 }
 
-/* SUBJECT CARDS */
+/* CARD GRID */
 
-.subject-grid {
+.cards {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
-    gap: 17px;
-
-    padding-bottom: 55px;
+    gap: 16px;
 }
 
-.subject-card {
-    background: rgba(255,255,255,.72);
+/* CARDS */
 
-    border: 1px solid rgba(23,34,27,.10);
-
-    border-radius: var(--radius);
-
-    padding: 25px;
-
-    min-height: 205px;
-
-    box-shadow: 0 10px 35px rgba(25,55,35,.06);
-
-    transition: .28s ease;
-
+.card {
     position: relative;
     overflow: hidden;
+    min-height: 210px;
+    padding: 24px 23px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(255,255,255,0.65);
+    transition: all 0.3s ease;
 }
 
-.subject-card::before {
+.card::before {
     content: "";
-
     position: absolute;
-
-    width: 120px;
-    height: 120px;
-
+    top: -38px;
+    right: -38px;
+    width: 105px;
+    height: 105px;
     border-radius: 50%;
-
-    right: -50px;
-    top: -50px;
-
-    background: #e8f3dc;
+    background: rgba(169,199,124,0.35);
 }
 
-.subject-card:hover {
-    transform: translateY(-7px);
-
-    box-shadow: 0 25px 70px rgba(24,55,34,.16);
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(65,90,45,0.12);
 }
 
-.subject-icon {
-    width: 48px;
-    height: 48px;
+/* ICON */
 
-    border-radius: 15px;
-
-    background: #e7f1df;
-
-    display: grid;
-    place-items: center;
-
-    font-size: 24px;
-
-    margin-bottom: 15px;
-
+.icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    background: rgba(181,205,148,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    margin-bottom: 16px;
     position: relative;
+    z-index: 1;
 }
 
-.subject-card h2 {
-    font-size: 1.08rem;
-    margin-bottom: 7px;
+/* CARD CONTENT */
 
+.card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
     position: relative;
+    z-index: 1;
 }
 
-.subject-card p {
-    color: var(--muted);
-
-    font-size: .9rem;
-
-    max-width: 290px;
-
+.card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #555;
+    margin-bottom: 16px;
     position: relative;
+    z-index: 1;
 }
 
-.card-link {
+/* EXPLORE */
+
+.explore {
     display: inline-block;
-
-    margin-top: 14px;
-
-    color: var(--green);
-
-    font-weight: 800;
-    font-size: .88rem;
-
+    color: #243b2b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
     position: relative;
+    z-index: 1;
+}
+
+.explore:hover {
+    color: #679342;
 }
 
 /* FOOTER */
 
 footer {
     text-align: center;
-
-    padding: 25px 15px;
-
-    color: var(--muted);
-
-    font-size: 14px;
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
 }
 
-/* RESPONSIVE DESIGN */
+/* TABLET */
 
-@media (max-width: 850px) {
-
-    .subject-grid {
+@media (max-width: 900px) {
+    .cards {
         grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
-@media (max-width: 550px) {
+/* MOBILE */
 
-    .nav-inner {
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 0 5%;
         height: 65px;
     }
 
-    .subject-grid {
+    .logo {
+        font-size: 15px;
+    }
+
+    .heading h1 {
+        font-size: 28px;
+    }
+
+    .heading p {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .cards {
         grid-template-columns: 1fr;
         gap: 15px;
     }
 
-    .hero {
-        padding: 38px 0 30px;
-    }
-
-    .subject-card {
-        min-height: 180px;
+    .card {
+        min-height: 195px;
     }
 
 }
@@ -295,18 +233,12 @@ footer {
 
 <nav class="navbar">
 
-    <div class="nav-inner">
-
-        <div class="logo">
-            <span class="logo-icon">🌿</span>
-            Plant Science Academy
-        </div>
-
-        <a href="index.html" class="home-btn">
-            ← Home
-        </a>
-
+    <div class="logo">
+        <div class="logo-icon">🌿</div>
+        Plant Science Academy
     </div>
+
+    <a href="index.html" class="home">← Home</a>
 
 </nav>
 
@@ -315,30 +247,26 @@ footer {
 
 <main class="container">
 
-    <!-- HERO -->
-
-    <section class="hero">
-
+    <div class="heading">
         <h1>🌱 Plant Breeding</h1>
 
         <p>
             Study of Crop Improvement, Breeding Methods
             and Development of Improved Varieties
         </p>
-
-    </section>
+    </div>
 
 
     <!-- SUBJECT CARDS -->
 
-    <section class="subject-grid">
+    <div class="cards">
 
 
         <!-- CARD 1 -->
 
-        <div class="subject-card">
+        <div class="card">
 
-            <div class="subject-icon">📚</div>
+            <div class="icon">📚</div>
 
             <h2>History of Plant Breeding</h2>
 
@@ -347,34 +275,36 @@ footer {
                 and milestones in plant breeding.
             </p>
 
-            <span class="card-link">Explore →</span>
+            <a href="history-of-plant-breeding.html"
+               class="explore">Explore →</a>
 
         </div>
 
 
         <!-- CARD 2 -->
 
-        <div class="subject-card">
+        <div class="card">
 
-            <div class="subject-icon">🌾</div>
+            <div class="icon">🌾</div>
 
             <h2>Plant Breeding Methods</h2>
 
             <p>
-                Selection, hybridization, backcross
-                breeding and other breeding methods.
+                Selection, hybridization, backcross breeding
+                and other breeding methods.
             </p>
 
-            <span class="card-link">Explore →</span>
+            <a href="plant-breeding-methods.html"
+               class="explore">Explore →</a>
 
         </div>
 
 
         <!-- CARD 3 -->
 
-        <div class="subject-card">
+        <div class="card">
 
-            <div class="subject-icon">🧬</div>
+            <div class="icon">🧬</div>
 
             <h2>Special Breeding Techniques</h2>
 
@@ -383,16 +313,17 @@ footer {
                 and other special techniques.
             </p>
 
-            <span class="card-link">Explore →</span>
+            <a href="special-breeding-techniques.html"
+               class="explore">Explore →</a>
 
         </div>
 
 
         <!-- CARD 4 -->
 
-        <div class="subject-card">
+        <div class="card">
 
-            <div class="subject-icon">🔬</div>
+            <div class="icon">🔬</div>
 
             <h2>Modern Plant Breeding</h2>
 
@@ -401,16 +332,17 @@ footer {
                 and modern breeding approaches.
             </p>
 
-            <span class="card-link">Explore →</span>
+            <a href="modern-plant-breeding.html"
+               class="explore">Explore →</a>
 
         </div>
 
 
         <!-- CARD 5 -->
 
-        <div class="subject-card">
+        <div class="card">
 
-            <div class="subject-icon">🌿</div>
+            <div class="icon">🌿</div>
 
             <h2>Crop Improvement</h2>
 
@@ -419,22 +351,19 @@ footer {
                 with desirable traits.
             </p>
 
-            <span class="card-link">Explore →</span>
+            <a href="crop-improvement.html"
+               class="explore">Explore →</a>
 
         </div>
 
 
-    </section>
+    </div>
 
 </main>
 
 
-<!-- FOOTER -->
-
 <footer>
-
-    © 2026 Plant Science Academy
-
+    © 2026 Plant Science Academy | Learn • Grow • Succeed
 </footer>
 
 </body>
