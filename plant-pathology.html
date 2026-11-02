@@ -8,141 +8,197 @@
 
 <style>
 
+/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* BODY */
 body {
     font-family: Arial, sans-serif;
-    background: #f1f8f2;
+    background: linear-gradient(135deg, #e8f5d8, #f4f7e9);
     color: #183d2b;
 }
 
-/* HEADER - SAME AS PLANT BREEDING */
-
-header {
-    background: #14532d;
-    color: white;
-    text-align: center;
-    padding: 45px 20px;
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 8%;
+    background: rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
 }
 
-header h1 {
-    font-size: 32px;
-    margin-bottom: 12px;
-}
-
-header p {
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-size: 16px;
+    font-weight: 800;
+    color: #142f23;
 }
 
-/* MAIN CONTAINER */
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: #173523;
+    color: white;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+}
 
+.navbar a {
+    text-decoration: none;
+    color: #183d2b;
+    font-weight: 700;
+}
+
+/* MAIN HEADER */
+.page-header {
+    text-align: center;
+    padding: 35px 20px 36px;
+}
+
+.page-header h1 {
+    font-size: 34px;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    font-size: 14px;
+    color: #263c30;
+}
+
+/* CONTAINER */
 .container {
     max-width: 1100px;
-    margin: 35px auto;
-    padding: 20px;
+    margin: auto;
+    padding: 0 20px 55px;
 }
 
 /* SUBJECT GRID */
-
 .subject-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 17px;
+    gap: 18px;
 }
 
-/* SUBJECT CARDS - SAME INTERIOR */
-
-.card {
-    background: white;
-    padding: 28px 22px;
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    border-left: 5px solid #2e8b57;
-    transition: 0.3s;
-    min-height: 155px;
+/* SUBJECT CARDS */
+.subject-card {
+    background: rgba(255,255,255,0.72);
+    border-radius: 25px;
+    padding: 25px;
+    min-height: 205px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: 0 8px 25px rgba(35,70,35,0.06);
+    transition: 0.3s ease;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+/* GREEN DECORATIVE CIRCLE */
+.subject-card::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    right: -45px;
+    top: -45px;
+    background: rgba(153,190,94,0.30);
 }
 
-.card h2 {
-    font-size: 20px;
-    margin-bottom: 12px;
+/* HOVER */
+.subject-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 14px 30px rgba(35,70,35,0.13);
 }
 
-.card p {
-    color: #607568;
+/* ICON */
+.subject-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    background: #e7f1df;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+    margin-bottom: 14px;
+    position: relative;
+}
+
+/* CARD HEADING */
+.subject-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #18251d;
+    position: relative;
+}
+
+/* CARD DESCRIPTION */
+.subject-card p {
+    font-size: 13px;
     line-height: 1.6;
-    font-size: 15px;
+    color: #526057;
+    max-width: 290px;
+    position: relative;
 }
 
 /* EXPLORE LINK */
-
-.card a {
+.card-link {
     display: inline-block;
-    margin-top: 18px;
-    color: #14532d;
-    font-weight: bold;
+    margin-top: 17px;
+    color: #214b35;
+    font-weight: 800;
+    font-size: 13px;
     text-decoration: none;
+    position: relative;
 }
 
-.card a:hover {
-    color: #2e8b57;
-}
-
-/* BACK BUTTON */
-
-.back {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 22px;
-    background: #14532d;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-}
-
-.back:hover {
-    background: #2e8b57;
+.card-link:hover {
+    color: #3d8052;
 }
 
 /* FOOTER */
-
 footer {
     text-align: center;
-    padding: 25px;
-    color: #607568;
-    font-size: 14px;
+    padding: 25px 15px;
+    color: #718078;
+    font-size: 13px;
 }
 
-/* MOBILE RESPONSIVE */
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
 
     .subject-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    header h1 {
-        font-size: 26px;
+    .page-header h1 {
+        font-size: 29px;
     }
 
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
 
     .subject-grid {
         grid-template-columns: 1fr;
     }
 
-    .container {
-        padding: 15px;
+    .navbar {
+        padding: 15px 5%;
+    }
+
+    .subject-card {
+        min-height: 190px;
     }
 
 }
@@ -152,144 +208,143 @@ footer {
 
 <body>
 
-<!-- HEADER -->
+<!-- NAVBAR -->
+<nav class="navbar">
 
-<header>
+    <div class="logo">
+        <div class="logo-icon">🌿</div>
+        Plant Science Academy
+    </div>
+
+    <a href="index.html">← Home</a>
+
+</nav>
+
+
+<!-- PAGE HEADER -->
+<header class="page-header">
 
     <h1>🌿 Plant Pathology</h1>
 
-    <p>Plant Science Academy | Learn • Understand • Grow</p>
+    <p>
+        Study of Plant Diseases, Pathogens and Disease Management
+    </p>
 
 </header>
 
 
-<!-- MAIN CONTENT -->
-
-<div class="container">
+<!-- SUBJECT TOPICS -->
+<main class="container">
 
     <div class="subject-grid">
 
         <!-- CARD 1 -->
+        <div class="subject-card">
 
-        <div class="card">
+            <div class="subject-icon">📚</div>
 
-            <h2>01. History of Plant Pathology</h2>
+            <h3>History of Plant Pathology</h3>
 
             <p>
                 Origin, development, important scientists
                 and contributions in plant pathology.
             </p>
 
-            <a href="history-plant-pathology.html">
-                Explore →
-            </a>
+            <a href="#" class="card-link">Explore →</a>
 
         </div>
 
 
         <!-- CARD 2 -->
+        <div class="subject-card">
 
-        <div class="card">
+            <div class="subject-icon">🍄</div>
 
-            <h2>02. Mycology</h2>
+            <h3>Mycology</h3>
 
             <p>
                 Fungi, classification, morphology,
                 reproduction and fungal diseases.
             </p>
 
-            <a href="mycology.html">
-                Explore →
-            </a>
+            <a href="#" class="card-link">Explore →</a>
 
         </div>
 
 
         <!-- CARD 3 -->
+        <div class="subject-card">
 
-        <div class="card">
+            <div class="subject-icon">🔬</div>
 
-            <h2>03. Bacteriology</h2>
+            <h3>Bacteriology</h3>
 
             <p>
                 Bacterial structure, classification,
                 reproduction and plant pathogenic bacteria.
             </p>
 
-            <a href="bacteriology.html">
-                Explore →
-            </a>
+            <a href="#" class="card-link">Explore →</a>
 
         </div>
 
 
         <!-- CARD 4 -->
+        <div class="subject-card">
 
-        <div class="card">
+            <div class="subject-icon">🦠</div>
 
-            <h2>04. Virology</h2>
+            <h3>Virology</h3>
 
             <p>
                 Plant viruses, structure, transmission,
                 replication and viral diseases.
             </p>
 
-            <a href="virology.html">
-                Explore →
-            </a>
+            <a href="#" class="card-link">Explore →</a>
 
         </div>
 
 
         <!-- CARD 5 -->
+        <div class="subject-card">
 
-        <div class="card">
+            <div class="subject-icon">🌱</div>
 
-            <h2>05. Plant Epidemiology</h2>
+            <h3>Plant Epidemiology</h3>
 
             <p>
                 Disease development, disease cycle,
                 forecasting and epidemic management.
             </p>
 
-            <a href="plant-epidemiology.html">
-                Explore →
-            </a>
+            <a href="#" class="card-link">Explore →</a>
 
         </div>
 
 
         <!-- CARD 6 -->
+        <div class="subject-card">
 
-        <div class="card">
+            <div class="subject-icon">🌿</div>
 
-            <h2>06. Plant Diseases & Management</h2>
+            <h3>Plant Diseases & Management</h3>
 
             <p>
                 Important crop diseases, symptoms,
                 causal organisms, diagnosis and management.
             </p>
 
-            <a href="plant-diseases.html">
-                Explore →
-            </a>
+            <a href="#" class="card-link">Explore →</a>
 
         </div>
 
     </div>
 
-
-    <!-- BACK BUTTON -->
-
-    <a href="index.html" class="back">
-        ← Back to Home
-    </a>
-
-</div>
+</main>
 
 
 <!-- FOOTER -->
-
 <footer>
 
     © 2026 Plant Science Academy
