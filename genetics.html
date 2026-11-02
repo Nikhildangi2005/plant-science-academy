@@ -14,53 +14,30 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f4f8f3;
-    color: #183b2b;
+    background: #f1f8f2;
+    color: #183d2b;
 }
 
 header {
-    background: #123d2b;
+    background: #14532d;
     color: white;
-    padding: 22px 8%;
+    text-align: center;
+    padding: 45px 20px;
 }
 
-header h2 {
-    font-size: 25px;
+header h1 {
+    font-size: 32px;
+    margin-bottom: 12px;
 }
 
 header p {
-    margin-top: 6px;
-    color: #c9e3d0;
+    font-size: 16px;
 }
 
 .container {
     max-width: 1100px;
-    margin: auto;
-    padding: 45px 20px;
-}
-
-.back {
-    display: inline-block;
-    color: #26734d;
-    text-decoration: none;
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
-.heading {
-    text-align: center;
-    margin-bottom: 35px;
-}
-
-.heading h1 {
-    font-size: 38px;
-    color: #164c32;
-    margin-bottom: 12px;
-}
-
-.heading p {
-    color: #647568;
-    font-size: 16px;
+    margin: 35px auto;
+    padding: 20px;
 }
 
 .topics {
@@ -69,42 +46,47 @@ header p {
     gap: 22px;
 }
 
-.topic {
+.card {
     background: white;
-    padding: 28px;
+    padding: 28px 22px;
     border-radius: 14px;
-    border: 1px solid #dce9dd;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    border-left: 5px solid #2e8b57;
     transition: 0.3s;
-    text-decoration: none;
-    color: inherit;
 }
 
-.topic:hover {
+.card:hover {
     transform: translateY(-5px);
-    border-color: #39865a;
 }
 
-.topic span {
-    font-size: 30px;
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
 }
 
-.topic h3 {
-    margin: 15px 0 10px;
-    color: #17603a;
-}
-
-.topic p {
-    color: #667568;
+.card p {
+    color: #607568;
     line-height: 1.6;
 }
 
-footer {
-    background: #123d2b;
+.back {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 22px;
+    background: #14532d;
     color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.back:hover {
+    background: #267346;
+}
+
+footer {
     text-align: center;
-    padding: 20px;
-    margin-top: 50px;
+    padding: 25px;
+    color: #607568;
 }
 </style>
 </head>
@@ -112,52 +94,43 @@ footer {
 <body>
 
 <header>
-    <h2>Plant Science Academy</h2>
-    <p>Learn Better. Practice Smarter.</p>
+    <h1>🧬 Genetics</h1>
+    <p>Plant Science Academy | Learn • Understand • Grow</p>
 </header>
 
 <div class="container">
 
-<a class="back" href="index.html">← Back to Home</a>
-
-<div class="heading">
-    <h1>Genetics</h1>
-    <p>Explore the five major areas of Genetics</p>
-</div>
-
 <div class="topics">
 
-<a href="#history" class="topic">
-    <span>📚</span>
-    <h3>1. History of Genetics</h3>
-    <p>Development of genetics and contributions of important scientists.</p>
-</a>
+    <div class="card">
+        <h2>01. History of Genetics</h2>
+        <p>Development of genetics and contributions of important scientists.</p>
+    </div>
 
-<a href="#classical" class="topic">
-    <span>🧬</span>
-    <h3>2. Classical Genetics</h3>
-    <p>Mendel's laws, inheritance, linkage and genetic principles.</p>
-</a>
+    <div class="card">
+        <h2>02. Classical Genetics</h2>
+        <p>Mendel's laws, inheritance, linkage and genetic principles.</p>
+    </div>
 
-<a href="#cytogenetics" class="topic">
-    <span>🔬</span>
-    <h3>3. Cytogenetics</h3>
-    <p>Study of chromosomes, cell division and chromosome structure.</p>
-</a>
+    <div class="card">
+        <h2>03. Cytogenetics</h2>
+        <p>Study of chromosomes, cell division and chromosome structure.</p>
+    </div>
 
-<a href="#molecular" class="topic">
-    <span>🧪</span>
-    <h3>4. Molecular Genetics</h3>
-    <p>DNA, RNA, genes, replication, transcription and translation.</p>
-</a>
+    <div class="card">
+        <h2>04. Molecular Genetics</h2>
+        <p>DNA, RNA, genes, replication, transcription and translation.</p>
+    </div>
 
-<a href="#population" class="topic">
-    <span>🌱</span>
-    <h3>5. Population Genetics</h3>
-    <p>Gene frequency, genetic variation and evolution in populations.</p>
-</a>
+    <div class="card">
+        <h2>05. Population Genetics</h2>
+        <p>Gene frequency, genetic variation and evolution in populations.</p>
+    </div>
 
 </div>
+
+<a href="index.html" class="back">← Back to Home</a>
+
 </div>
 
 <footer>
