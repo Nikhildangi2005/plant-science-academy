@@ -3,138 +3,438 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Plant Breeding | Plant Science Academy</title>
 
 <style>
+
+:root {
+    --bg: #f6f8f2;
+    --surface: #ffffff;
+    --text: #17221b;
+    --muted: #667268;
+    --green: #2f6b45;
+    --green-dark: #1e4b31;
+    --lime: #8bc34a;
+    --radius: 24px;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f1f8f2;
-    color: #183d2b;
-}
+    font-family: Inter, Arial, sans-serif;
+    color: var(--text);
 
-header {
-    background: #14532d;
-    color: white;
-    text-align: center;
-    padding: 45px 20px;
-}
+    background:
+        radial-gradient(
+            circle at 8% 8%,
+            rgba(139,195,74,.13),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 92% 16%,
+            rgba(47,107,69,.09),
+            transparent 24%
+        ),
+        var(--bg);
 
-header h1 {
-    font-size: 32px;
-    margin-bottom: 12px;
-}
-
-header p {
-    font-size: 16px;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 35px auto;
-    padding: 20px;
-}
-
-.topics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 22px;
-}
-
-.card {
-    background: white;
-    padding: 28px 22px;
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    border-left: 5px solid #2e8b57;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card h2 {
-    font-size: 20px;
-    margin-bottom: 12px;
-}
-
-.card p {
-    color: #607568;
     line-height: 1.6;
 }
 
-.back {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 22px;
-    background: #14532d;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
+/* NAVBAR */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    backdrop-filter: blur(18px);
+
+    background: rgba(246,248,242,.84);
+
+    border-bottom: 1px solid rgba(23,34,27,.07);
 }
 
-.back:hover {
-    background: #267346;
+.nav-inner {
+    max-width: 1180px;
+    height: 76px;
+
+    margin: auto;
+    padding: 0 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    font-weight: 800;
+    font-size: 1.02rem;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 13px;
+
+    display: grid;
+    place-items: center;
+
+    background: linear-gradient(
+        145deg,
+        #315f41,
+        #83bd4a
+    );
+
+    color: white;
+    font-size: 21px;
+}
+
+.home-btn {
+    text-decoration: none;
+    color: var(--text);
+
+    font-weight: 700;
+    font-size: 14px;
+
+    transition: .2s;
+}
+
+.home-btn:hover {
+    color: var(--green);
+}
+
+/* MAIN CONTENT */
+
+.container {
+    width: min(1180px, 92%);
+    margin: auto;
+}
+
+/* HERO SECTION */
+
+.hero {
+    text-align: center;
+    padding: 48px 0 40px;
+}
+
+.hero h1 {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* SUBJECT CARDS */
+
+.subject-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 17px;
+
+    padding-bottom: 55px;
+}
+
+.subject-card {
+    background: rgba(255,255,255,.72);
+
+    border: 1px solid rgba(23,34,27,.10);
+
+    border-radius: var(--radius);
+
+    padding: 25px;
+
+    min-height: 205px;
+
+    box-shadow: 0 10px 35px rgba(25,55,35,.06);
+
+    transition: .28s ease;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.subject-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+
+    right: -50px;
+    top: -50px;
+
+    background: #e8f3dc;
+}
+
+.subject-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow: 0 25px 70px rgba(24,55,34,.16);
+}
+
+.subject-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 15px;
+
+    background: #e7f1df;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 24px;
+
+    margin-bottom: 15px;
+
+    position: relative;
+}
+
+.subject-card h2 {
+    font-size: 1.08rem;
+    margin-bottom: 7px;
+
+    position: relative;
+}
+
+.subject-card p {
+    color: var(--muted);
+
+    font-size: .9rem;
+
+    max-width: 290px;
+
+    position: relative;
+}
+
+.card-link {
+    display: inline-block;
+
+    margin-top: 14px;
+
+    color: var(--green);
+
+    font-weight: 800;
+    font-size: .88rem;
+
+    position: relative;
+}
+
+/* FOOTER */
 
 footer {
     text-align: center;
-    padding: 25px;
-    color: #607568;
+
+    padding: 25px 15px;
+
+    color: var(--muted);
+
+    font-size: 14px;
 }
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 850px) {
+
+    .subject-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .nav-inner {
+        height: 65px;
+    }
+
+    .subject-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 38px 0 30px;
+    }
+
+    .subject-card {
+        min-height: 180px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>🌱 Plant Breeding</h1>
-    <p>Plant Science Academy | Learn • Understand • Grow</p>
-</header>
+<!-- NAVBAR -->
 
-<div class="container">
+<nav class="navbar">
 
-    <div class="topics">
+    <div class="nav-inner">
 
-        <div class="card">
-            <h2>01. History of Plant Breeding</h2>
-            <p>Origin, development and important milestones in plant breeding.</p>
+        <div class="logo">
+            <span class="logo-icon">🌿</span>
+            Plant Science Academy
         </div>
 
-        <div class="card">
-            <h2>02. Plant Breeding Methods</h2>
-            <p>Selection, hybridization, backcross breeding and other breeding methods.</p>
-        </div>
-
-        <div class="card">
-            <h2>03. Special Breeding Techniques</h2>
-            <p>Mutation breeding, polyploidy breeding and other special techniques.</p>
-        </div>
-
-        <div class="card">
-            <h2>04. Modern Plant Breeding</h2>
-            <p>Molecular markers, biotechnology and modern breeding approaches.</p>
-        </div>
-
-        <div class="card">
-            <h2>05. Crop Improvement</h2>
-            <p>Development of improved crop varieties with desirable traits.</p>
-        </div>
+        <a href="index.html" class="home-btn">
+            ← Home
+        </a>
 
     </div>
 
-    <a href="index.html" class="back">← Back to Home</a>
+</nav>
 
-</div>
+
+<!-- MAIN CONTENT -->
+
+<main class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <h1>🌱 Plant Breeding</h1>
+
+        <p>
+            Study of Crop Improvement, Breeding Methods
+            and Development of Improved Varieties
+        </p>
+
+    </section>
+
+
+    <!-- SUBJECT CARDS -->
+
+    <section class="subject-grid">
+
+
+        <!-- CARD 1 -->
+
+        <div class="subject-card">
+
+            <div class="subject-icon">📚</div>
+
+            <h2>History of Plant Breeding</h2>
+
+            <p>
+                Origin, development, important scientists
+                and milestones in plant breeding.
+            </p>
+
+            <span class="card-link">Explore →</span>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+
+        <div class="subject-card">
+
+            <div class="subject-icon">🌾</div>
+
+            <h2>Plant Breeding Methods</h2>
+
+            <p>
+                Selection, hybridization, backcross
+                breeding and other breeding methods.
+            </p>
+
+            <span class="card-link">Explore →</span>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+
+        <div class="subject-card">
+
+            <div class="subject-icon">🧬</div>
+
+            <h2>Special Breeding Techniques</h2>
+
+            <p>
+                Mutation breeding, polyploidy breeding
+                and other special techniques.
+            </p>
+
+            <span class="card-link">Explore →</span>
+
+        </div>
+
+
+        <!-- CARD 4 -->
+
+        <div class="subject-card">
+
+            <div class="subject-icon">🔬</div>
+
+            <h2>Modern Plant Breeding</h2>
+
+            <p>
+                Molecular markers, biotechnology
+                and modern breeding approaches.
+            </p>
+
+            <span class="card-link">Explore →</span>
+
+        </div>
+
+
+        <!-- CARD 5 -->
+
+        <div class="subject-card">
+
+            <div class="subject-icon">🌿</div>
+
+            <h2>Crop Improvement</h2>
+
+            <p>
+                Development of improved crop varieties
+                with desirable traits.
+            </p>
+
+            <span class="card-link">Explore →</span>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
 
 <footer>
+
     © 2026 Plant Science Academy
+
 </footer>
 
 </body>
