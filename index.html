@@ -467,43 +467,7 @@ footer p,footer a{color:var(--muted);font-size:.82rem}
     <div class="no-result" id="noResult">No matching subject found. Try another search.</div>
   </div>
 </section>
-<!-- MCQ PRACTICE SECTION -->
-<section class="section" id="mcq-practice">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">PRACTICE ZONE</div>
-        <h2>MCQ Practice</h2>
-        <p class="section-sub">Test your Plant Science knowledge.</p>
-      </div>
-    </div>
 
-    <div class="study-card" style="max-width:800px;margin:auto;">
-      <h3>Select Subject</h3>
-
-    <select id="mcqSubject" style="padding:12px;width:100%;margin:12px 0;">
-  <option value="">Select Subject</option>
-  <option value="genetics">Genetics</option>
-  <option value="plant-breeding">Plant Breeding</option>
-  <option value="plant-pathology">Plant Pathology</option>
-  <option value="microbiology">Microbiology</option>
-  <option value="seed-science">Seed Science</option>
-  <option value="agriculture">Agriculture</option>
-</select>
-      <div id="mcqQuestion" style="margin-top:20px;">
-        <h3 id="questionText"></h3>
-        <div id="options"></div>
-      </div>
-
-      <p id="mcqFeedback"></p>
-
-      <button class="primary" onclick="checkAnswer()">Submit Answer</button>
-      <button class="primary" onclick="nextQuestion()">Next Question →</button>
-
-      <h3 id="mcqScore" style="margin-top:20px;">Score: 0</h3>
-    </div>
-  </div>
-</section>
 
 <script>
 const questions = [
@@ -652,7 +616,8 @@ showQuestion();
         <div class="top"><span class="pill">PRACTICE</span><span>🧠</span></div>
         <h3>MCQ Practice</h3>
         <p>Test your preparation with exam-focused questions and improve your accuracy.</p>
-        <a class="study-action" href="#mcq-practice">start practice →</a>
+        <a class="study-action" onclick="openMCQ( )">start practice →</a>
+     
       </article>
     </div>
 
@@ -702,7 +667,55 @@ showQuestion();
           </div>
           <button class="secondary" type="button" onclick="adminLogout()">Logout</button>
         </div>
+<hr style="margin:25px 0;">
 
+<h3>MCQ Management</h3>
+<p>Add new questions for students.</p>
+
+<div class="form-grid">
+  <label>Subject
+    <select id="mcqAdminSubject">
+      <option value="genetics">Genetics</option>
+      <option value="plant-breeding">Plant Breeding</option>
+      <option value="plant-pathology">Plant Pathology</option>
+      <option value="microbiology">Microbiology</option>
+      <option value="seed-science">Seed Science</option>
+      <option value="agriculture">Agriculture</option>
+    </select>
+  </label>
+
+  <label>Question
+    <textarea id="mcqAdminQuestion" placeholder="Enter question"></textarea>
+  </label>
+
+  <label>Option 1
+    <input id="mcqOption1">
+  </label>
+  <label>Option 2
+    <input id="mcqOption2">
+  </label>
+  <label>Option 3
+    <input id="mcqOption3">
+  </label>
+  <label>Option 4
+    <input id="mcqOption4">
+  </label>
+
+  <label>Correct Answer
+    <select id="mcqCorrectAnswer">
+      <option value="0">Option 1</option>
+      <option value="1">Option 2</option>
+      <option value="2">Option 3</option>
+      <option value="3">Option 4</option>
+    </select>
+  </label>
+</div>
+
+<button type="button" class="primary" onclick="addMCQ()">
+  Add MCQ
+</button>
+
+<div id="adminMCQList"></div>
         <form id="uploadForm">
           <div class="form-grid">
             <label>Title
