@@ -770,21 +770,7 @@ async function renderMaterials() {
     return;
   }
 
-  const publicBox = ensurePublicNotes();
-
-  publicBox.innerHTML = "<h2>Available Study Notes</h2>";
-
-  data.forEach(note => {
-    publicBox.innerHTML += `
-      <div style="padding:12px;margin:10px 0;border:1px solid #ddd;border-radius:8px;">
-        <h3>${escapeHtml(note.title)}</h3>
-        <p>${escapeHtml(note.subject)}</p>
-        <a href="${escapeHtml(note.file_url)}" target="_blank">📖 View PDF</a>
-        &nbsp;
-        <a href="${escapeHtml(note.file_url)}" download>⬇ Download</a>
-      </div>
-    `;
-  });
+ 
 
   const adminList = document.getElementById("publishedList");
 
