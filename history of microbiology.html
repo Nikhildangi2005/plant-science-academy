@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>History of Microbiology | Plant Science Academy</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(120deg, #e7f0d0, #f5f5e9, #e3edce);
+    color: #171717;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+
+.navbar {
+    height: 72px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(80,100,50,0.12);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: #172a19;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.home {
+    text-decoration: none;
+    color: #171717;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* MAIN SECTION */
+
+.container {
+    max-width: 1080px;
+    margin: auto;
+    padding: 30px 20px 55px;
+}
+
+/* HEADING */
+
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heading h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.heading p {
+    font-size: 14px;
+    color: #333;
+}
+
+/* CARD GRID */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* CARDS */
+
+.card {
+    position: relative;
+    overflow: hidden;
+    min-height: 210px;
+    padding: 24px 23px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(255,255,255,0.65);
+    transition: all 0.3s ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -38px;
+    right: -38px;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background: rgba(169,199,124,0.35);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(65,90,45,0.12);
+}
+
+/* ICON */
+
+.icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    background: rgba(181,205,148,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+/* CARD CONTENT */
+
+.card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #555;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+/* EXPLORE */
+
+.explore {
+    display: inline-block;
+    color: #243b2b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    margin-right: 12px;
+}
+
+.explore:hover {
+    color: #679342;
+}
+
+/* LOADING */
+
+.loading {
+    text-align: center;
+    color: #555;
+    padding: 25px;
+    grid-column: 1 / -1;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 0 5%;
+        height: 65px;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .heading h1 {
+        font-size: 28px;
+    }
+
+    .heading p {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card {
+        min-height: 195px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <div class="logo-icon">🌿</div>
+        Plant Science Academy
+    </div>
+
+    <a href="microbiology.html" class="home">← Microbiology</a>
+
+</nav>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="container">
+
+    <div class="heading">
+        <h1>📚 History of Microbiology</h1>
+
+        <p>
+            Origin, development, important scientists,
+            discoveries and contributions in microbiology.
+        </p>
+    </div>
+
+    <!-- PDF CARD -->
+
+    <div class="cards" id="microbiologyNotes">
+
+        <div class="loading">
+            Loading Study Notes...
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+    © 2026 Plant Science Academy | Learn • Grow • Succeed
+</footer>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://cqucrvpugvcrjcwrwtyh.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_ZfGeOkLQOOs8XcRNsHx_dA_nlBtffSK";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+async function loadMicrobiologyNotes() {
+
+    const container = document.getElementById("microbiologyNotes");
+
+    const { data, error } = await supabaseClient
+        .from("study_notes")
+        .select("id,title,subject,file_url,file_name,created_at")
+        .ilike("subject", "Microbiology")
+        .ilike("title", "%history%")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+
+        container.innerHTML = `
+            <div class="loading">
+                Unable to load PDF. Please try again.
+            </div>
+        `;
+
+        console.error(error);
+        return;
+    }
+
+    container.innerHTML = "";
+
+    if (!data || data.length === 0) {
+
+        container.innerHTML = `
+            <div class="loading">
+                No History of Microbiology PDF available yet.
+            </div>
+        `;
+
+        return;
+    }
+
+    data.forEach(note => {
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const icon = document.createElement("div");
+        icon.className = "icon";
+        icon.textContent = "📄";
+
+        const title = document.createElement("h2");
+        title.textContent = note.title;
+
+        const description = document.createElement("p");
+        description.textContent = "History of Microbiology Study Material";
+
+        const viewLink = document.createElement("a");
+        viewLink.className = "explore";
+        viewLink.href = note.file_url;
+        viewLink.target = "_blank";
+        viewLink.rel = "noopener noreferrer";
+        viewLink.textContent = "View PDF →";
+
+        const downloadLink = document.createElement("a");
+        downloadLink.className = "explore";
+        downloadLink.href = note.file_url;
+        downloadLink.target = "_blank";
+        downloadLink.rel = "noopener noreferrer";
+        downloadLink.textContent = "Download ↓";
+
+        card.appendChild(icon);
+        card.appendChild(title);
+        card.appendChild(description);
+        card.appendChild(viewLink);
+        card.appendChild(downloadLink);
+
+        container.appendChild(card);
+
+    });
+
+}
+
+loadMicrobiologyNotes();
+
+</script>
+
+</body>
+</html>
