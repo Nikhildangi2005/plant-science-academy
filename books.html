@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Books Library | Plant Science Academy</title>
+<link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(120deg, #e7f0d0, #f5f5e9, #e3edce);
+    color: #171717;
+    min-height: 100vh;
+}
+
+.navbar {
+    height: 72px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(80,100,50,0.12);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: #172a19;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.home {
+    text-decoration: none;
+    color: #171717;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 1080px;
+    margin: auto;
+    padding: 30px 20px 55px;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heading h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.heading p {
+    font-size: 14px;
+    color: #333;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    min-height: 210px;
+    padding: 24px 23px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(255,255,255,0.65);
+    transition: all 0.3s ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -38px;
+    right: -38px;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background: rgba(169,199,124,0.35);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(65,90,45,0.12);
+}
+
+.icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    background: rgba(181,205,148,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #555;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.explore {
+    display: inline-block;
+    color: #243b2b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.explore:hover {
+    color: #679342;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+}
+
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 0 5%;
+        height: 65px;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .heading h1 {
+        font-size: 28px;
+    }
+
+    .heading p {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card {
+        min-height: 195px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <div class="logo-icon">🌿</div>
+        Plant Science Academy
+    </div>
+
+    <a href="index.html" class="home">← Home</a>
+</nav>
+
+<main class="container">
+
+    <div class="heading">
+        <h1>📚 Books Library</h1>
+        <p>
+            Explore subject-wise Agriculture and Plant Science
+            books, reference books and e-books.
+        </p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🧬</div>
+            <h2>Genetics</h2>
+            <p>Classical genetics, molecular genetics and cytogenetics books.</p>
+            <a href="books-genetics.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌱</div>
+            <h2>Plant Breeding</h2>
+            <p>Breeding methods, crop improvement and hybridization books.</p>
+            <a href="books-plant-breeding.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🍂</div>
+            <h2>Plant Pathology</h2>
+            <p>Mycology, bacteriology, virology and plant disease books.</p>
+            <a href="books-plant-pathology.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌾</div>
+            <h2>Seed Science</h2>
+            <p>Seed production, processing, testing and certification books.</p>
+            <a href="books-seed-science.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🦠</div>
+            <h2>Microbiology</h2>
+            <p>Agricultural, soil, food and general microbiology books.</p>
+            <a href="books-microbiology.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🚜</div>
+            <h2>Agriculture</h2>
+            <p>General agriculture and agricultural science reference books.</p>
+            <a href="books-agriculture.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌿</div>
+            <h2>Plant Physiology</h2>
+            <p>Plant growth, metabolism, hormones and physiology books.</p>
+            <a href="books-plant-physiology.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🧪</div>
+            <h2>Agricultural Biochemistry</h2>
+            <p>Biomolecules, enzymes and plant biochemistry books.</p>
+            <a href="books-biochemistry.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌻</div>
+            <h2>Horticulture</h2>
+            <p>Fruit science, vegetable science and ornamental horticulture books.</p>
+            <a href="books-horticulture.html" class="explore">Explore Books →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌱</div>
+            <h2>Agronomy</h2>
+            <p>Crop production, soil management and field crop books.</p>
+            <a href="books-agronomy.html" class="explore">Explore Books →</a>
+        </div>
+
+    </div>
+
+</main>
+
+<footer>
+    © 2026 Plant Science Academy | Learn • Grow • Succeed
+</footer>
+
+</body>
+</html>
