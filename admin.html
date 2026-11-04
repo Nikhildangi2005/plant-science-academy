@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Plant Science Academy</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root {
+    --green: #174d32;
+    --bg: #e9efd9;
+    --text: #17251b;
+    --muted: #667166;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e9efd9, #f4f5e9);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+header {
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(220,233,194,.9);
+    border-bottom: 1px solid #d5dfc8;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: #102e27;
+    color: #b5d78d;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+}
+
+.header-links {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.header-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.container {
+    width: 92%;
+    max-width: 1050px;
+    margin: 45px auto;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.heading h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.heading p {
+    color: var(--muted);
+}
+
+.card {
+    background: rgba(255,255,255,.85);
+    border-radius: 22px;
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(30,60,30,.06);
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+.card h2 {
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin: 15px 0 8px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d4ddce;
+    border-radius: 10px;
+    background: white;
+    font-size: 15px;
+    outline: none;
+    font-family: inherit;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #39764a;
+}
+
+button {
+    border: none;
+    background: var(--green);
+    color: white;
+    padding: 13px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #286441;
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.secondary {
+    background: #68776a;
+}
+
+.danger {
+    background: #b83c32;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.status {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.success {
+    color: #238044;
+}
+
+.error {
+    color: #b83c32;
+}
+
+.mcq-item {
+    border: 1px solid #dce4d6;
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 15px;
+    background: #fff;
+}
+
+.mcq-item h3 {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.mcq-item p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 6px 0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.badge {
+    display: inline-block;
+    background: #e5efda;
+    color: #245b36;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.badge.draft {
+    background: #fff0d8;
+    color: #875b12;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.actions button {
+    margin-top: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media(max-width:600px) {
+    header {
+        padding: 13px 5%;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .header-links {
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .container {
+        margin: 30px auto;
+    }
+
+    .heading h1 {
+        font-size: 26px;
+    }
+
+    .card {
+        padding: 20px 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">🌿</div>
+        Plant Science Academy
+    </div>
+
+    <div class="header-links">
+        <a href="index.html">← Home</a>
+        <button id="logoutBtn" class="hidden" onclick="logout()">
+            Logout
+        </button>
+    </div>
+</header>
+
+<main class="container">
+
+    <div class="heading">
+        <h1>🔐 Admin Dashboard</h1>
+        <p>Manage your Plant Science Academy MCQ Question Bank.</p>
+    </div>
+
+    <!-- LOGIN -->
+
+    <section class="card" id="loginSection">
+
+        <h2>Admin Login</h2>
+
+        <form id="loginForm">
+
+            <label>Email Address</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your admin email"
+                required
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" id="loginBtn">
+                Login →
+            </button>
+
+        </form>
+
+        <div id="loginMessage" class="status"></div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboardSection" class="hidden">
+
+        <div class="card">
+
+            <h2>📚 Add New MCQ</h2>
+
+            <form id="mcqForm">
+
+                <label>Subject</label>
+
+                <select id="subject" required>
+                    <option value="Genetics">Genetics</option>
+                    <option value="Plant Breeding">Plant Breeding</option>
+                    <option value="Plant Pathology">Plant Pathology</option>
+                    <option value="Seed Science">Seed Science</option>
+                    <option value="Microbiology">Microbiology</option>
+                    <option value="Agriculture">Agriculture</option>
+                </select>
+
+                <label>Question</label>
+                <textarea id="question" placeholder="Enter your MCQ question..." required></textarea>
+
+                <label>Option A</label>
+                <input id="option_a" type="text" required placeholder="Enter option A">
+
+                <label>Option B</label>
+                <input id="option_b" type="text" required placeholder="Enter option B">
+
+                <label>Option C</label>
+                <input id="option_c" type="text" required placeholder="Enter option C">
+
+                <label>Option D</label>
+                <input id="option_d" type="text" required placeholder="Enter option D">
+
+                <label>Correct Answer</label>
+                <select id="correct_answer" required>
+                    <option value="">Select Correct Answer</option>
+                    <option value="A">Option A</option>
+                    <option value="B">Option B</option>
+                    <option value="C">Option C</option>
+                    <option value="D">Option D</option>
+                </select>
+
+                <label>Explanation (Optional)</label>
+                <textarea id="explanation" placeholder="Write explanation..."></textarea>
+
+                <label>Publish Status</label>
+                <select id="is_published">
+                    <option value="true">Publish Now</option>
+                    <option value="false">Save as Draft</option>
+                </select>
+
+                <div class="actions">
+                    <button type="submit" id="saveBtn">
+                        ➕ Add MCQ
+                    </button>
+
+                    <button type="button" id="cancelEditBtn"
+                        class="secondary hidden" onclick="cancelEdit()">
+                        Cancel Edit
+                    </button>
+                </div>
+
+            </form>
+
+            <div id="formMessage" class="status"></div>
+
+        </div>
+
+
+        <!-- QUESTION LIST -->
+
+        <div class="card">
+
+            <h2>📋 Manage MCQs</h2>
+
+            <label>Filter by Subject</label>
+
+            <select id="filterSubject" onchange="loadMCQs()">
+                <option value="">All Subjects</option>
+                <option value="Genetics">Genetics</option>
+                <option value="Plant Breeding">Plant Breeding</option>
+                <option value="Plant Pathology">Plant Pathology</option>
+                <option value="Seed Science">Seed Science</option>
+                <option value="Microbiology">Microbiology</option>
+                <option value="Agriculture">Agriculture</option>
+            </select>
+
+            <div id="mcqList">
+                Loading MCQs...
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 Plant Science Academy | Admin Dashboard
+</footer>
+
+
+<script>
+
+// =====================================
+// SUPABASE CONFIGURATION
+// =====================================
+
+const SUPABASE_URL = "https://cqucrvpugvcrjcwrwtyh.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_ZfGeOkLQOOs8XcRNsHx_dA_nlBtffSK";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+// =====================================
+// ADMIN VARIABLES
+// =====================================
+
+let editingId = null;
+
+
+// =====================================
+// MESSAGE
+// =====================================
+
+function showMessage(elementId, message, type) {
+
+    const element = document.getElementById(elementId);
+
+    element.textContent = message;
+    element.className = "status " + type;
+
+}
+
+
+// =====================================
+// AUTH CHECK
+// =====================================
+
+async function checkSession() {
+
+    const { data, error } = await supabaseClient.auth.getSession();
+
+    if (error) {
+        showMessage("loginMessage", error.message, "error");
+        return;
+    }
+
+    if (data.session) {
+        showDashboard();
+    } else {
+        showLogin();
+    }
+
+}
+
+
+function showLogin() {
+
+    document.getElementById("loginSection").classList.remove("hidden");
+    document.getElementById("dashboardSection").classList.add("hidden");
+    document.getElementById("logoutBtn").classList.add("hidden");
+
+}
+
+
+async function showDashboard() {
+
+    document.getElementById("loginSection").classList.add("hidden");
+    document.getElementById("dashboardSection").classList.remove("hidden");
+    document.getElementById("logoutBtn").classList.remove("hidden");
+
+    await loadMCQs();
+
+}
+
+
+// =====================================
+// LOGIN
+// =====================================
+
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const btn = document.getElementById("loginBtn");
+
+    btn.disabled = true;
+    btn.textContent = "Logging in...";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
+
+    btn.disabled = false;
+    btn.textContent = "Login →";
+
+    if (error) {
+
+        showMessage("loginMessage", error.message, "error");
+        return;
+
+    }
+
+    if (data.session) {
+        showDashboard();
+    }
+
+});
+
+
+// =====================================
+// ADD / UPDATE MCQ
+// =====================================
+
+document.getElementById("mcqForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const btn = document.getElementById("saveBtn");
+
+    btn.disabled = true;
+    btn.textContent = "Saving...";
+
+    const mcq = {
+
+        subject: document.getElementById("subject").value,
+
+        question: document.getElementById("question").value.trim(),
+
+        option_a: document.getElementById("option_a").value.trim(),
+
+        option_b: document.getElementById("option_b").value.trim(),
+
+        option_c: document.getElementById("option_c").value.trim(),
+
+        option_d: document.getElementById("option_d").value.trim(),
+
+        correct_answer: document.getElementById("correct_answer").value,
+
+        explanation: document.getElementById("explanation").value.trim(),
+
+        is_published: document.getElementById("is_published").value === "true"
+
+    };
+
+    let result;
+
+    if (editingId !== null) {
+
+        result = await supabaseClient
+            .from("mcqs")
+            .update(mcq)
+            .eq("id", editingId);
+
+    } else {
+
+        result = await supabaseClient
+            .from("mcqs")
+            .insert([mcq]);
+
+    }
+
+    btn.disabled = false;
+    btn.textContent = editingId !== null ? "Update MCQ" : "➕ Add MCQ";
+
+    if (result.error) {
+
+        showMessage("formMessage", result.error.message, "error");
+        return;
+
+    }
+
+    showMessage(
+        "formMessage",
+        editingId !== null ? "MCQ Updated Successfully!" : "MCQ Added Successfully!",
+        "success"
+    );
+
+    resetForm();
+    await loadMCQs();
+
+});
+
+
+// =====================================
+// LOAD MCQs
+// =====================================
+
+async function loadMCQs() {
+
+    const list = document.getElementById("mcqList");
+
+    list.textContent = "Loading MCQs...";
+
+    let query = supabaseClient
+        .from("mcqs")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    const filter = document.getElementById("filterSubject").value;
+
+    if (filter) {
+        query = query.eq("subject", filter);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+
+        list.textContent = "Error: " + error.message;
+        return;
+
+    }
+
+    list.replaceChildren();
+
+    if (!data || data.length === 0) {
+
+        list.textContent = "No MCQs found. Add your first question above.";
+        return;
+
+    }
+
+    data.forEach(q => {
+
+        const item = document.createElement("div");
+        item.className = "mcq-item";
+
+        const badge = document.createElement("span");
+        badge.className = q.is_published ? "badge" : "badge draft";
+        badge.textContent = q.is_published ? "PUBLISHED" : "DRAFT";
+
+        const title = document.createElement("h3");
+        title.textContent = q.question;
+
+        const subject = document.createElement("p");
+        subject.textContent = "Subject: " + q.subject;
+
+        const answer = document.createElement("p");
+        answer.textContent = "Correct Answer: " + q.correct_answer;
+
+        const options = document.createElement("p");
+        options.textContent =
+            "A. " + q.option_a +
+            " | B. " + q.option_b +
+            " | C. " + q.option_c +
+            " | D. " + q.option_d;
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "✏️ Edit";
+        editBtn.onclick = () => editMCQ(q);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "🗑 Delete";
+        deleteBtn.className = "danger";
+        deleteBtn.onclick = () => deleteMCQ(q.id);
+
+        const publishBtn = document.createElement("button");
+        publishBtn.textContent = q.is_published ? "Unpublish" : "Publish";
+        publishBtn.className = "secondary";
+        publishBtn.onclick = () => togglePublish(q.id, q.is_published);
+
+        actions.append(editBtn, publishBtn, deleteBtn);
+
+        item.append(badge, title, subject, options, answer, actions);
+
+        list.appendChild(item);
+
+    });
+
+}
+
+
+// =====================================
+// EDIT MCQ
+// =====================================
+
+function editMCQ(q) {
+
+    editingId = q.id;
+
+    document.getElementById("subject").value = q.subject;
+    document.getElementById("question").value = q.question;
+    document.getElementById("option_a").value = q.option_a;
+    document.getElementById("option_b").value = q.option_b;
+    document.getElementById("option_c").value = q.option_c;
+    document.getElementById("option_d").value = q.option_d;
+    document.getElementById("correct_answer").value = q.correct_answer;
+    document.getElementById("explanation").value = q.explanation || "";
+    document.getElementById("is_published").value = String(q.is_published);
+
+    document.getElementById("saveBtn").textContent = "Update MCQ";
+
+    document.getElementById("cancelEditBtn").classList.remove("hidden");
+
+    document.getElementById("formMessage").textContent = "";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+// =====================================
+// CANCEL EDIT
+// =====================================
+
+function cancelEdit() {
+
+    resetForm();
+
+}
+
+
+function resetForm() {
+
+    editingId = null;
+
+    document.getElementById("mcqForm").reset();
+
+    document.getElementById("saveBtn").textContent = "➕ Add MCQ";
+
+    document.getElementById("cancelEditBtn").classList.add("hidden");
+
+}
+
+
+// =====================================
+// DELETE MCQ
+// =====================================
+
+async function deleteMCQ(id) {
+
+    if (!confirm("Are you sure you want to delete this MCQ?")) {
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("mcqs")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+
+        alert("Delete failed: " + error.message);
+        return;
+
+    }
+
+    alert("MCQ Deleted Successfully!");
+
+    await loadMCQs();
+
+}
+
+
+// =====================================
+// PUBLISH / UNPUBLISH
+// =====================================
+
+async function togglePublish(id, currentStatus) {
+
+    const { error } = await supabaseClient
+        .from("mcqs")
+        .update({ is_published: !currentStatus })
+        .eq("id", id);
+
+    if (error) {
+
+        alert("Update failed: " + error.message);
+        return;
+
+    }
+
+    await loadMCQs();
+
+}
+
+
+// =====================================
+// LOGOUT
+// =====================================
+
+async function logout() {
+
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    showLogin();
+
+}
+
+
+// =====================================
+// AUTH STATE
+// =====================================
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+
+    if (event === "SIGNED_OUT") {
+        showLogin();
+    }
+
+});
+
+
+// =====================================
+// START
+// =====================================
+
+checkSession();
+
+</script>
+
+</body>
+</html>
