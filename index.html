@@ -566,53 +566,6 @@ footer p,footer a{color:var(--muted);font-size:.82rem}
         </div>
 <hr style="margin:25px 0;">
 
-<h3>MCQ Management</h3>
-<p>Add new questions for students.</p>
-
-<div class="form-grid">
-  <label>Subject
-    <select id="mcqAdminSubject">
-      <option value="genetics">Genetics</option>
-      <option value="plant-breeding">Plant Breeding</option>
-      <option value="plant-pathology">Plant Pathology</option>
-      <option value="microbiology">Microbiology</option>
-      <option value="seed-science">Seed Science</option>
-      <option value="agriculture">Agriculture</option>
-    </select>
-  </label>
-
-  <label>Question
-    <textarea id="mcqAdminQuestion" placeholder="Enter question"></textarea>
-  </label>
-
-  <label>Option 1
-    <input id="mcqOption1">
-  </label>
-  <label>Option 2
-    <input id="mcqOption2">
-  </label>
-  <label>Option 3
-    <input id="mcqOption3">
-  </label>
-  <label>Option 4
-    <input id="mcqOption4">
-  </label>
-
-  <label>Correct Answer
-    <select id="mcqCorrectAnswer">
-      <option value="0">Option 1</option>
-      <option value="1">Option 2</option>
-      <option value="2">Option 3</option>
-      <option value="3">Option 4</option>
-    </select>
-  </label>
-</div>
-
-<button type="button" class="primary" onclick="addMCQ()">
-  Add MCQ
-</button>
-
-<div id="adminMCQList"></div>
         <form id="uploadForm">
           <div class="form-grid">
             <label>Title
