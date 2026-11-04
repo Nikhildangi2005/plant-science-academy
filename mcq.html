@@ -6,216 +6,327 @@
 
 <title>MCQ Practice | Plant Science Academy</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 :root {
-    --green:#39784a;
-    --dark:#234d31;
-    --bg:#f2f6e9;
-    --card:#ffffff;
-    --text:#24352a;
+    --green: #174d32;
+    --green-light: #e3edcf;
+    --bg: #e9efd9;
+    --white: #ffffff;
+    --text: #17251b;
+    --muted: #667166;
 }
 
 * {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family:Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #e9efd9, #f4f5e9);
+    color: var(--text);
+    min-height: 100vh;
 }
+
+/* HEADER */
 
 header {
-    background:#e7efd9;
-    padding:20px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #dce6d4;
+    width: 100%;
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(220, 233, 194, 0.85);
+    border-bottom: 1px solid rgba(40, 80, 40, 0.12);
 }
 
-header h2 {
-    font-size:21px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 19px;
+    font-weight: 800;
 }
 
-header a {
-    text-decoration:none;
-    color:var(--dark);
-    font-weight:bold;
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: #102e27;
+    color: #b5d78d;
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
 }
+
+.home-link {
+    text-decoration: none;
+    color: #17251b;
+    font-weight: 700;
+}
+
+/* MAIN */
 
 .container {
-    max-width:850px;
-    margin:45px auto;
-    padding:20px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 55px auto;
 }
 
 .heading {
-    text-align:center;
-    margin-bottom:30px;
+    text-align: center;
+    margin-bottom: 35px;
 }
 
 .heading h1 {
-    font-size:32px;
-    margin-bottom:10px;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 10px;
 }
 
 .heading p {
-    color:#687666;
+    color: var(--muted);
+    font-size: 15px;
 }
 
-.quiz-box {
-    background:white;
-    padding:30px;
-    border-radius:22px;
-    box-shadow:0 10px 35px rgba(0,0,0,.07);
+/* CARDS */
+
+.card {
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(30, 60, 30, 0.06);
+    border: 1px solid rgba(255,255,255,0.7);
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(174, 203, 132, 0.25);
+    border-radius: 0 0 0 100%;
+    top: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
 select {
-    width:100%;
-    padding:14px;
-    border:1px solid #dce5d9;
-    border-radius:10px;
-    margin-bottom:22px;
-    font-size:16px;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d4ddce;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 15px;
+    outline: none;
+    margin-bottom: 20px;
 }
 
-.info {
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:20px;
-    color:#687666;
-    font-size:14px;
-}
-
-.progress {
-    height:7px;
-    background:#e9eee5;
-    border-radius:10px;
-    margin-bottom:25px;
-    overflow:hidden;
-}
-
-.progress-bar {
-    height:100%;
-    width:0%;
-    background:var(--green);
-    transition:.3s;
-}
-
-.question {
-    font-size:21px;
-    font-weight:bold;
-    line-height:1.5;
-    margin-bottom:22px;
-}
-
-.option {
-    padding:15px;
-    border:1px solid #dce5d9;
-    border-radius:12px;
-    margin-bottom:12px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.option:hover {
-    border-color:var(--green);
-    background:#f3f8ef;
-}
-
-.option.selected {
-    background:#e7f2e5;
-    border:2px solid var(--green);
-}
-
-.option.correct {
-    background:#dff5e4;
-    border-color:#26934b;
-}
-
-.option.wrong {
-    background:#ffe5e5;
-    border-color:#df4545;
-}
+/* BUTTONS */
 
 button {
-    border:none;
-    padding:13px 25px;
-    border-radius:10px;
-    background:var(--green);
-    color:white;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
+    border: none;
+    background: var(--green);
+    color: white;
+    padding: 13px 25px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
-    background:var(--dark);
+    background: #286441;
+    transform: translateY(-2px);
 }
 
 button:disabled {
-    background:#aab7a9;
-    cursor:not-allowed;
+    background: #a7b5a9;
+    cursor: not-allowed;
+    transform: none;
 }
 
-.buttons {
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-    margin-top:25px;
+.hidden {
+    display: none !important;
 }
 
-.explanation {
-    display:none;
-    padding:15px;
-    background:#f1f7eb;
-    border-left:4px solid var(--green);
-    border-radius:8px;
-    margin-top:20px;
-    line-height:1.6;
+/* QUIZ */
+
+.quiz-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
+
+.progress-bg {
+    width: 100%;
+    height: 9px;
+    background: #e1e8dc;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: #39764a;
+    transition: 0.3s;
+}
+
+.question {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #dce4d6;
+    background: #fff;
+    color: #26352a;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.option:hover {
+    background: #eef5e8;
+    transform: none;
+}
+
+.option.selected {
+    border: 2px solid #39764a;
+    background: #e6f0df;
+}
+
+.option.correct {
+    background: #d8f3df;
+    border: 2px solid #24944c;
+}
+
+.option.wrong {
+    background: #ffe1df;
+    border: 2px solid #d64b4b;
+}
+
+.feedback {
+    margin-top: 18px;
+    padding: 15px;
+    border-radius: 12px;
+    line-height: 1.5;
+    background: #edf3e8;
+    display: none;
+}
+
+.quiz-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+/* RESULT */
 
 .result {
-    display:none;
-    text-align:center;
-    padding:25px;
+    text-align: center;
+    padding: 25px 10px;
 }
 
 .result h2 {
-    font-size:28px;
-    margin-bottom:15px;
+    font-size: 29px;
+    margin-bottom: 15px;
 }
 
 .score {
-    font-size:45px;
-    color:var(--green);
-    font-weight:bold;
-    margin:20px;
+    font-size: 45px;
+    color: var(--green);
+    font-weight: 800;
+    margin: 20px 0;
 }
 
+.result p {
+    color: var(--muted);
+    margin-bottom: 22px;
+}
+
+.message {
+    color: #b33c32;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #697469;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
 @media(max-width:600px) {
+
     header {
-        padding:18px;
+        padding: 14px 5%;
+    }
+
+    .logo {
+        font-size: 15px;
     }
 
     .container {
-        margin:20px auto;
-        padding:12px;
-    }
-
-    .quiz-box {
-        padding:20px;
+        width: 92%;
+        margin: 40px auto;
     }
 
     .heading h1 {
-        font-size:26px;
+        font-size: 27px;
+    }
+
+    .card {
+        padding: 22px 18px;
     }
 
     .question {
-        font-size:18px;
+        font-size: 17px;
+    }
+
+    .quiz-buttons button {
+        padding: 12px 16px;
     }
 }
 </style>
@@ -224,262 +335,347 @@ button:disabled {
 <body>
 
 <header>
-    <h2>🌱 Plant Science Academy</h2>
-    <a href="index.html">← Home</a>
+
+    <div class="logo">
+        <div class="logo-icon">🌿</div>
+        Plant Science Academy
+    </div>
+
+    <a href="index.html" class="home-link">← Home</a>
+
 </header>
 
-<div class="container">
 
-<div class="heading">
-    <h1>📝 MCQ Practice</h1>
-    <p>Practice questions and improve your preparation.</p>
-</div>
+<main class="container">
 
-<div class="quiz-box">
+    <div class="heading">
+        <h1>📝 MCQ Practice</h1>
+        <p>Practice questions and improve your preparation.</p>
+    </div>
 
-<div id="setup">
-    <h3 style="margin-bottom:15px;">Select Your Subject</h3>
 
-    <select id="subject">
-        <option value="Genetics">Genetics</option>
-        <option value="Plant Breeding">Plant Breeding</option>
-        <option value="Plant Pathology">Plant Pathology</option>
-        <option value="Seed Science">Seed Science</option>
-        <option value="Microbiology">Microbiology</option>
-        <option value="Agriculture">Agriculture</option>
-    </select>
+    <!-- SUBJECT SELECTION -->
 
-    <button onclick="startQuiz()">Start Practice →</button>
-</div>
+    <section class="card" id="subjectSection">
 
-<div id="quiz" style="display:none;">
+        <h2>Select Your Subject</h2>
 
-<div class="info">
-    <span id="questionNumber">Question 1</span>
-    <span id="totalQuestions">Total: 5</span>
-</div>
+        <label for="subject">Choose Subject</label>
 
-<div class="progress">
-    <div class="progress-bar" id="progressBar"></div>
-</div>
+        <select id="subject">
+            <option value="Genetics">Genetics</option>
+            <option value="Plant Breeding">Plant Breeding</option>
+            <option value="Plant Pathology">Plant Pathology</option>
+            <option value="Seed Science">Seed Science</option>
+            <option value="Microbiology">Microbiology</option>
+            <option value="Agriculture">Agriculture</option>
+        </select>
 
-<div class="question" id="question"></div>
+        <button onclick="startPractice()">
+            Start Practice →
+        </button>
 
-<div id="options"></div>
+    </section>
 
-<div class="explanation" id="explanation"></div>
 
-<div class="buttons">
-    <button id="submitBtn" onclick="submitAnswer()">
-        Submit Answer
-    </button>
+    <!-- QUIZ SECTION -->
 
-    <button id="nextBtn" onclick="nextQuestion()" disabled>
-        Next →
-    </button>
-</div>
+    <section class="card hidden" id="quizSection">
 
-</div>
+        <div class="quiz-info">
 
-<div class="result" id="result">
+            <span id="subjectName">Genetics</span>
 
-    <h2>🎉 Test Completed!</h2>
+            <span id="questionCount">Question 1</span>
 
-    <p>Your Final Score</p>
+        </div>
 
-    <div class="score" id="finalScore">0/5</div>
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
 
-    <p id="percentage"></p>
+        <div class="question" id="question">
+            Loading question...
+        </div>
 
-    <br>
+        <div id="options"></div>
 
-    <button onclick="restartQuiz()">Practice Again ↻</button>
+        <div class="feedback" id="feedback"></div>
 
-</div>
+        <div class="quiz-buttons">
 
-</div>
-</div>
+            <button onclick="goHome()" style="background:#68776a">
+                Exit
+            </button>
+
+            <button id="nextBtn" onclick="nextQuestion()" disabled>
+                Next →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT SECTION -->
+
+    <section class="card hidden" id="resultSection">
+
+        <div class="result">
+
+            <h2>🎉 Test Completed!</h2>
+
+            <p>Your Practice Result</p>
+
+            <div class="score" id="finalScore">0/0</div>
+
+            <p id="resultMessage"></p>
+
+            <button onclick="restartPractice()">
+                Practice Again →
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    © 2026 Plant Science Academy | Learn • Practice • Grow
+</footer>
+
 
 <script>
 
-const questions = {
+// ==================================
+// SUPABASE CONFIGURATION
+// ==================================
 
-"Genetics": [
+// sb_publishable_ZfGeOkLQOOs8XcRNsHx_dA_nlBtffSK
 
-{
-q:"Who is known as the Father of Genetics?",
-options:["Darwin","Gregor Mendel","Morgan","Watson"],
-answer:1,
-explanation:"Gregor Johann Mendel is known as the Father of Genetics."
-},
+const SUPABASE_URL = "https://cqucrvpugvcrjcwrwtyh.supabase.co";
+const SUPABASE_KEY = "sb_publishable_ZfGeOkLQOOs8XcRNsHx_dA_nlBtffSK";
 
-{
-q:"How many pairs of chromosomes are present in humans?",
-options:["21","22","23","24"],
-answer:2,
-explanation:"Humans have 23 pairs of chromosomes."
-},
+let supabaseClient = null;
 
-{
-q:"What is the basic unit of heredity?",
-options:["Cell","Gene","Tissue","Protein"],
-answer:1,
-explanation:"Gene is the basic functional unit of heredity."
-},
-
-{
-q:"Who proposed the double helix model of DNA?",
-options:["Mendel","Darwin","Watson and Crick","Morgan"],
-answer:2,
-explanation:"Watson and Crick proposed the double helix model in 1953."
-},
-
-{
-q:"What is the phenotypic ratio of a Mendelian monohybrid cross?",
-options:["9:3:3:1","3:1","1:2:1","1:1"],
-answer:1,
-explanation:"The typical F2 phenotypic ratio is 3:1."
+if (
+    SUPABASE_URL !== "YOUR_SUPABASE_PROJECT_URL"&&
+    SUPABASE_KEY !== "YOUR_SUPABASE_PUBLISHABLE_KEY"
+) {
+    supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 }
 
-]
 
-};
+// ==================================
+// QUIZ VARIABLES
+// ==================================
 
-let currentSubject = "";
+let questions = [];
 let currentQuestion = 0;
 let score = 0;
-let selected = null;
 let answered = false;
 
-function startQuiz() {
 
-    currentSubject = document.getElementById("subject").value;
+// ==================================
+// START PRACTICE
+// ==================================
 
-    if(!questions[currentSubject] ||
-       questions[currentSubject].length === 0) {
-        alert("Questions will be added soon for this subject.");
+async function startPractice() {
+
+    const subject = document.getElementById("subject").value;
+
+    if (!supabaseClient) {
+        alert("Supabase अभी Connect नहीं हुआ है। पहले Project URL और Publishable Key सेट करें।");
         return;
     }
 
-    currentQuestion = 0;
-    score = 0;
+    const startButton = document.querySelector(
+        "#subjectSection button"
+    );
 
-    document.getElementById("setup").style.display="none";
-    document.getElementById("result").style.display="none";
-    document.getElementById("quiz").style.display="block";
+    startButton.disabled = true;
+    startButton.textContent = "Loading Questions...";
 
-    showQuestion();
+    try {
+
+        const { data, error } = await supabaseClient
+            .from("mcqs")
+            .select("*")
+            .eq("subject", subject)
+            .eq("is_published", true)
+            .order("created_at", { ascending: true });
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+            alert("इस Subject में अभी कोई Published MCQ उपलब्ध नहीं है।");
+            return;
+        }
+
+        questions = data;
+        currentQuestion = 0;
+        score = 0;
+
+        document.getElementById("subjectSection")
+            .classList.add("hidden");
+
+        document.getElementById("resultSection")
+            .classList.add("hidden");
+
+        document.getElementById("quizSection")
+            .classList.remove("hidden");
+
+        document.getElementById("subjectName").textContent = subject;
+
+        showQuestion();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Questions Load नहीं हुए। Supabase Database और Table Settings चेक करें।");
+
+    } finally {
+
+        startButton.disabled = false;
+        startButton.textContent = "Start Practice →";
+
+    }
+
 }
+
+
+// ==================================
+// SHOW QUESTION
+// ==================================
 
 function showQuestion() {
 
-    selected = null;
     answered = false;
 
-    const q = questions[currentSubject][currentQuestion];
+    const q = questions[currentQuestion];
 
-    document.getElementById("questionNumber").innerText =
-        "Question " + (currentQuestion+1);
+    document.getElementById("question").textContent =
+        q.question;
 
-    document.getElementById("totalQuestions").innerText =
-        "Total: " + questions[currentSubject].length;
+    document.getElementById("questionCount").textContent =
+        `Question ${currentQuestion + 1} / ${questions.length}`;
 
-    document.getElementById("question").innerText = q.q;
+    document.getElementById("progress").style.width =
+        ((currentQuestion + 1) / questions.length * 100) + "%";
 
-    document.getElementById("progressBar").style.width =
-        ((currentQuestion+1)/questions[currentSubject].length*100)+"%";
+    document.getElementById("feedback").style.display = "none";
 
-    document.getElementById("explanation").style.display="none";
+    document.getElementById("nextBtn").disabled = true;
 
-    const optionsDiv = document.getElementById("options");
-    optionsDiv.innerHTML="";
+    const optionsBox = document.getElementById("options");
 
-    q.options.forEach((option,index)=>{
+    optionsBox.innerHTML = "";
 
-        const div = document.createElement("div");
+    const options = [
+        ["A", q.option_a],
+        ["B", q.option_b],
+        ["C", q.option_c],
+        ["D", q.option_d]
+    ];
 
-        div.className="option";
+    options.forEach(([key, value]) => {
 
-        div.innerText =
-            String.fromCharCode(65+index)+". "+option;
+        const button = document.createElement("button");
 
-        div.onclick=()=>selectOption(index,div);
+        button.className = "option";
 
-        optionsDiv.appendChild(div);
+        button.textContent = key + ". " + value;
+
+        button.onclick = () => checkAnswer(key, button);
+
+        optionsBox.appendChild(button);
 
     });
 
-    document.getElementById("submitBtn").disabled=false;
-    document.getElementById("nextBtn").disabled=true;
-
-    document.getElementById("nextBtn").innerText =
-        currentQuestion === questions[currentSubject].length-1
-        ? "Finish Test"
-        : "Next →";
 }
 
-function selectOption(index,element) {
 
-    if(answered) return;
+// ==================================
+// CHECK ANSWER
+// ==================================
 
-    selected = index;
+function checkAnswer(selected, selectedButton) {
 
-    document.querySelectorAll(".option").forEach(el=>{
-        el.classList.remove("selected");
+    if (answered) return;
+
+    answered = true;
+
+    const q = questions[currentQuestion];
+
+    const correct = String(q.correct_answer).toUpperCase();
+
+    const allOptions = document.querySelectorAll(".option");
+
+    allOptions.forEach(button => {
+
+        button.disabled = true;
+
+        const key = button.textContent.substring(0, 1);
+
+        if (key === correct) {
+            button.classList.add("correct");
+        }
+
     });
 
-    element.classList.add("selected");
-}
+    const feedback = document.getElementById("feedback");
 
-function submitAnswer() {
+    feedback.style.display = "block";
 
-    if(selected===null) {
-        alert("Please select an answer first!");
-        return;
-    }
+    if (selected === correct) {
 
-    if(answered) return;
-
-    answered=true;
-
-    const q = questions[currentSubject][currentQuestion];
-
-    const options = document.querySelectorAll(".option");
-
-    if(selected===q.answer) {
         score++;
+
+        feedback.innerHTML =
+            "<strong>✓ Correct Answer!</strong>";
+
+        feedback.style.background = "#d8f3df";
+
+    } else {
+
+        selectedButton.classList.add("wrong");
+
+        feedback.innerHTML =
+            "<strong>✗ Incorrect Answer</strong><br>Correct Answer: " +
+            correct + ". " + q["option_" + correct.toLowerCase()];
+
+        feedback.style.background = "#ffe1df";
+
     }
 
-    options.forEach((el,index)=>{
+    if (q.explanation) {
 
-        el.onclick=null;
+        feedback.innerHTML +=
+            "<br><br><strong>Explanation:</strong> " + escapeHTML(q.explanation);
 
-        if(index===q.answer) {
-            el.classList.add("correct");
-        }
+    }
 
-        if(index===selected && selected!==q.answer) {
-            el.classList.add("wrong");
-        }
+    document.getElementById("nextBtn").disabled = false;
 
-    });
-
-    document.getElementById("explanation").innerHTML =
-        "<b>Explanation:</b> "+q.explanation;
-
-    document.getElementById("explanation").style.display="block";
-
-    document.getElementById("submitBtn").disabled=true;
-    document.getElementById("nextBtn").disabled=false;
 }
+
+
+// ==================================
+// NEXT QUESTION
+// ==================================
 
 function nextQuestion() {
 
-    if(!answered) return;
+    currentQuestion++;
 
-    if(currentQuestion < questions[currentSubject].length-1) {
+    if (currentQuestion < questions.length) {
 
-        currentQuestion++;
         showQuestion();
 
     } else {
@@ -487,26 +683,87 @@ function nextQuestion() {
         showResult();
 
     }
+
 }
+
+
+// ==================================
+// SHOW RESULT
+// ==================================
 
 function showResult() {
 
-    document.getElementById("quiz").style.display="none";
-    document.getElementById("result").style.display="block";
+    document.getElementById("quizSection")
+        .classList.add("hidden");
 
-    const total=questions[currentSubject].length;
+    document.getElementById("resultSection")
+        .classList.remove("hidden");
 
-    document.getElementById("finalScore").innerText =
-        score+"/"+total;
+    document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
 
-    document.getElementById("percentage").innerText =
-        "Accuracy: "+Math.round(score/total*100)+"%";
+    let percentage = (score / questions.length) * 100;
+
+    let message = "";
+
+    if (percentage >= 80) {
+        message = "Excellent! Your preparation is going very well. 🌟";
+    } else if (percentage >= 60) {
+        message = "Good Work! Keep practicing. 👍";
+    } else if (percentage >= 40) {
+        message = "Keep Learning! You can improve. 📚";
+    } else {
+        message = "Revise the topic and try again. 💪";
+    }
+
+    document.getElementById("resultMessage").textContent = message;
+
 }
 
-function restartQuiz() {
 
-    document.getElementById("result").style.display="none";
-    document.getElementById("setup").style.display="block";
+// ==================================
+// RESTART
+// ==================================
+
+function restartPractice() {
+
+    document.getElementById("resultSection")
+        .classList.add("hidden");
+
+    document.getElementById("subjectSection")
+        .classList.remove("hidden");
+
+}
+
+
+// ==================================
+// EXIT
+// ==================================
+
+function goHome() {
+
+    document.getElementById("quizSection")
+        .classList.add("hidden");
+
+    document.getElementById("subjectSection")
+        .classList.remove("hidden");
+
+}
+
+
+// ==================================
+// SAFE EXPLANATION TEXT
+// ==================================
+
+function escapeHTML(value) {
+
+    return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[character]);
 
 }
 
