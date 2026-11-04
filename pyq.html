@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Previous Year Questions | Plant Science Academy</title>
+
+<meta name="description" content="Practice ICAR JRF previous year question papers from 2020 to 2026 at Plant Science Academy.">
+
+<style>
+
+:root {
+    --bg: #f2f6e9;
+    --green: #39784a;
+    --dark: #234d31;
+    --light: #e7f0d9;
+    --card: #ffffff;
+    --text: #24352a;
+    --muted: #68766b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* HEADER */
+
+header {
+    width: 100%;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dce7d2;
+    background: rgba(255,255,255,0.35);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 800;
+    color: #172c20;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: #172b25;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.home-btn {
+    text-decoration: none;
+    color: #172c20;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.home-btn:hover {
+    color: var(--green);
+}
+
+/* MAIN SECTION */
+
+.container {
+    max-width: 1120px;
+    margin: auto;
+    padding: 45px 20px 60px;
+}
+
+/* TITLE */
+
+.page-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-heading h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #101b13;
+    margin-bottom: 12px;
+}
+
+.page-heading p {
+    font-size: 15px;
+    color: #536456;
+    line-height: 1.7;
+}
+
+/* PAPER GRID */
+
+.paper-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+/* CARDS */
+
+.paper-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid #e5eadf;
+    border-radius: 25px;
+    padding: 26px 24px;
+    min-height: 235px;
+    transition: 0.3s ease;
+}
+
+.paper-card::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 72px;
+    height: 72px;
+    background: #e5efd9;
+    border-radius: 0 0 0 70px;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.paper-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(35,77,49,0.10);
+}
+
+.card-icon {
+    width: 46px;
+    height: 46px;
+    background: #eaf1df;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    margin-bottom: 17px;
+}
+
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    color: #376d3e;
+    background: #e5efd7;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
+.paper-card h2 {
+    font-size: 20px;
+    color: #172c20;
+    margin-bottom: 11px;
+    font-weight: 750;
+}
+
+.paper-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 11px 15px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.view-btn {
+    color: #326c3e;
+    background: #eaf1e2;
+}
+
+.download-btn {
+    color: white;
+    background: #39784a;
+}
+
+.btn:hover {
+    opacity: 0.82;
+    transform: translateY(-2px);
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 25px 15px;
+    color: #718071;
+    font-size: 13px;
+    border-top: 1px solid #e0e8d8;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+    .paper-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    header {
+        padding: 14px 5%;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .container {
+        padding: 35px 16px 45px;
+    }
+
+    .page-heading h1 {
+        font-size: 27px;
+    }
+
+    .paper-grid {
+        grid-template-columns: 1fr;
+        gap: 17px;
+    }
+
+    .paper-card {
+        min-height: auto;
+        padding: 23px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        <div class="logo-icon">🌿</div>
+        Plant Science Academy
+    </div>
+
+    <a href="index.html" class="home-btn">
+        ← Home
+    </a>
+
+</header>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="container">
+
+    <section class="page-heading">
+
+        <h1>📚 Previous Year Questions</h1>
+
+        <p>
+            Practice ICAR JRF Previous Year Question Papers.<br>
+            Understand exam patterns and improve your preparation.
+        </p>
+
+    </section>
+
+
+    <!-- QUESTION PAPER CARDS -->
+
+    <section class="paper-grid">
+
+
+        <!-- 2026 -->
+
+        <div class="paper-card">
+
+            <div class="card-icon">📘</div>
+
+            <span class="badge">LATEST PAPER</span>
+
+            <h2>ICAR JRF 2026</h2>
+
+            <p>
+                ICAR JRF Previous Year Question Paper 2026.
+            </p>
+
+            <div class="buttons">
+
+                <a href="papers/icar-jrf-2026.pdf"
+                   target="_blank"
+                   class="btn view-btn">
+                   View Paper →
+                </a>
+
+                <a href="papers/icar-jrf-2026.pdf"
+                   download
+                   class="btn download-btn">
+                   Download ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2025 -->
+
+        <div class="paper-card">
+
+            <div class="card-icon">📘</div>
+
+            <span class="badge">PYQ</span>
+
+            <h2>ICAR JRF 2025</h2>
+
+            <p>
+                ICAR JRF Previous Year Question Paper 2025.
+            </p>
+
+            <div class="buttons">
+
+                <a href="papers/icar-jrf-2025.pdf"
+                   target="_blank"
+                   class="btn view-btn">
+                   View Paper →
+                </a>
+
+                <a href="papers/icar-jrf-2025.pdf"
+                   download
+                   class="btn download-btn">
+                   Download ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2024 -->
+
+        <div class="paper-card">
+
+            <div class="card-icon">📘</div>
+
+            <span class="badge">PYQ</span>
+
+            <h2>ICAR JRF 2024</h2>
+
+            <p>
+                ICAR JRF Previous Year Question Paper 2024.
+            </p>
+
+            <div class="buttons">
+
+                <a href="papers/icar-jrf-2024.pdf"
+                   target="_blank"
+                   class="btn view-btn">
+                   View Paper →
+                </a>
+
+                <a href="papers/icar-jrf-2024.pdf"
+                   download
+                   class="btn download-btn">
+                   Download ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2023 SHIFT 1 -->
+
+        <div class="paper-card">
+
+            <div class="card-icon">📘</div>
+
+            <span class="badge">PYQ • SHIFT 1</span>
+
+            <h2>ICAR JRF 2023</h2>
+
+            <p>
+                First Shift Question Paper – 2023.
+            </p>
+
+            <div class="buttons">
+
+                <a href="papers/icar-jrf-2023-shift-1.pdf"
+                   target="_blank"
+                   class="btn view-btn">
+                   View Paper →
+                </a>
+
+                <a href="papers/icar-jrf-2023-shift-1.pdf"
+                   download
+                   class="btn download-btn">
+                   Download ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2023 SHIFT 2 -->
+
+        <div class="paper-card">
+
+            <div class="card-icon">📘</div>
+
+            <span class="badge">PYQ • SHIFT 2</span>
+
+            <h2>ICAR JRF 2023</h2>
+
+            <p>
+                Second Shift Question Paper – 2023.
+            </p>
+
+            <div class="buttons">
+
+                <a href="papers/icar-jrf-2023-shift-2.pdf"
+                   target="_blank"
+                   class="btn view-btn">
+                   View Paper →
+                </a>
+
+                <a href="papers/icar-jrf-2023-shift-2.pdf"
+                   download
+                   class="btn download-btn">
+                   Download ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2022 -->
+
+        <div class="paper-card">
+
+            <div class="card-icon">📘</div>
+
+            <span class="badge">PYQ</span>
+
+            <h2>ICAR JRF 2022</h2>
+
+            <p>
+                ICAR JRF Previous Year Question Paper 2022.
+            </p>
+
+            <div class="buttons">
+
+                <a href="papers/icar-jrf-2022.pdf"
+                   target="_blank"
+                   class="btn view-btn">
+                   View Paper →
+                </a>
+
+                <a href="papers/icar-jrf-2022.pdf"
+                   download
+                   class="btn download-btn">
+                   Download ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2021 -->
+
+        <div class="paper-card">
+
+            <div class="card-icon">📘</div>
+
+            <span class="badge">PYQ</span>
+
+            <h2>ICAR JRF 2021</h2>
+
+            <p>
+                ICAR JRF Previous Year Question Paper 2021.
+            </p>
+
+            <div class="buttons">
+
+                <a href="papers/icar-jrf-2021.pdf"
+                   target="_blank"
+                   class="btn view-btn">
+                   View Paper →
+                </a>
+
+                <a href="papers/icar-jrf-2021.pdf"
+                   download
+                   class="btn download-btn">
+                   Download ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2020 -->
+
+        <div class="paper-card">
+
+            <div class="card-icon">📘</div>
+
+            <span class="badge">PYQ</span>
+
+            <h2>ICAR JRF 2020</h2>
+
+            <p>
+                ICAR JRF Previous Year Question Paper 2020.
+            </p>
+
+            <div class="buttons">
+
+                <a href="papers/icar-jrf-2020.pdf"
+                   target="_blank"
+                   class="btn view-btn">
+                   View Paper →
+                </a>
+
+                <a href="papers/icar-jrf-2020.pdf"
+                   download
+                   class="btn download-btn">
+                   Download ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 Plant Science Academy
+    <br><br>
+    Learn • Practice • Succeed
+
+</footer>
+
+
+</body>
+</html>
