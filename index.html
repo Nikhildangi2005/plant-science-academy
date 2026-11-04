@@ -850,6 +850,7 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
 
   const { error: uploadError } = await supabaseClient
     .storage.from(BUCKET)
+
     .upload(filePath, file);
 
   if (uploadError) {
@@ -938,62 +939,6 @@ window.addEventListener("load", renderMaterials);
 
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-const SUPABASE_URL = "https://cqucrvpugvcrjcwrwtyh.supabase.co";
-const SUPABASE_KEY = "sb_publishable_ZfGeOkLQOOs8XcRNsHx_dA_nlBtffSK";
-
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-async function loadPublicNotes() {
-  const container = ensurePublicNotes();
-  const { data, error } = await supabaseClient
-    .from("study_notes")
-    .select("id, title, subject, file_url, file_name, created_at")
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    container.innerHTML =
-      "<h3>Available Study Notes & PDFs</h3><p>Unable to load notes.</p>";
-    console.error(error);
-    return;
-  }
-
-  container.innerHTML = "<h3>Available Study Notes & PDFs</h3>";
-
-  if (!data || data.length === 0) {
-    container.innerHTML += "<p>No notes available yet.</p>";
-    return;
-  }
-
-  data.forEach(note => {
-    const item = document.createElement("div");
-    item.className = "published-item";
-
-    const title = document.createElement("h4");
-    title.textContent = note.title;
-
-    const subject = document.createElement("p");
-    subject.textContent = "Subject: " + note.subject;
-
-    const link = document.createElement("a");
-    link.href = note.file_url;
-    link.textContent = "View / Download PDF";
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-
-    item.appendChild(title);
-    item.appendChild(subject);
-    item.appendChild(link);
-
-    container.appendChild(item);
-  });
-}
-
-window.addEventListener("load", loadPublicNotes);
-</script>
 </body>
 </html>
