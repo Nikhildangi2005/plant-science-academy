@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MCQ Practice | Plant Science Academy</title>
+
+<style>
+:root {
+    --green:#39784a;
+    --dark:#234d31;
+    --bg:#f2f6e9;
+    --card:#ffffff;
+    --text:#24352a;
+}
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body {
+    font-family:Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+header {
+    background:#e7efd9;
+    padding:20px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #dce6d4;
+}
+
+header h2 {
+    font-size:21px;
+}
+
+header a {
+    text-decoration:none;
+    color:var(--dark);
+    font-weight:bold;
+}
+
+.container {
+    max-width:850px;
+    margin:45px auto;
+    padding:20px;
+}
+
+.heading {
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.heading h1 {
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.heading p {
+    color:#687666;
+}
+
+.quiz-box {
+    background:white;
+    padding:30px;
+    border-radius:22px;
+    box-shadow:0 10px 35px rgba(0,0,0,.07);
+}
+
+select {
+    width:100%;
+    padding:14px;
+    border:1px solid #dce5d9;
+    border-radius:10px;
+    margin-bottom:22px;
+    font-size:16px;
+}
+
+.info {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+    color:#687666;
+    font-size:14px;
+}
+
+.progress {
+    height:7px;
+    background:#e9eee5;
+    border-radius:10px;
+    margin-bottom:25px;
+    overflow:hidden;
+}
+
+.progress-bar {
+    height:100%;
+    width:0%;
+    background:var(--green);
+    transition:.3s;
+}
+
+.question {
+    font-size:21px;
+    font-weight:bold;
+    line-height:1.5;
+    margin-bottom:22px;
+}
+
+.option {
+    padding:15px;
+    border:1px solid #dce5d9;
+    border-radius:12px;
+    margin-bottom:12px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover {
+    border-color:var(--green);
+    background:#f3f8ef;
+}
+
+.option.selected {
+    background:#e7f2e5;
+    border:2px solid var(--green);
+}
+
+.option.correct {
+    background:#dff5e4;
+    border-color:#26934b;
+}
+
+.option.wrong {
+    background:#ffe5e5;
+    border-color:#df4545;
+}
+
+button {
+    border:none;
+    padding:13px 25px;
+    border-radius:10px;
+    background:var(--green);
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover {
+    background:var(--dark);
+}
+
+button:disabled {
+    background:#aab7a9;
+    cursor:not-allowed;
+}
+
+.buttons {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:25px;
+}
+
+.explanation {
+    display:none;
+    padding:15px;
+    background:#f1f7eb;
+    border-left:4px solid var(--green);
+    border-radius:8px;
+    margin-top:20px;
+    line-height:1.6;
+}
+
+.result {
+    display:none;
+    text-align:center;
+    padding:25px;
+}
+
+.result h2 {
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.score {
+    font-size:45px;
+    color:var(--green);
+    font-weight:bold;
+    margin:20px;
+}
+
+@media(max-width:600px) {
+    header {
+        padding:18px;
+    }
+
+    .container {
+        margin:20px auto;
+        padding:12px;
+    }
+
+    .quiz-box {
+        padding:20px;
+    }
+
+    .heading h1 {
+        font-size:26px;
+    }
+
+    .question {
+        font-size:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>🌱 Plant Science Academy</h2>
+    <a href="index.html">← Home</a>
+</header>
+
+<div class="container">
+
+<div class="heading">
+    <h1>📝 MCQ Practice</h1>
+    <p>Practice questions and improve your preparation.</p>
+</div>
+
+<div class="quiz-box">
+
+<div id="setup">
+    <h3 style="margin-bottom:15px;">Select Your Subject</h3>
+
+    <select id="subject">
+        <option value="Genetics">Genetics</option>
+        <option value="Plant Breeding">Plant Breeding</option>
+        <option value="Plant Pathology">Plant Pathology</option>
+        <option value="Microbiology">Microbiology</option>
+    </select>
+
+    <button onclick="startQuiz()">Start Practice →</button>
+</div>
+
+<div id="quiz" style="display:none;">
+
+<div class="info">
+    <span id="questionNumber">Question 1</span>
+    <span id="totalQuestions">Total: 5</span>
+</div>
+
+<div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="question" id="question"></div>
+
+<div id="options"></div>
+
+<div class="explanation" id="explanation"></div>
+
+<div class="buttons">
+    <button id="submitBtn" onclick="submitAnswer()">
+        Submit Answer
+    </button>
+
+    <button id="nextBtn" onclick="nextQuestion()" disabled>
+        Next →
+    </button>
+</div>
+
+</div>
+
+<div class="result" id="result">
+
+    <h2>🎉 Test Completed!</h2>
+
+    <p>Your Final Score</p>
+
+    <div class="score" id="finalScore">0/5</div>
+
+    <p id="percentage"></p>
+
+    <br>
+
+    <button onclick="restartQuiz()">Practice Again ↻</button>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+const questions = {
+
+"Genetics": [
+
+{
+q:"Who is known as the Father of Genetics?",
+options:["Darwin","Gregor Mendel","Morgan","Watson"],
+answer:1,
+explanation:"Gregor Johann Mendel is known as the Father of Genetics."
+},
+
+{
+q:"How many pairs of chromosomes are present in humans?",
+options:["21","22","23","24"],
+answer:2,
+explanation:"Humans have 23 pairs of chromosomes."
+},
+
+{
+q:"What is the basic unit of heredity?",
+options:["Cell","Gene","Tissue","Protein"],
+answer:1,
+explanation:"Gene is the basic functional unit of heredity."
+},
+
+{
+q:"Who proposed the double helix model of DNA?",
+options:["Mendel","Darwin","Watson and Crick","Morgan"],
+answer:2,
+explanation:"Watson and Crick proposed the double helix model in 1953."
+},
+
+{
+q:"What is the phenotypic ratio of a Mendelian monohybrid cross?",
+options:["9:3:3:1","3:1","1:2:1","1:1"],
+answer:1,
+explanation:"The typical F2 phenotypic ratio is 3:1."
+}
+
+]
+
+};
+
+let currentSubject = "";
+let currentQuestion = 0;
+let score = 0;
+let selected = null;
+let answered = false;
+
+function startQuiz() {
+
+    currentSubject = document.getElementById("subject").value;
+
+    if(!questions[currentSubject] ||
+       questions[currentSubject].length === 0) {
+        alert("Questions will be added soon for this subject.");
+        return;
+    }
+
+    currentQuestion = 0;
+    score = 0;
+
+    document.getElementById("setup").style.display="none";
+    document.getElementById("result").style.display="none";
+    document.getElementById("quiz").style.display="block";
+
+    showQuestion();
+}
+
+function showQuestion() {
+
+    selected = null;
+    answered = false;
+
+    const q = questions[currentSubject][currentQuestion];
+
+    document.getElementById("questionNumber").innerText =
+        "Question " + (currentQuestion+1);
+
+    document.getElementById("totalQuestions").innerText =
+        "Total: " + questions[currentSubject].length;
+
+    document.getElementById("question").innerText = q.q;
+
+    document.getElementById("progressBar").style.width =
+        ((currentQuestion+1)/questions[currentSubject].length*100)+"%";
+
+    document.getElementById("explanation").style.display="none";
+
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML="";
+
+    q.options.forEach((option,index)=>{
+
+        const div = document.createElement("div");
+
+        div.className="option";
+
+        div.innerText =
+            String.fromCharCode(65+index)+". "+option;
+
+        div.onclick=()=>selectOption(index,div);
+
+        optionsDiv.appendChild(div);
+
+    });
+
+    document.getElementById("submitBtn").disabled=false;
+    document.getElementById("nextBtn").disabled=true;
+
+    document.getElementById("nextBtn").innerText =
+        currentQuestion === questions[currentSubject].length-1
+        ? "Finish Test"
+        : "Next →";
+}
+
+function selectOption(index,element) {
+
+    if(answered) return;
+
+    selected = index;
+
+    document.querySelectorAll(".option").forEach(el=>{
+        el.classList.remove("selected");
+    });
+
+    element.classList.add("selected");
+}
+
+function submitAnswer() {
+
+    if(selected===null) {
+        alert("Please select an answer first!");
+        return;
+    }
+
+    if(answered) return;
+
+    answered=true;
+
+    const q = questions[currentSubject][currentQuestion];
+
+    const options = document.querySelectorAll(".option");
+
+    if(selected===q.answer) {
+        score++;
+    }
+
+    options.forEach((el,index)=>{
+
+        el.onclick=null;
+
+        if(index===q.answer) {
+            el.classList.add("correct");
+        }
+
+        if(index===selected && selected!==q.answer) {
+            el.classList.add("wrong");
+        }
+
+    });
+
+    document.getElementById("explanation").innerHTML =
+        "<b>Explanation:</b> "+q.explanation;
+
+    document.getElementById("explanation").style.display="block";
+
+    document.getElementById("submitBtn").disabled=true;
+    document.getElementById("nextBtn").disabled=false;
+}
+
+function nextQuestion() {
+
+    if(!answered) return;
+
+    if(currentQuestion < questions[currentSubject].length-1) {
+
+        currentQuestion++;
+        showQuestion();
+
+    } else {
+
+        showResult();
+
+    }
+}
+
+function showResult() {
+
+    document.getElementById("quiz").style.display="none";
+    document.getElementById("result").style.display="block";
+
+    const total=questions[currentSubject].length;
+
+    document.getElementById("finalScore").innerText =
+        score+"/"+total;
+
+    document.getElementById("percentage").innerText =
+        "Accuracy: "+Math.round(score/total*100)+"%";
+}
+
+function restartQuiz() {
+
+    document.getElementById("result").style.display="none";
+    document.getElementById("setup").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
