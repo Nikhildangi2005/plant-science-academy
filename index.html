@@ -701,9 +701,14 @@ window.addEventListener("load", () => {
 const ADMIN_EMAIL = "nikhildangi876@gmail.com";
 const BUCKET = "study-notes";
 
-// Admin Login
+// ADMIN LOGIN
 async function adminLogin() {
   const password = document.getElementById("adminPassword").value;
+
+  if (!password) {
+    alert("Please enter admin password.");
+    return;
+  }
 
   const { data, error } = await supabaseClient.auth.signInWithPassword({
     email: ADMIN_EMAIL,
@@ -715,17 +720,50 @@ async function adminLogin() {
     return;
   }
 
+  if (data.user.email !== ADMIN_EMAIL) {
+    await supabaseClient.auth.signOut();
+    alert("Unauthorized access!");
+    return;
+  }
+
   document.getElementById("adminLogin").style.display = "none";
   document.getElementById("adminDashboard").style.display = "block";
 
   await renderMaterials();
 }
 
+// RESTORE ADMIN SESSION
+async function restoreAdminSession() {
+  const { data: { session }, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  if (session && session.user.email === ADMIN_EMAIL) {
+    document.getElementById("adminLogin").style.display = "none";
+    document.getElementById("adminDashboard").style.display = "block";
+
+    await renderMaterials();
+  }
+}
+
+window.addEventListener("load", restoreAdminSession);
+
+// ADMIN LOGOUT
 async function adminLogout() {
-  await supabaseClient.auth.signOut();
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
 
   document.getElementById("adminLogin").style.display = "block";
   document.getElementById("adminDashboard").style.display = "none";
+  document.getElementById("adminPassword").value = "";
 }
 
 // Escape HTML
@@ -828,6 +866,7 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
     .insert([{
       title: title,
       subject: subject,
+      description: document.getElementById("noteDescription").value.trim(),
       file_url: urlData.publicUrl,
       file_name: file.name
     }]);
@@ -910,10 +949,7 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_KEY
 );
 async function loadPublicNotes() {
-  const container = document.getElementById("publicNotes");
-
-  if (!container) return;
-
+  const container = ensurePublicNotes();
   const { data, error } = await supabaseClient
     .from("study_notes")
     .select("id, title, subject, file_url, file_name, created_at")
