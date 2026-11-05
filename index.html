@@ -76,6 +76,26 @@ button,input{font:inherit}
   border:0;background:var(--text);color:#fff;
   padding:11px 17px;border-radius:12px;font-weight:750;cursor:pointer;
 }
+  /* ADMIN LOGIN BUTTON */
+.admin-nav-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 14px;
+    border:1px solid rgba(47,107,69,.28);
+    border-radius:12px;
+    color:#315f41;
+    background:#edf4e7;
+    font-size:.88rem;
+    font-weight:800;
+    white-space:nowrap;
+    transition:.2s;
+}
+
+.admin-nav-btn:hover{
+    background:#dfeccc;
+    transform:translateY(-1px);
+}
 .menu-btn{display:none;border:0;background:transparent;font-size:26px;cursor:pointer}
 
 /* HERO */
@@ -292,6 +312,9 @@ footer p,footer a{color:var(--muted);font-size:.82rem}
     </nav>
 
     <div class="nav-actions">
+      <a href="admin.html" class="admin-nav-btn">
+    🔐 Admin Login
+</a>
       <a href="#subjects" class="nav-btn">Start Learning →</a>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
     </div>
@@ -303,6 +326,7 @@ footer p,footer a{color:var(--muted);font-size:.82rem}
       <a href="#study">Notes & PDFs</a>
       <a href="#practice">MCQ Practice</a>
       <a href="#features">Features</a>
+      <a href="admin.html">🔐 Admin Login</a>
     </div>
   </div>
 </header>
