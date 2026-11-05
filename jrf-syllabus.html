@@ -519,8 +519,7 @@ body{
 
 const SUPABASE_URL = "https://cqucrvpugvcrjcwwtyh.supabase.co";
 
-// यहां admin.html वाली SUPABASE_KEY कॉपी करके लगाओ
-const SUPABASE_KEY = "PASTE_YOUR_EXISTING_PUBLISHABLE_KEY";
+const SUPABASE_KEY = "sb_publishable_ZfGeOkLQOOs8XcRNsHx_dA_nlBtffSK";
 
 const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
@@ -528,7 +527,7 @@ const supabaseClient = window.supabase.createClient(
 );
 
 
-async function loadJRF syllabus() {
+async function loadJRFsyllabus() {
 
     const viewer = document.getElementById("pdfViewer");
     const downloadBtn = document.getElementById("downloadBtn");
@@ -577,7 +576,7 @@ async function loadJRF syllabus() {
 
 }
 
-loadJRF syllabus();
+loadJRFsyllabus();
 
 </script>
 
