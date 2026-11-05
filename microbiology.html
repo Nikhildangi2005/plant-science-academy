@@ -411,11 +411,13 @@ async function loadMicrobiologyNotes() {
     }
 
     const { data, error } = await supabaseClient
-        .from("study_notes")
-        .select("title, subject, file_url")
-        .ilike("subject", "Microbiology")
-        .ilike("title", "%lab techniques%")
-        .order("created_at", { ascending: false });
+    .from("study_notes")
+    .select("title, subject, file_url")
+    .eq("subject", "Lab Techniques")
+    .order("created_at", { ascending: false });
+
+console.log("Lab Techniques PDF Data:", data);
+console.log("Supabase Error:", error);
 
     if (error) {
         container.innerHTML = "<p>Notes load नहीं हो पाए।</p>";
