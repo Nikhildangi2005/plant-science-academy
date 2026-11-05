@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lab Techniques | Plant Science Academy</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(120deg, #e7f0d0, #f5f5e9, #e3edce);
+    color: #171717;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+.navbar {
+    height: 65px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(80,100,50,0.12);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: #172a19;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.back {
+    text-decoration: none;
+    color: #171717;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* MAIN */
+.container {
+    max-width: 1080px;
+    margin: auto;
+    padding: 45px 20px 60px;
+}
+
+/* HEADING */
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heading h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.heading p {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* NOTES GRID */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* PDF CARD */
+.note-card {
+    position: relative;
+    overflow: hidden;
+    padding: 25px;
+    min-height: 220px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(255,255,255,0.65);
+    transition: all 0.3s ease;
+}
+
+.note-card::before {
+    content: "";
+    position: absolute;
+    top: -38px;
+    right: -38px;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background: rgba(169,199,124,0.35);
+}
+
+.note-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(65,90,45,0.12);
+}
+
+.note-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    background: rgba(181,205,148,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 17px;
+    position: relative;
+}
+
+.note-card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.note-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.note-actions {
+    display: flex;
+    gap: 15px;
+    position: relative;
+}
+
+.note-actions a {
+    text-decoration: none;
+    color: #243b2b;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.note-actions a:hover {
+    color: #679342;
+}
+
+/* STATUS */
+.status {
+    text-align: center;
+    padding: 25px;
+    color: #555;
+    font-size: 14px;
+    grid-column: 1 / -1;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+    .notes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .heading h1 {
+        font-size: 28px;
+    }
+
+    .heading p {
+        font-size: 12px;
+    }
+
+    .notes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .note-card {
+        min-height: 200px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <div class="logo-icon">🌿</div>
+        Plant Science Academy
+    </div>
+
+    <a href="microbiology.html" class="back">
+        ← Microbiology
+    </a>
+
+</nav>
+
+<main class="container">
+
+    <div class="heading">
+        <h1>🔬 Lab Techniques</h1>
+
+        <p>
+            Microbiology laboratory techniques, staining methods,
+            culture media preparation and microbial growth.
+        </p>
+    </div>
+
+    <div class="notes-grid" id="notesContainer">
+        <p class="status">Loading notes...</p>
+    </div>
+
+</main>
+
+<footer>
+    © 2026 Plant Science Academy | Learn • Practice • Master
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabaseClient = window.supabase.createClient(
+    "https://cqucrvpugvcrjcwrwtyh.supabase.co",
+    "sb_publishable_ZfGeOkLQOOs8XcRNsHx_dA_nlBtffSK"
+);
+
+async function loadLabNotes() {
+
+    const container = document.getElementById("notesContainer");
+
+    const { data, error } = await supabaseClient
+        .from("study_notes")
+        .select("title, subject, file_url")
+        .eq("subject", "Lab Techniques")
+        .ilike("title", "%lab techniques%")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error(error);
+        container.innerHTML =
+            '<p class="status">Notes load नहीं हो पाए। कृपया बाद में कोशिश करें।</p>';
+        return;
+    }
+
+    container.innerHTML = "";
+
+    if (!data || data.length === 0) {
+        container.innerHTML =
+            '<p class="status">अभी कोई Lab Techniques PDF उपलब्ध नहीं है।</p>';
+        return;
+    }
+
+    data.forEach(note => {
+
+        const card = document.createElement("div");
+        card.className = "note-card";
+
+        const icon = document.createElement("div");
+        icon.className = "note-icon";
+        icon.textContent = "📄";
+
+        const title = document.createElement("h2");
+        title.textContent = note.title;
+
+        const description = document.createElement("p");
+        description.textContent = "Lab Techniques Study Material";
+
+        const actions = document.createElement("div");
+        actions.className = "note-actions";
+
+        const viewLink = document.createElement("a");
+        viewLink.href = note.file_url;
+        viewLink.target = "_blank";
+        viewLink.rel = "noopener noreferrer";
+        viewLink.textContent = "View PDF →";
+
+        const downloadLink = document.createElement("a");
+        downloadLink.href = note.file_url;
+        downloadLink.target = "_blank";
+        downloadLink.rel = "noopener noreferrer";
+        downloadLink.textContent = "Download ↓";
+
+        actions.append(viewLink, downloadLink);
+
+        card.append(icon, title, description, actions);
+
+        container.appendChild(card);
+    });
+}
+
+window.addEventListener("DOMContentLoaded", loadLabNotes);
+</script>
+
+</body>
+</html>
