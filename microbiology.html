@@ -379,6 +379,9 @@ footer {
 
           <a href="lab-techniques.html"
              class="explore">Explore →</a>
+           <div id="labTechniquesNotes" class="notes-list">
+    <p>Loading notes...</p>
+</div>
 
      </div>
 
@@ -399,43 +402,52 @@ const supabaseClient = window.supabase.createClient(
 );
 
 async function loadMicrobiologyNotes() {
-  const container = document.getElementById("microbiologyNotes");
 
-  const { data, error } = await supabaseClient
-    .from("study_notes")
-    .select("title, subject, file_url")
-    .ilike("subject", "Microbiology")
-    .order("created_at", { ascending: false });
+    const container = document.getElementById("labTechniquesNotes");
 
-  if (error) {
-    container.innerHTML = "<p>Notes load नहीं हो पाए।</p>";
-    console.error(error);
-    return;
-  }
+    if (!container) {
+        console.error("Lab Techniques container not found!");
+        return;
+    }
 
-  container.innerHTML = "";
+    const { data, error } = await supabaseClient
+        .from("study_notes")
+        .select("title, subject, file_url")
+        .ilike("subject", "Microbiology")
+        .ilike("title", "%lab techniques%")
+        .order("created_at", { ascending: false });
 
-  if (!data || data.length === 0) {
-    container.innerHTML = "<p>अभी कोई Microbiology PDF उपलब्ध नहीं है।</p>";
-    return;
-  }
+    if (error) {
+        container.innerHTML = "<p>Notes load नहीं हो पाए।</p>";
+        console.error(error);
+        return;
+    }
 
-  data.forEach(note => {
-    const item = document.createElement("div");
-    item.className = "card";
+    container.innerHTML = "";
 
-    const title = document.createElement("h3");
-    title.textContent = note.title;
+    if (!data || data.length === 0) {
+        container.innerHTML = "<p>अभी कोई Lab Techniques PDF उपलब्ध नहीं है।</p>";
+        return;
+    }
 
-    const link = document.createElement("a");
-    link.href = note.file_url;
-    link.textContent = "View / Download PDF";
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
+    data.forEach(note => {
 
-    item.append(title, link);
-    container.appendChild(item);
-  });
+        const item = document.createElement("div");
+        item.className = "card";
+
+        const title = document.createElement("h3");
+        title.textContent = note.title;
+
+        const link = document.createElement("a");
+        link.href = note.file_url;
+        link.textContent = "View / Download PDF";
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+
+        item.append(title, link);
+        container.appendChild(item);
+
+    });
 }
 
 window.addEventListener("DOMContentLoaded", loadMicrobiologyNotes);
