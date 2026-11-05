@@ -189,9 +189,16 @@ button,input{font:inherit}
 /* STUDY CARDS */
 .study-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .study-card{
-  border:1px solid var(--line);background:#fff;border-radius:26px;
-  padding:30px;box-shadow:0 10px 35px rgba(25,55,35,.05);
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:26px;
+  padding:30px;
+  box-shadow:0 10px 35px rgba(25,55,35,.05);
 }
+ /* MCQ PRACTICE SCROLL POSITION */
+#practice {
+    scroll-margin-top: 100px;
+} 
 .study-card .top{display:flex;justify-content:space-between;align-items:center;gap:20px}
 .pill{padding:7px 10px;background:#edf5e6;border-radius:999px;color:var(--green);font-size:.72rem;font-weight:800}
 .study-card h3{font-size:1.55rem;line-height:1.15;margin:20px 0 8px}
