@@ -1,1 +1,2642 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard | Plant Science Academy</title>
+
+<link rel="icon" href="favicon.png">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f2f5ee;
+    color:#17251c;
+}
+
+/* LOGIN */
+
+.login-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:linear-gradient(135deg,#dce9c8,#f4f3e9);
+}
+
+.login-box{
+    background:white;
+    padding:40px;
+    width:100%;
+    max-width:420px;
+    border-radius:25px;
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
+}
+
+.login-box h2{
+    margin-bottom:12px;
+    font-size:28px;
+}
+
+.login-box p{
+    color:#718078;
+    margin-bottom:25px;
+}
+
+.login-box input{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border:1px solid #dce5d8;
+    border-radius:12px;
+    font-size:15px;
+}
+
+.login-box button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#245d3d;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* APP */
+
+#adminApp{
+    display:none;
+}
+
+.layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:260px;
+    background:#14251b;
+    color:white;
+    padding:25px 17px;
+    position:fixed;
+    height:100vh;
+    overflow-y:auto;
+}
+
+.brand{
+    font-size:19px;
+    font-weight:bold;
+    padding:10px;
+    margin-bottom:35px;
+}
+
+.brand span{
+    color:#b5d58d;
+}
+
+.nav-title{
+    color:#92a99a;
+    font-size:11px;
+    letter-spacing:1.5px;
+    padding:15px 12px 10px;
+}
+
+.nav-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    background:transparent;
+    color:#d5e2d8;
+    text-align:left;
+    border-radius:12px;
+    margin-bottom:5px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+    background:#315c3d;
+    color:white;
+}
+
+.logout-btn{
+    margin-top:30px;
+    background:#963d35;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:30px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+    gap:15px;
+}
+
+.topbar h1{
+    font-size:28px;
+}
+
+.admin-label{
+    background:#dceacb;
+    color:#245d3d;
+    padding:11px 17px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* SECTIONS */
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+.section-heading{
+    margin-bottom:25px;
+}
+
+.section-heading h2{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.section-heading p{
+    color:#758178;
+    line-height:1.6;
+}
+
+/* STAT CARDS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:30px;
+}
+
+.stat-card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid #e4e9df;
+}
+
+.stat-card .icon{
+    font-size:27px;
+    margin-bottom:18px;
+}
+
+.stat-card h3{
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+.stat-card p{
+    color:#7a867d;
+    font-size:13px;
+}
+
+/* PANELS */
+
+.panel{
+    background:white;
+    padding:27px;
+    border-radius:20px;
+    border:1px solid #e2e8de;
+    margin-bottom:25px;
+}
+
+.panel h3{
+    font-size:19px;
+    margin-bottom:20px;
+}
+
+/* FORMS */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:17px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:13px;
+    font-weight:bold;
+    color:#435449;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #dce5d8;
+    border-radius:10px;
+    font-size:14px;
+    font-family:inherit;
+    background:white;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    outline:2px solid #b7d49c;
+    border-color:#245d3d;
+}
+
+/* BUTTONS */
+
+.btn{
+    padding:13px 20px;
+    border:none;
+    border-radius:10px;
+    background:#245d3d;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.btn:hover{
+    background:#183e29;
+}
+
+.btn-secondary{
+    background:#e4eadf;
+    color:#245d3d;
+}
+
+.btn-danger{
+    background:#a53f36;
+}
+
+.btn-warning{
+    background:#d7a23d;
+    color:#17251c;
+}
+
+.form-actions{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+/* TABLE */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th,td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #e9eee5;
+    font-size:13px;
+}
+
+th{
+    color:#607166;
+    background:#f7f9f4;
+}
+
+td{
+    line-height:1.5;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.actions button{
+    padding:8px 11px;
+    border:0;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.search-box{
+    margin-bottom:20px;
+    max-width:350px;
+}
+
+/* STATUS */
+
+.status{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.published{
+    background:#d9efda;
+    color:#216b35;
+}
+
+.unpublished{
+    background:#fce9cf;
+    color:#97621a;
+}
+
+/* MOBILE */
+
+.mobile-menu{
+    display:none;
+    padding:10px 15px;
+    background:#14251b;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#14251b;
+    color:white;
+    padding:15px 22px;
+    border-radius:12px;
+    display:none;
+    z-index:1000;
+    max-width:90%;
+}
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:750px){
+
+    .sidebar{
+        display:none;
+        z-index:100;
+        width:260px;
+    }
+
+    .sidebar.show{
+        display:block;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:20px 15px;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .topbar{
+        flex-wrap:wrap;
+    }
+
+    .topbar h1{
+        font-size:22px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:16px;
+    }
+
+    .stat-card h3{
+        font-size:24px;
+    }
+
+    .panel{
+        padding:17px;
+    }
+
+    .login-box{
+        padding:25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN SCREEN -->
+
+<div class="login-screen" id="loginScreen">
+
+    <div class="login-box">
+
+        <h2>🌿 Admin Login</h2>
+
+        <p>Plant Science Academy Management</p>
+
+        <form id="loginForm">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Admin Email"
+                required>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required>
+
+            <button type="submit" id="loginButton">
+                Login to Dashboard
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ADMIN APPLICATION -->
+
+<div id="adminApp">
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        🌿 Plant Science <span>Academy</span>
+    </div>
+
+    <div class="nav-title">MAIN MENU</div>
+
+    <button class="nav-btn active" data-section="dashboard">
+        📊 Dashboard
+    </button>
+
+    <button class="nav-btn" data-section="notes">
+        📚 Study Notes
+    </button>
+
+    <button class="nav-btn" data-section="mcqs">
+        🎯 MCQ Management
+    </button>
+
+    <button class="nav-btn" data-section="resources">
+        📄 PYQs & Resources
+    </button>
+
+    <div class="nav-title">MANAGEMENT</div>
+
+    <button class="nav-btn" data-section="jrf">
+        🎓 JRF Syllabus
+    </button>
+
+    <button class="nav-btn" data-section="books">
+        📖 Books & E-books
+    </button>
+
+    <button class="nav-btn" data-section="tests">
+        📝 Test Series
+    </button>
+
+    <button class="nav-btn logout-btn" id="logoutButton">
+        ↪ Logout
+    </button>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="main">
+
+    <div class="topbar">
+
+        <button class="mobile-menu" id="menuButton">
+            ☰ Menu
+        </button>
+
+        <h1 id="pageTitle">Dashboard</h1>
+
+        <span class="admin-label">
+            ADMIN PANEL
+        </span>
+
+    </div>
+
+
+    <!-- DASHBOARD -->
+
+    <section class="section active" id="dashboard">
+
+        <div class="section-heading">
+
+            <h2>Welcome to Admin Dashboard</h2>
+
+            <p>
+                Manage your Plant Science Academy content
+                from one place.
+            </p>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <div class="icon">📚</div>
+                <h3 id="notesCount">0</h3>
+                <p>Study Notes</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon">🎯</div>
+                <h3 id="mcqCount">0</h3>
+                <p>Total MCQs</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon">📄</div>
+                <h3 id="resourceCount">0</h3>
+                <p>Resources</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon">🌿</div>
+                <h3 id="publishedCount">0</h3>
+                <p>Published MCQs</p>
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <h3>Quick Management</h3>
+
+            <div class="form-actions">
+
+                <button class="btn" onclick="showSection('notes')">
+                    Upload Study Notes
+                </button>
+
+                <button class="btn" onclick="showSection('mcqs')">
+                    Add MCQ
+                </button>
+
+                <button class="btn" onclick="showSection('resources')">
+                    Upload PYQ
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STUDY NOTES -->
+
+    <section class="section" id="notes">
+
+        <div class="section-heading">
+
+            <h2>Study Notes Management</h2>
+
+            <p>Upload and manage subject-wise PDF notes.</p>
+
+        </div>
+
+        <div class="panel">
+
+            <h3>Upload New Study Material</h3>
+
+            <form id="notesForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>PDF Title</label>
+                        <input id="noteTitle" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+
+                        <select id="noteSubject" required>
+                            <option value="">Select Subject</option>
+                            <option>Genetics</option>
+                            <option>Plant Breeding</option>
+                            <option>Plant Pathology</option>
+                            <option>Microbiology</option>
+                            <option>Seed Science</option>
+                            <option>Plant Physiology</option>
+                            <option>Agricultural Biochemistry</option>
+                            <option>Lab Techniques</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Description</label>
+                        <textarea id="noteDescription"></textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Select PDF File</label>
+                        <input type="file"
+                               id="noteFile"
+                               accept=".pdf,application/pdf"
+                               required>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button class="btn" type="submit">
+                        Upload Study Notes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3>Uploaded Study Notes</h3>
+
+            <input class="search-box"
+                   id="noteSearch"
+                   placeholder="Search notes...">
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>File</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="notesTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MCQS -->
+
+    <section class="section" id="mcqs">
+
+        <div class="section-heading">
+
+            <h2>MCQ Management</h2>
+
+            <p>
+                Create, edit, publish and manage examination questions.
+            </p>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3 id="mcqFormTitle">Add New MCQ</h3>
+
+            <form id="mcqForm">
+
+                <input type="hidden" id="mcqId">
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+
+                        <label>Subject</label>
+
+                        <select id="mcqSubject" required>
+
+                            <option value="">Select Subject</option>
+                            <option>Genetics</option>
+                            <option>Plant Breeding</option>
+                            <option>Plant Pathology</option>
+                            <option>Microbiology</option>
+                            <option>Seed Science</option>
+                            <option>Plant Physiology</option>
+                            <option>Agricultural Biochemistry</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group full">
+
+                        <label>Question</label>
+
+                        <textarea id="mcqQuestion"
+                                  required></textarea>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Option A</label>
+                        <input id="optionA" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Option B</label>
+                        <input id="optionB" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Option C</label>
+                        <input id="optionC" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Option D</label>
+                        <input id="optionD" required>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Correct Answer</label>
+
+                        <select id="correctAnswer" required>
+                            <option value="">Select Answer</option>
+                            <option value="A">Option A</option>
+                            <option value="B">Option B</option>
+                            <option value="C">Option C</option>
+                            <option value="D">Option D</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group full">
+
+                        <label>Explanation</label>
+
+                        <textarea id="mcqExplanation"></textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button class="btn" type="submit" id="mcqSubmit">
+                        Save MCQ
+                    </button>
+
+                    <button class="btn btn-secondary"
+                            type="button"
+                            onclick="resetMCQForm()">
+                        Clear Form
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- BULK MCQ -->
+
+        <div class="panel">
+
+            <h3>Bulk MCQ Upload (CSV)</h3>
+
+            <p style="color:#758178;margin-bottom:18px;font-size:13px;line-height:1.6">
+
+                CSV columns:
+                subject, question, option_a, option_b,
+                option_c, option_d, correct_answer, explanation
+
+            </p>
+
+            <div class="form-group">
+
+                <label>Select CSV File</label>
+
+                <input type="file"
+                       id="csvFile"
+                       accept=".csv,text/csv">
+
+            </div>
+
+            <div class="form-actions">
+
+                <button class="btn" onclick="uploadCSV()">
+                    Import MCQs
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3>All MCQs</h3>
+
+            <input class="search-box"
+                   id="mcqSearch"
+                   placeholder="Search questions...">
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="mcqTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESOURCES -->
+
+    <section class="section" id="resources">
+
+        <div class="section-heading">
+
+            <h2>PYQs & Resources</h2>
+
+            <p>Upload previous year question papers and other resources.</p>
+
+        </div>
+
+        <div class="panel">
+
+            <h3>Upload New Resource</h3>
+
+            <form id="resourceForm">
+
+                <input type="hidden" id="resourceId">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Resource Title</label>
+                        <input id="resourceTitle" required>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Resource Type</label>
+
+                        <select id="resourceType" required>
+
+                            <option value="">Select Type</option>
+                            <option value="PYQ">Previous Year Paper</option>
+                            <option value="Books">Books</option>
+                            <option value="JRF Syllabus">JRF Syllabus</option>
+                            <option value="Test Series">Test Series</option>
+                            <option value="Other">Other Resources</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Subject</label>
+
+                        <select id="resourceSubject">
+
+                            <option value="">Select Subject</option>
+                            <option>Genetics</option>
+                            <option>Plant Breeding</option>
+                            <option>Plant Pathology</option>
+                            <option>Microbiology</option>
+                            <option>Seed Science</option>
+                            <option>Plant Physiology</option>
+                            <option>Agricultural Biochemistry</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Year</label>
+
+                        <input type="number"
+                               id="resourceYear"
+                               min="2000"
+                               max="2100"
+                               placeholder="2026">
+
+                    </div>
+
+                    <div class="form-group full">
+
+                        <label>Description</label>
+
+                        <textarea id="resourceDescription"></textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Expiry Date (Optional)</label>
+
+                        <input type="date" id="resourceExpiry">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>PDF File</label>
+
+                        <input type="file"
+                               id="resourceFile"
+                               accept=".pdf,application/pdf">
+
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button class="btn" type="submit">
+                        Save Resource
+                    </button>
+
+                    <button class="btn btn-secondary"
+                            type="button"
+                            onclick="resetResourceForm()">
+                        Clear Form
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3>All Resources</h3>
+
+            <input class="search-box"
+                   id="resourceSearch"
+                   placeholder="Search resources...">
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Subject</th>
+                            <th>Year</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="resourceTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JRF -->
+
+    <section class="section" id="jrf">
+
+        <div class="section-heading">
+
+            <h2>JRF Syllabus Management</h2>
+
+            <p>
+                Manage the official JRF Plant Science syllabus PDF.
+            </p>
+
+        </div>
+
+        <div class="panel">
+
+            <h3>Manage JRF Syllabus</h3>
+
+            <p style="color:#718078;margin-bottom:20px;font-size:14px;line-height:1.6">
+
+                Upload or replace the JRF syllabus PDF.
+                The latest uploaded syllabus will appear on the
+                JRF Syllabus page.
+
+            </p>
+
+            <button class="btn"
+                    onclick="showSection('resources');document.getElementById('resourceType').value='JRF Syllabus'">
+
+                Upload / Replace JRF Syllabus
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOOKS -->
+
+    <section class="section" id="books">
+
+        <div class="section-heading">
+
+            <h2>Books & E-books</h2>
+
+            <p>Manage your academic book collection.</p>
+
+        </div>
+
+        <div class="panel">
+
+            <button class="btn"
+                    onclick="showSection('resources');document.getElementById('resourceType').value='Books'">
+
+                Upload New Book
+
+            </button>
+
+            <br><br>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Year</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="booksTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TEST SERIES -->
+
+    <section class="section" id="tests">
+
+        <div class="section-heading">
+
+            <h2>Test Series Management</h2>
+
+            <p>
+                Manage test series related PDF resources.
+            </p>
+
+        </div>
+
+        <div class="panel">
+
+            <h3>Test Series Resources</h3>
+
+            <button class="btn"
+                    onclick="showSection('resources');document.getElementById('resourceType').value='Test Series'">
+
+                Add Test Series Resource
+
+            </button>
+
+            <br><br>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Expiry</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="testsTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+</div>
+
+</div>
+
+
+<div id="toast"></div>
+
+
+<script>
+
+/* SUPABASE CONFIGURATION */
+
+const SUPABASE_URL =
+"https://cqucrvpugvcrjcwwtyh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_ZfGeOkLQOOs8XcRNsHx_dA_nlBtffSK";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* GLOBAL DATA */
+
+let notesData = [];
+let mcqData = [];
+let resourceData = [];
+
+let currentAdmin = null;
+
+
+/* HELPERS */
+
+function toast(message){
+
+    const el = document.getElementById("toast");
+
+    el.textContent = message;
+    el.style.display = "block";
+
+    setTimeout(()=>{
+        el.style.display = "none";
+    },3500);
+
+}
+
+
+function safe(value){
+
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+    })[char]);
+
+}
+
+
+function safeURL(value){
+
+    try{
+
+        const url = new URL(value);
+
+        if(url.protocol === "https:" || url.protocol === "http:"){
+            return url.href;
+        }
+
+    }catch(e){}
+
+    return "#";
+
+}
+
+
+function escapeCSV(value){
+
+    return String(value ?? "")
+        .replace(/^\uFEFF/,"")
+        .trim();
+
+}
+
+
+/* AUTHENTICATION */
+
+document.getElementById("loginForm")
+.addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+    const button = document.getElementById("loginButton");
+
+    button.disabled = true;
+    button.textContent = "Checking...";
+
+    try{
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const {data,error} = await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
+
+        if(error) throw error;
+
+        await verifyAdmin(data.user);
+
+    }
+
+    catch(error){
+
+        toast(error.message || "Login failed.");
+
+        await supabaseClient.auth.signOut();
+
+    }
+
+    finally{
+
+        button.disabled = false;
+        button.textContent = "Login to Dashboard";
+
+    }
+
+});
+
+
+/* ADMIN VERIFICATION */
+
+async function verifyAdmin(user){
+
+    if(!user){
+        throw new Error("User authentication failed.");
+    }
+
+    const {data,error} = await supabaseClient
+        .from("admin_users")
+        .select("user_id")
+        .eq("user_id",user.id)
+        .maybeSingle();
+
+    if(error){
+        throw error;
+    }
+
+    if(!data){
+
+        await supabaseClient.auth.signOut();
+
+        throw new Error("Access denied. You are not an authorized admin.");
+
+    }
+
+    currentAdmin = user;
+
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("adminApp").style.display = "block";
+
+    await loadDashboard();
+
+}
+
+
+/* CHECK EXISTING SESSION */
+
+async function checkSession(){
+
+    const {data} = await supabaseClient.auth.getSession();
+
+    if(data.session){
+
+        try{
+
+            await verifyAdmin(data.session.user);
+
+        }
+
+        catch(error){
+
+            toast(error.message);
+
+        }
+
+    }
+
+}
+
+
+checkSession();
+
+
+/* LOGOUT */
+
+document.getElementById("logoutButton")
+.addEventListener("click",async function(){
+
+    await supabaseClient.auth.signOut();
+
+    currentAdmin = null;
+
+    location.reload();
+
+});
+
+
+/* NAVIGATION */
+
+document.querySelectorAll(".nav-btn[data-section]")
+.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        showSection(button.dataset.section);
+
+    });
+
+});
+
+
+function showSection(id){
+
+    document.querySelectorAll(".section")
+    .forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".nav-btn")
+    .forEach(button=>{
+        button.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    const button = document.querySelector(
+        `.nav-btn[data-section="${id}"]`
+    );
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    document.getElementById("pageTitle").textContent =
+        id.charAt(0).toUpperCase()+id.slice(1);
+
+    document.getElementById("sidebar").classList.remove("show");
+
+    if(id === "notes") loadNotes();
+    if(id === "mcqs") loadMCQs();
+    if(id === "resources") loadResources();
+    if(id === "books") loadResources();
+    if(id === "tests") loadResources();
+
+}
+
+
+document.getElementById("menuButton")
+.addEventListener("click",()=>{
+
+    document.getElementById("sidebar").classList.toggle("show");
+
+});
+
+
+/* DASHBOARD */
+
+async function loadDashboard(){
+
+    try{
+
+        const results = await Promise.all([
+
+            supabaseClient.from("study_notes")
+                .select("*",{count:"exact",head:true}),
+
+            supabaseClient.from("mcqs")
+                .select("*",{count:"exact",head:true}),
+
+            supabaseClient.from("academy_resources")
+                .select("*",{count:"exact",head:true}),
+
+            supabaseClient.from("mcqs")
+                .select("*",{count:"exact",head:true})
+                .eq("is_published",true)
+
+        ]);
+
+        results.forEach(result=>{
+            if(result.error) throw result.error;
+        });
+
+        document.getElementById("notesCount").textContent =
+            results[0].count ?? 0;
+
+        document.getElementById("mcqCount").textContent =
+            results[1].count ?? 0;
+
+        document.getElementById("resourceCount").textContent =
+            results[2].count ?? 0;
+
+        document.getElementById("publishedCount").textContent =
+            results[3].count ?? 0;
+
+    }
+
+    catch(error){
+
+        toast("Dashboard Error: "+error.message);
+
+    }
+
+}
+
+
+/* STORAGE UPLOAD */
+
+async function uploadPDF(bucket,file){
+
+    if(!file){
+        throw new Error("Please select a PDF file.");
+    }
+
+    if(file.type !== "application/pdf" &&
+       !file.name.toLowerCase().endsWith(".pdf")){
+
+        throw new Error("Only PDF files are allowed.");
+
+    }
+
+    const path =
+        currentAdmin.id + "/" +
+        Date.now() + "-" +
+        file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+
+    const {error} = await supabaseClient.storage
+        .from(bucket)
+        .upload(path,file,{
+            contentType:"application/pdf",
+            upsert:false
+        });
+
+    if(error) throw error;
+
+    const {data} = supabaseClient.storage
+        .from(bucket)
+        .getPublicUrl(path);
+
+    return {
+        url:data.publicUrl,
+        path:path,
+        name:file.name
+    };
+
+}
+
+
+/* DELETE STORAGE FILE */
+
+async function deleteStorageFile(bucket,path){
+
+    if(!path) return;
+
+    const {error} = await supabaseClient.storage
+        .from(bucket)
+        .remove([path]);
+
+    if(error) throw error;
+
+}
+
+
+/* STUDY NOTES UPLOAD */
+
+document.getElementById("notesForm")
+.addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+    try{
+
+        const file = document.getElementById("noteFile").files[0];
+
+        const uploaded = await uploadPDF("study-notes",file);
+
+        const payload = {
+
+            title:document.getElementById("noteTitle").value.trim(),
+
+            subject:document.getElementById("noteSubject").value,
+
+            description:document.getElementById("noteDescription").value.trim(),
+
+            file_url:uploaded.url,
+
+            file_name:uploaded.name
+
+        };
+
+        const {error} = await supabaseClient
+            .from("study_notes")
+            .insert(payload);
+
+        if(error){
+
+            await deleteStorageFile("study-notes",uploaded.path);
+
+            throw error;
+
+        }
+
+        toast("Study notes uploaded successfully!");
+
+        this.reset();
+
+        await loadNotes();
+        await loadDashboard();
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+});
+
+
+/* LOAD NOTES */
+
+async function loadNotes(){
+
+    try{
+
+        const {data,error} = await supabaseClient
+            .from("study_notes")
+            .select("*")
+            .order("created_at",{ascending:false});
+
+        if(error) throw error;
+
+        notesData = data || [];
+
+        renderNotes(notesData);
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+}
+
+
+function renderNotes(data){
+
+    document.getElementById("notesTable").innerHTML =
+        data.map(note=>`
+
+        <tr>
+
+            <td>${safe(note.title)}</td>
+
+            <td>${safe(note.subject)}</td>
+
+            <td>
+                <a href="${safeURL(note.file_url)}"
+                   target="_blank"
+                   rel="noopener">
+                    View PDF
+                </a>
+            </td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button class="btn-danger"
+                        onclick="deleteNote(${Number(note.id)})">
+                        Delete
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        `).join("");
+
+}
+
+
+document.getElementById("noteSearch")
+.addEventListener("input",function(){
+
+    const q = this.value.toLowerCase();
+
+    renderNotes(notesData.filter(note=>
+
+        (note.title || "").toLowerCase().includes(q) ||
+
+        (note.subject || "").toLowerCase().includes(q)
+
+    ));
+
+});
+
+
+/* DELETE NOTE */
+
+async function deleteNote(id){
+
+    if(!confirm("Are you sure you want to delete this note?")){
+        return;
+    }
+
+    try{
+
+        const note = notesData.find(n=>Number(n.id)===Number(id));
+
+        if(!note) throw new Error("Note not found.");
+
+        const {error} = await supabaseClient
+            .from("study_notes")
+            .delete()
+            .eq("id",id);
+
+        if(error) throw error;
+
+        toast("Note deleted successfully.");
+
+        await loadNotes();
+        await loadDashboard();
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* MCQ MANAGEMENT */
+
+document.getElementById("mcqForm")
+.addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+    try{
+
+        const id = document.getElementById("mcqId").value;
+
+        const payload = {
+
+            subject:document.getElementById("mcqSubject").value,
+
+            question:document.getElementById("mcqQuestion").value.trim(),
+
+            option_a:document.getElementById("optionA").value.trim(),
+
+            option_b:document.getElementById("optionB").value.trim(),
+
+            option_c:document.getElementById("optionC").value.trim(),
+
+            option_d:document.getElementById("optionD").value.trim(),
+
+            correct_answer:document.getElementById("correctAnswer").value,
+
+            explanation:document.getElementById("mcqExplanation").value.trim()
+
+        };
+
+        let result;
+
+        if(id){
+
+            result = await supabaseClient
+                .from("mcqs")
+                .update(payload)
+                .eq("id",id);
+
+        }
+
+        else{
+
+            result = await supabaseClient
+                .from("mcqs")
+                .insert(payload);
+
+        }
+
+        if(result.error) throw result.error;
+
+        toast(id ? "MCQ updated successfully!" : "MCQ added successfully!");
+
+        resetMCQForm();
+
+        await loadMCQs();
+        await loadDashboard();
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+});
+
+
+/* RESET MCQ FORM */
+
+function resetMCQForm(){
+
+    document.getElementById("mcqForm").reset();
+
+    document.getElementById("mcqId").value = "";
+
+    document.getElementById("mcqFormTitle").textContent = "Add New MCQ";
+
+    document.getElementById("mcqSubmit").textContent = "Save MCQ";
+
+}
+
+
+/* LOAD MCQS */
+
+async function loadMCQs(){
+
+    try{
+
+        const {data,error} = await supabaseClient
+            .from("mcqs")
+            .select("*")
+            .order("created_at",{ascending:false});
+
+        if(error) throw error;
+
+        mcqData = data || [];
+
+        renderMCQs(mcqData);
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+}
+
+
+function renderMCQs(data){
+
+    document.getElementById("mcqTable").innerHTML =
+        data.map(mcq=>`
+
+        <tr>
+
+            <td>${safe(mcq.question)}</td>
+
+            <td>${safe(mcq.subject)}</td>
+
+            <td>
+
+                <span class="status ${mcq.is_published ? "published":"unpublished"}">
+
+                    ${mcq.is_published ? "Published":"Unpublished"}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button class="btn-warning"
+                        onclick="editMCQ(${Number(mcq.id)})">
+                        Edit
+                    </button>
+
+                    <button class="btn-secondary"
+                        onclick="togglePublish(${Number(mcq.id)},${!mcq.is_published})">
+                        ${mcq.is_published ? "Unpublish":"Publish"}
+                    </button>
+
+                    <button class="btn-danger"
+                        onclick="deleteMCQ(${Number(mcq.id)})">
+                        Delete
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        `).join("");
+
+}
+
+
+/* SEARCH MCQ */
+
+document.getElementById("mcqSearch")
+.addEventListener("input",function(){
+
+    const q = this.value.toLowerCase();
+
+    renderMCQs(mcqData.filter(mcq=>
+
+        (mcq.question || "").toLowerCase().includes(q) ||
+
+        (mcq.subject || "").toLowerCase().includes(q)
+
+    ));
+
+});
+
+
+/* EDIT MCQ */
+
+function editMCQ(id){
+
+    const mcq = mcqData.find(m=>Number(m.id)===Number(id));
+
+    if(!mcq) return;
+
+    document.getElementById("mcqId").value = mcq.id;
+
+    document.getElementById("mcqSubject").value = mcq.subject;
+
+    document.getElementById("mcqQuestion").value = mcq.question;
+
+    document.getElementById("optionA").value = mcq.option_a;
+
+    document.getElementById("optionB").value = mcq.option_b;
+
+    document.getElementById("optionC").value = mcq.option_c;
+
+    document.getElementById("optionD").value = mcq.option_d;
+
+    document.getElementById("correctAnswer").value = mcq.correct_answer;
+
+    document.getElementById("mcqExplanation").value = mcq.explanation || "";
+
+    document.getElementById("mcqFormTitle").textContent = "Edit MCQ";
+
+    document.getElementById("mcqSubmit").textContent = "Update MCQ";
+
+    showSection("mcqs");
+
+    document.getElementById("mcqFormTitle").scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* PUBLISH MCQ */
+
+async function togglePublish(id,status){
+
+    try{
+
+        const {error} = await supabaseClient
+            .from("mcqs")
+            .update({is_published:status})
+            .eq("id",id);
+
+        if(error) throw error;
+
+        toast(status ? "MCQ Published!" : "MCQ Unpublished!");
+
+        await loadMCQs();
+        await loadDashboard();
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* DELETE MCQ */
+
+async function deleteMCQ(id){
+
+    if(!confirm("Delete this MCQ permanently?")){
+        return;
+    }
+
+    try{
+
+        const {error} = await supabaseClient
+            .from("mcqs")
+            .delete()
+            .eq("id",id);
+
+        if(error) throw error;
+
+        toast("MCQ deleted successfully.");
+
+        await loadMCQs();
+        await loadDashboard();
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* CSV PARSER */
+
+function parseCSV(text){
+
+    const rows = [];
+
+    let row = [];
+    let value = "";
+    let quoted = false;
+
+    for(let i=0;i<text.length;i++){
+
+        const char = text[i];
+        const next = text[i+1];
+
+        if(char === '"' && quoted && next === '"'){
+
+            value += '"';
+            i++;
+
+        }
+
+        else if(char === '"'){
+
+            quoted = !quoted;
+
+        }
+
+        else if(char === ',' && !quoted){
+
+            row.push(value);
+            value = "";
+
+        }
+
+        else if((char === '\n' || char === '\r') && !quoted){
+
+            if(char === '\r' && next === '\n') i++;
+
+            row.push(value);
+
+            if(row.some(cell=>cell.trim() !== "")){
+                rows.push(row);
+            }
+
+            row = [];
+            value = "";
+
+        }
+
+        else{
+
+            value += char;
+
+        }
+
+    }
+
+    if(quoted){
+        throw new Error("Invalid CSV: unmatched quotation mark.");
+    }
+
+    row.push(value);
+
+    if(row.some(cell=>cell.trim() !== "")){
+        rows.push(row);
+    }
+
+    return rows;
+
+}
+
+
+/* BULK CSV UPLOAD */
+
+async function uploadCSV(){
+
+    const file = document.getElementById("csvFile").files[0];
+
+    if(!file){
+
+        toast("Please select a CSV file.");
+
+        return;
+
+    }
+
+    try{
+
+        const text = await file.text();
+
+        const rows = parseCSV(text);
+
+        if(rows.length < 2){
+            throw new Error("CSV contains no MCQ records.");
+        }
+
+        const headers = rows[0].map(h=>
+            h.trim().toLowerCase().replace(/^\uFEFF/,"")
+        );
+
+        const required = [
+            "subject",
+            "question",
+            "option_a",
+            "option_b",
+            "option_c",
+            "option_d",
+            "correct_answer"
+        ];
+
+        for(const col of required){
+
+            if(!headers.includes(col)){
+                throw new Error("Missing CSV column: "+col);
+            }
+
+        }
+
+        const records = rows.slice(1).map(row=>{
+
+            const obj = {};
+
+            headers.forEach((header,index)=>{
+                obj[header] = (row[index] || "").trim();
+            });
+
+            const answer = obj.correct_answer.toUpperCase();
+
+            if(!required.every(key=>obj[key])){
+                throw new Error("A CSV row has missing required values.");
+            }
+
+            if(!["A","B","C","D"].includes(answer)){
+                throw new Error("Correct answer must be A, B, C or D.");
+            }
+
+            return {
+
+                subject:obj.subject,
+                question:obj.question,
+                option_a:obj.option_a,
+                option_b:obj.option_b,
+                option_c:obj.option_c,
+                option_d:obj.option_d,
+                correct_answer:answer,
+                explanation:obj.explanation || "",
+                is_published:false
+
+            };
+
+        });
+
+        if(!confirm("Import "+records.length+" MCQs as unpublished?")){
+            return;
+        }
+
+        for(let i=0;i<records.length;i+=100){
+
+            const batch = records.slice(i,i+100);
+
+            const {error} = await supabaseClient
+                .from("mcqs")
+                .insert(batch);
+
+            if(error) throw error;
+
+        }
+
+        toast(records.length+" MCQs imported successfully!");
+
+        document.getElementById("csvFile").value = "";
+
+        await loadMCQs();
+        await loadDashboard();
+
+    }
+
+    catch(error){
+
+        toast("CSV Error: "+error.message);
+
+    }
+
+}
+
+
+/* RESOURCE UPLOAD */
+
+document.getElementById("resourceForm")
+.addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+    let uploaded = null;
+
+    try{
+
+        const file = document.getElementById("resourceFile").files[0];
+
+        if(!document.getElementById("resourceId").value && !file){
+
+            throw new Error("Please select a PDF file.");
+
+        }
+
+        if(file){
+
+            uploaded = await uploadPDF("academy-files",file);
+
+        }
+
+        const payload = {
+
+            title:document.getElementById("resourceTitle").value.trim(),
+
+            resource_type:document.getElementById("resourceType").value,
+
+            subject:document.getElementById("resourceSubject").value || null,
+
+            year:document.getElementById("resourceYear").value
+                ? Number(document.getElementById("resourceYear").value)
+                : null,
+
+            description:document.getElementById("resourceDescription").value.trim() || null,
+
+            expiry_date:document.getElementById("resourceExpiry").value || null
+
+        };
+
+        if(uploaded){
+
+            payload.file_url = uploaded.url;
+            payload.storage_path = uploaded.path;
+            payload.file_name = uploaded.name;
+
+        }
+
+        const id = document.getElementById("resourceId").value;
+
+        let result;
+
+        if(id){
+
+            result = await supabaseClient
+                .from("academy_resources")
+                .update(payload)
+                .eq("id",id);
+
+        }
+
+        else{
+
+            result = await supabaseClient
+                .from("academy_resources")
+                .insert(payload);
+
+        }
+
+        if(result.error){
+
+            if(uploaded){
+                await deleteStorageFile("academy-files",uploaded.path);
+            }
+
+            throw result.error;
+
+        }
+
+        toast("Resource saved successfully!");
+
+        resetResourceForm();
+
+        await loadResources();
+        await loadDashboard();
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+});
+
+
+/* RESET RESOURCE FORM */
+
+function resetResourceForm(){
+
+    document.getElementById("resourceForm").reset();
+
+    document.getElementById("resourceId").value = "";
+
+}
+
+
+/* LOAD RESOURCES */
+
+async function loadResources(){
+
+    try{
+
+        const {data,error} = await supabaseClient
+            .from("academy_resources")
+            .select("*")
+            .order("created_at",{ascending:false});
+
+        if(error) throw error;
+
+        resourceData = data || [];
+
+        renderResources(resourceData);
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* RESOURCE TABLES */
+
+function renderResources(data){
+
+    document.getElementById("resourceTable").innerHTML =
+        data.map(resource=>`
+
+        <tr>
+
+            <td>${safe(resource.title)}</td>
+
+            <td>${safe(resource.resource_type)}</td>
+
+            <td>${safe(resource.subject)}</td>
+
+            <td>${safe(resource.year)}</td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button class="btn-secondary"
+                        onclick="viewResource(${Number(resource.id)})">
+                        View
+                    </button>
+
+                    <button class="btn-warning"
+                        onclick="editResource(${Number(resource.id)})">
+                        Edit
+                    </button>
+
+                    <button class="btn-danger"
+                        onclick="deleteResource(${Number(resource.id)})">
+                        Delete
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        `).join("");
+
+
+    renderResourceCategory("Books","booksTable");
+
+    renderResourceCategory("Test Series","testsTable");
+
+}
+
+
+function renderResourceCategory(type,tableId){
+
+    const filtered = resourceData.filter(r=>
+        r.resource_type === type
+    );
+
+    document.getElementById(tableId).innerHTML =
+        filtered.map(resource=>`
+
+        <tr>
+
+            <td>${safe(resource.title)}</td>
+
+            <td>${safe(resource.subject)}</td>
+
+            <td>${safe(type === "Books" ? resource.year : resource.expiry_date)}</td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button class="btn-secondary"
+                        onclick="viewResource(${Number(resource.id)})">
+                        View
+                    </button>
+
+                    <button class="btn-warning"
+                        onclick="editResource(${Number(resource.id)})">
+                        Edit
+                    </button>
+
+                    <button class="btn-danger"
+                        onclick="deleteResource(${Number(resource.id)})">
+                        Delete
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        `).join("");
+
+}
+
+
+/* RESOURCE SEARCH */
+
+document.getElementById("resourceSearch")
+.addEventListener("input",function(){
+
+    const q = this.value.toLowerCase();
+
+    renderResources(resourceData.filter(r=>
+
+        (r.title || "").toLowerCase().includes(q) ||
+
+        (r.resource_type || "").toLowerCase().includes(q) ||
+
+        (r.subject || "").toLowerCase().includes(q)
+
+    ));
+
+});
+
+
+/* VIEW RESOURCE */
+
+function viewResource(id){
+
+    const resource = resourceData.find(r=>
+        Number(r.id)===Number(id)
+    );
+
+    if(!resource) return;
+
+    const url = safeURL(resource.file_url);
+
+    if(url === "#"){
+
+        toast("Invalid PDF URL.");
+
+        return;
+
+    }
+
+    window.open(url,"_blank","noopener");
+
+}
+
+
+/* EDIT RESOURCE */
+
+function editResource(id){
+
+    const resource = resourceData.find(r=>
+        Number(r.id)===Number(id)
+    );
+
+    if(!resource) return;
+
+    document.getElementById("resourceId").value = resource.id;
+
+    document.getElementById("resourceTitle").value = resource.title || "";
+
+    document.getElementById("resourceType").value = resource.resource_type || "";
+
+    document.getElementById("resourceSubject").value = resource.subject || "";
+
+    document.getElementById("resourceYear").value = resource.year || "";
+
+    document.getElementById("resourceDescription").value =
+        resource.description || "";
+
+    document.getElementById("resourceExpiry").value =
+        resource.expiry_date || "";
+
+    showSection("resources");
+
+    document.getElementById("resourceForm").scrollIntoView({
+        behavior:"smooth"
+    });
+
+    toast("Edit details and save. Leave PDF empty to keep the existing file.");
+
+}
+
+
+/* DELETE RESOURCE */
+
+async function deleteResource(id){
+
+    if(!confirm("Delete this resource permanently?")){
+        return;
+    }
+
+    try{
+
+        const resource = resourceData.find(r=>
+            Number(r.id)===Number(id)
+        );
+
+        if(!resource) throw new Error("Resource not found.");
+
+        const {error} = await supabaseClient
+            .from("academy_resources")
+            .delete()
+            .eq("id",id);
+
+        if(error) throw error;
+
+        toast("Resource deleted successfully.");
+
+        await loadResources();
+        await loadDashboard();
+
+    }
+
+    catch(error){
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* INITIAL DASHBOARD */
+
+</script>
+
+</body>
+</html>
